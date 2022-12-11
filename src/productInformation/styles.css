@@ -1,0 +1,57 @@
+.productInformation {
+  background-color: rgba(120, 120, 120, 0.4);
+  width: 550px;
+  min-height: 200px;
+  border-radius: 20px;
+  font-size: 25px;
+  padding: 40px 20px 20px;
+  border: 1px solid;
+  color: rgb(202, 202, 202);
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+}
+
+.editableTitle,
+.editablePrice {
+  font: 25px/25px "MyriadProRegular";
+  background: none;
+  width: 130px;
+  height: 25px;
+  border: 1px solid rgb(202, 202, 202);
+  outline: none;
+  color: rgb(202, 202, 202);
+}
+
+.editablePrice {
+  width: 25px;
+}
+
+.price {
+  display: flex;
+  margin: 0 0 30px;
+}
+
+button {
+  display: block;
+  width: 120px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: rgb(149, 149, 149, 0.4);
+  cursor: pointer;
+  color: rgb(202, 202, 202);
+  font-size: 20px;
+  border: 1px solid;
+}
+
+button:hover {
+  background-color: rgb(149, 149, 149);
+}
+
+.description {
+  margin: 0 0 30px;
+  line-height: 30px;
+}
