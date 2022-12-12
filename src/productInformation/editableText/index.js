@@ -1,51 +1,67 @@
-import { Component } from 'react'
+import { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
 
-export class EditableText extends Component {
-  static defaultProps = {
-    onLoose: () => { }
+export const EditableText = ({ multiLine, stylesInput, text }) => {
+  const [hidden, setHidden] = useState(true)
+  const [value, setValue] = useState(text)
+
+  const setValueInput = ({ target: { value } }) => {
+    setValue(value)
   }
 
-  static propTypes = {
-    onLoose: PropTypes.func
+  const handleBlur = e => {
+    e.preventDefault()
+
+    setHidden(true)
   }
 
-  state = {
-    hidden: true,
-    value: this.props.text
+  const showInput = () => {
+    setHidden(false)
   }
 
-  setValue = ({ target: { value } }) => {
-    this.setState({ value })
-  }
+  return (
+    hidden
+      ? <span onClick={showInput}>{value ? value : text}</span>
+      : (
+        <form className={styles.editableText} onSubmit={handleBlur}>
+          {
+            multiLine
+              ? (
+                <textarea
+                  name="description"
+                  className={styles.description}
+                  onChange={setValueInput}
+                  onBlur={handleBlur}
+                  value={value}
+                  autoFocus
+                />
+              )
+              : (
+                <input
+                  className={stylesInput}
+                  name="text"
+                  value={value}
+                  onChange={setValueInput}
+                  onBlur={handleBlur}
+                  autoFocus
+                />
+              )
+          }
+        </form>
+      )
+  )
+}
 
-  handleBlur = (e) => {
-    e.preventDefault();
+EditableText.defaultProps = {
+  multiLine: false,
+  stylesInput: '',
+  text: ''
+}
 
-    this.setState({ hidden: true });
-
-    this.props.onLoose(this.state.value)
-  }
-
-  showInput = () => {
-    this.setState({ hidden: false })
-  }
-
-  render() {
-    const { value, hidden } = this.state
-    const { multiLine, stylesInput } = this.props
-
-    return (
-      hidden ? <span onClick={this.showInput}>{value ? value : this.props.text}</span> :
-      <form className={styles.editableText} onSubmit={this.handleBlur}>
-        {
-          multiLine ?
-          <textarea name="description" className={styles.description} onChange={this.setValue} onBlur={this.handleBlur} value={value} autoFocus /> :
-          <input className={stylesInput} name="text" value={value} onChange={this.setValue} onBlur={this.handleBlur} autoFocus />
-        }
-      </form>
-    )
-  }
+EditableText.propTypes = {
+  multiLine: PropTypes.bool,
+  stylesInput: PropTypes.string,
+  text: PropTypes.string
 }

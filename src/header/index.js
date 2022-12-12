@@ -12,19 +12,19 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.navigation}>
-        <img src={logo} className={styles.logo} />
+        <img src={logo} className={styles.logo} alt="logo" />
         <nav>
           <ul className={styles.list}>
-            {links.map((link, index) =>
+            {links.map((link, index) => (
               <li key={index}>
                 <a href='#' className={styles[`${link.value}`]}>{link.text}</a>
               </li>
-            )}
+            ))}
           </ul>
         </nav>
       </div>
       <div className={styles.loginPanel}>
-        <img src={loginPage}/>
+        <img src={loginPage} alt="login page" />
         <a>Sign In</a>
         <span>/</span>
         <a>Sign Up</a>

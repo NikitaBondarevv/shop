@@ -3,14 +3,10 @@ import styles from './styles.css'
 export const NumberOfProductsAndCategories = ({ name, products }) => {
   const productsAndCategories = products
 
-  const getNumberOfCategories = () => {
-    return productsAndCategories.map(product => product.category)
-  }
-  
-  const getNumberOfProducts = () => {
-    return productsAndCategories.map(product => product.product)
-  }
-  
+  const getNumberOfCategories = () => productsAndCategories.map(product => product.category)
+
+  const getNumberOfProducts = () => productsAndCategories.map(product => product.product)
+
   const getNumberOfPublished = () => {
     const published = []
 
@@ -24,17 +20,21 @@ export const NumberOfProductsAndCategories = ({ name, products }) => {
   }
 
   return (
-    <div className={styles.productsInfo} >
-      <span className={styles.greetings} >Hello, {name}</span>
+    <div className={styles.productsInfo}>
+      <span className={styles.greetings}>
+        Hello,
+        {name}
+      </span>
       <ul className={styles.list}>
         <li>
-          You have {getNumberOfCategories().length} categories ({getNumberOfPublished().length} published)
+          You have {getNumberOfCategories().length} categories
+          ({getNumberOfPublished().length} published)
         </li>
         <li>
           You have {getNumberOfProducts().length} products
         </li>
       </ul>
-      <a className={styles.categories} href='#'>Go to categories</a>
+      <a className={styles.categories} href="#">Go to categories</a>
     </div>
   )
 }
