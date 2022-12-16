@@ -11,8 +11,7 @@ export const ProductInformation = () => (
       <EditableText text="TOW TRACK" stylesInput={styles.editableTitle} />
     </span>
     <span className={styles.price}>
-      $
-      <EditableText text="32" stylesInput={styles.editablePrice} />
+      $ <EditableText text="32" stylesInput={styles.editablePrice} />
     </span>
     <div className={styles.description}>
       <EditableText text={descriptionText} multiLine />

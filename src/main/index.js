@@ -1,8 +1,9 @@
-import { NumberOfProductsAndCategories } from '../numberOfProductsAndCategories'
+import { useEffect, useState } from 'react'
+
+import { ProductsInfo } from '../ProductsInfo'
 import { ProductInformation } from '../productInformation'
 import { getCategories } from '../contracts/getCategories'
 import styles from './styles.css'
-import { useEffect, useState } from 'react'
 
 export const Main = () => {
   const [products, setProducts] = useState({})
@@ -17,7 +18,7 @@ export const Main = () => {
 
   return (
     <main className={styles.main}>
-      <NumberOfProductsAndCategories name="Nikita" products={products} />
+      <ProductsInfo name="Nikita" products={products} />
       <ProductInformation />
     </main>
   )

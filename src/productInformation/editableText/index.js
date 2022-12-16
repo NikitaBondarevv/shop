@@ -23,7 +23,7 @@ export const EditableText = ({ multiLine, stylesInput, text }) => {
 
   return (
     hidden
-      ? <span onClick={showInput}>{value ? value : text}</span>
+      ? <span className={styles.text} onClick={showInput}>{value ? value : text}</span>
       : (
         <form className={styles.editableText} onSubmit={handleBlur}>
           {

@@ -15,10 +15,14 @@
   color: rgb(255, 255, 255);
 }
 
-.list {
-  list-style: none;
+.info {
   margin: 0 0 30px;
-  padding: 0;
+}
+
+.info mark {
+  color: rgb(202, 202, 202);
+  background: none;
+  font-family: "MyriadProBold";
 }
 
 .categories {

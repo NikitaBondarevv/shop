@@ -9,12 +9,12 @@ header {
   background-color: rgba(120, 120, 120, 0.4);
 }
 
-header .navigation {
+.navigation {
   display: flex;
   align-items: center;
 }
 
-header .list {
+.list {
   list-style: none;
   margin: 0;
   padding: 0;

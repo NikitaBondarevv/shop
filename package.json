@@ -1,5 +1,5 @@
 {
-  "name": "todo",
+  "name": "project-by-nikita",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NikitaBondarevv/todo.git"
+    "url": "git+https://github.com/NikitaBondarevv/project-by-nikita.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NikitaBondarevv/todo/issues"
+    "url": "https://github.com/NikitaBondarevv/project-by-nikita/issues"
   },
-  "homepage": "https://github.com/NikitaBondarevv/todo#readme",
+  "homepage": "https://github.com/NikitaBondarevv/project-by-nikita#readme",
   "devDependencies": {
     "@babel/core": "^7.19.6",
     "@babel/preset-env": "^7.19.4",

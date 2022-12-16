@@ -8,3 +8,7 @@
   border: 1px solid rgb(202, 202, 202);
   outline: none;
 }
+
+.text {
+  padding: 0 0 0 5px;
+}

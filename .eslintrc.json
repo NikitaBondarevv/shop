@@ -45,7 +45,12 @@
     }],
     "padding-line-between-statements": ["error", { "blankLine": "always", "prev": ["const", "let"], "next": "return" }],
     "no-trailing-spaces": 0,
-    "arrow-parens": ["error", "as-needed"]
+    "arrow-parens": ["error", "as-needed"],
+    "react/jsx-one-expression-per-line": "off",
+    "import/no-cycle": 0,
+    "jsx-a11y/no-autofocus": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/control-has-associated-label": 0
   },
   "parser": "babel-eslint",
   "plugins": [

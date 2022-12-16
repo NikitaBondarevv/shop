@@ -3,6 +3,11 @@
   src: url(./fonts/MyriadProRegular.ttf);
 }
 
+@font-face {
+  font-family: "MyriadProBold";
+  src: url(./fonts/MyriadProBold.ttf);
+}
+
 :global body {
   background: url(./images/background.jpg);
   height: 100%;
