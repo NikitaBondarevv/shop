@@ -6,7 +6,9 @@ header {
   justify-content: space-between;
   column-gap: 75px;
   margin: 0 0 60px;
-  background-color: rgba(120, 120, 120, 0.4);
+  background-color: rgba(16 18 27 / 40%);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(113 119 144 / 25%);
 }
 
 .navigation {
@@ -30,7 +32,7 @@ header {
 }
 
 .loginPanel img {
-  width: 100px;
+  width: 70px;
 }
 
 .loginPanel a {

@@ -1,5 +1,3 @@
-export const getCategories = async () => {
-  const response = await fetch('http://localhost:8086/shop_info', { credentials: 'include' })
-  
-  return response.json()
-}
+import { request } from './request'
+
+export const getCategories = async () => request.get('shop_info')

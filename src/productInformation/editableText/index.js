@@ -24,33 +24,27 @@ export const EditableText = ({ multiLine, stylesInput, text }) => {
   return (
     hidden
       ? <span className={styles.text} onClick={showInput}>{value ? value : text}</span>
-      : (
-        <form className={styles.editableText} onSubmit={handleBlur}>
-          {
-            multiLine
-              ? (
-                <textarea
-                  name="description"
-                  className={styles.description}
-                  onChange={setValueInput}
-                  onBlur={handleBlur}
-                  value={value}
-                  autoFocus
-                />
-              )
-              : (
-                <input
-                  className={stylesInput}
-                  name="text"
-                  value={value}
-                  onChange={setValueInput}
-                  onBlur={handleBlur}
-                  autoFocus
-                />
-              )
-          }
-        </form>
-      )
+      : multiLine
+        ? (
+          <textarea
+            name="description"
+            className={styles.description}
+            onChange={setValueInput}
+            onBlur={handleBlur}
+            value={value}
+            autoFocus
+          />
+        )
+        : (
+          <input
+            className={stylesInput}
+            name="text"
+            value={value}
+            onChange={setValueInput}
+            onBlur={handleBlur}
+            autoFocus
+          />
+        )
   )
 }
 

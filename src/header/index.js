@@ -12,7 +12,9 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.navigation}>
-        <img src={logo} className={styles.logo} alt="logo" />
+        <a href="/#">
+          <img src={logo} className={styles.logo} alt="logo" />
+        </a>
         <nav>
           <ul className={styles.list}>
             {links.map((link, index) => (

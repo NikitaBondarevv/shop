@@ -3,8 +3,7 @@ import styles from './styles.css'
 export const ProductsInfo = ({ name, products }) => (
   <div className={styles.productsInfo}>
     <span className={styles.greetings}>
-      Hello,
-      {name}
+      Hello, {name}
     </span>
     <div className={styles.info}>
       <p>
