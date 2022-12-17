@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { ProductsInfo } from '../ProductsInfo'
+import { ProductsInfo } from '../productsInfo'
 import { ProductInformation } from '../productInformation'
-import { getCategories } from '../contracts/getCategories'
+import { getCategories } from '../../contracts/getCategories'
 import styles from './styles.css'
 
 export const Main = () => {
