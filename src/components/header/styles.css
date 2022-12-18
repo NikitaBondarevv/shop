@@ -1,9 +1,9 @@
 header {
   font-size: 26px;
   line-height: 26px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 170px 1fr auto;
   align-items: center;
-  justify-content: space-between;
   column-gap: 75px;
   margin: 0 0 60px;
   background-color: rgba(16 18 27 / 40%);

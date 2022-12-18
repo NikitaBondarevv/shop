@@ -21,31 +21,29 @@ export const EditableText = ({ multiLine, stylesInput, text }) => {
     setHidden(false)
   }
 
-  return (
-    hidden
-      ? <span className={styles.text} onClick={showInput}>{value ? value : text}</span>
-      : multiLine
-        ? (
-          <textarea
-            name="description"
-            className={styles.description}
-            onChange={setValueInput}
-            onBlur={handleBlur}
-            value={value}
-            autoFocus
-          />
-        )
-        : (
-          <input
-            className={stylesInput}
-            name="text"
-            value={value}
-            onChange={setValueInput}
-            onBlur={handleBlur}
-            autoFocus
-          />
-        )
-  )
+  if (hidden) return <span className={styles.text} onClick={showInput}>{value ? value : text}</span>
+
+  return multiLine
+    ? (
+      <textarea
+        name="description"
+        className={styles.description}
+        onChange={setValueInput}
+        onBlur={handleBlur}
+        value={value}
+        autoFocus
+      />
+    )
+    : (
+      <input
+        className={stylesInput}
+        name="text"
+        value={value}
+        onChange={setValueInput}
+        onBlur={handleBlur}
+        autoFocus
+      />
+    )
 }
 
 EditableText.defaultProps = {
