@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": true,
+    "noImplicitAny": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "esModuleInterop": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "pretty": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "target": "ES2017",
+    "incremental": true,
+    "sourceMap": true,
+    "importHelpers": true,
+    "baseUrl": "./src",
+    "rootDir": ".",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "noEmit": false
+  },
+  "include": [
+    "types/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.ts"
+  ]
+}

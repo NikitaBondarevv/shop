@@ -1,26 +1,25 @@
 const path = require('path');
 const HTMLPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  entry: './index.js',
-  // context: path.resolve(__dirname, 'src'),
+  entry: './index.tsx',
+  context: path.resolve(__dirname, 'src'),
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   mode: 'development',
   devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: { presets: ['@babel/preset-env', ['@babel/preset-react', { runtime: 'automatic' }]] }
-        },
-      },
+       },       
       {
         test: /\.css$/,
         use: [
@@ -38,7 +37,7 @@ module.exports = {
       },
       {
         enforce: 'pre',
-        test: /\.js$/,
+        test: /\.tsx$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
         options: { emitWarning: true }
@@ -49,12 +48,19 @@ module.exports = {
       } 
     ]
   },
+  resolve: {
+    modules: [path.resolve('./src'), 'node_modules'],
+    extensions: ['.tsx', '.ts', '.json', '.js'],
+  },
   plugins: [
     new HTMLPlugin({
       title: 'React',
-      template: path.resolve(__dirname, 'index.html')
+      template: './index.html'
     }),
-    new MiniCssExtractPlugin({ filename: 'styles.css' })
+    new MiniCssExtractPlugin({ filename: 'styles.css' }),
+    new webpack.DefinePlugin({
+      BASE_URL: "'http://localhost:8086'"
+    })
   ],
   optimization: {
     splitChunks: {
@@ -74,6 +80,7 @@ module.exports = {
     hot: true,
     client: {
       overlay: false,
-    },   
+    },
+    historyApiFallback: true
   }
 };
