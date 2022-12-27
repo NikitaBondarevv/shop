@@ -1,18 +1,18 @@
 import styles from './styles.css'
 import logo from './images/logo.png'
 import loginPage from './images/loginPage.png'
-import { links } from '../../helpers/links'
+import { links } from 'helpers/links'
 
 export const Header = () => (
   <header className={styles.header}>
-    <a href="/#">
+    <a href="/">
       <img src={logo} className={styles.logo} alt="logo" />
     </a>
     <nav>
       <ul className={styles.list}>
         {links.map((link, index) => (
           <li key={index}>
-            <a href="/#" className={styles[`${link.value}`]}>{link.text}</a>
+            <a href={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</a>
           </li>
         ))}
       </ul>

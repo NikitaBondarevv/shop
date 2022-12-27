@@ -1,6 +1,7 @@
 import styles from './styles.css'
+import { TProductsInfoProps } from './types'
 
-export const ProductsInfo = ({ name, products }) => (
+export const ProductsInfo = ({ name, products }: TProductsInfoProps) => (
   <div className={styles.productsInfo}>
     <span className={styles.greetings}>
       Hello, {name}

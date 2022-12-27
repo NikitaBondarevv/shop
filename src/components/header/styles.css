@@ -69,7 +69,7 @@ header {
   position: absolute;
 }
 
-.list .shop::before {
+.list .categories::before {
   background-position: -25px 0;
 }
 
