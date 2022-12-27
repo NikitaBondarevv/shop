@@ -1,0 +1,36 @@
+.productsInfo {
+  background-color: rgba(16 18 27 / 40%);
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 0px 10px black;
+  width: 550px;
+  height: 200px;
+  border-radius: 20px;
+  font-size: 25px;
+  padding: 20px;
+  border: 1px solid rgba(113 119 144 / 25%);
+  color: rgb(202, 202, 202);
+}
+
+.greetings {
+  display: block;
+  margin: 0 0 30px;
+  color: rgb(255, 255, 255);
+}
+
+.info {
+  margin: 0 0 30px;
+}
+
+.info mark {
+  color: rgb(202, 202, 202);
+  background: none;
+  font-family: "MyriadProBold";
+}
+
+.categories {
+  color: rgb(255, 255, 255);
+}
+
+.categories:hover {
+  color: rgb(157, 157, 157);
+}

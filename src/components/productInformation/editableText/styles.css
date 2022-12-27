@@ -1,0 +1,14 @@
+.description {
+  font: 25px/30px "MyriadProRegular";
+  min-width: 550px;
+  min-height: 120px;
+  background: none;
+  color: rgb(202, 202, 202);
+  resize: none;
+  border: 1px solid rgb(202, 202, 202);
+  outline: none;
+}
+
+.text {
+  padding: 0 0 0 5px;
+}
