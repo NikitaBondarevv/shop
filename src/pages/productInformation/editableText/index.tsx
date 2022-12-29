@@ -1,4 +1,4 @@
-import { useState, DetailedHTMLProps, InputHTMLAttributes } from 'react'
+import { useState, FormEvent } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
@@ -12,7 +12,7 @@ export const EditableText = ({ multiLine, stylesInput, text }: TEditableText) =>
     setValue(value)
   }
 
-  const handleBlur = (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
+  const handleBlur = (e: FormEvent) => {
     e.preventDefault()
 
     setHidden(true)

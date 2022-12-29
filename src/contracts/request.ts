@@ -1,7 +1,7 @@
-import { IData } from "interfaces/IData"
+import { IData } from 'interfaces/IData'
 
-const makeRequest = async (url: string, data: IData | undefined, method = 'GET') => {
-  const options = {
+const makeRequest = async (url: string, data?: IData, method = 'GET') => {
+  const options: RequestInit = {
     method,
     credentials: 'include'
   }
@@ -15,14 +15,14 @@ const makeRequest = async (url: string, data: IData | undefined, method = 'GET')
     })
   }
 
-  const response = await fetch(`http://localhost:8086/${url}`,<RequestInit> options)
+  const response = await fetch(`http://localhost:8086/${url}`, options)
 
   return response.json()
 }
 
 export const request = {
   get(url: string) {
-    return makeRequest(url, undefined)
+    return makeRequest(url)
   },
 
   post(url: string, data: IData) {

@@ -1,10 +1,24 @@
-import styles from './styles.css'
-import { TProductsInfoProps } from './types'
+import { useEffect, useState } from 'react'
 
-export const ProductsInfo = ({ name, products }: TProductsInfoProps) => (
+import { getCategories } from 'contracts/getCategories'
+import styles from './styles.css'
+import { IData } from 'interfaces/IData'
+
+export const ProductsInfo = () => {
+  const [products, setProducts] = useState<IData>({})
+
+  useEffect(() => {
+    const getData = async () => {
+      setProducts(await getCategories())
+    }
+
+    getData()
+  }, [])
+  
+  return (
   <div className={styles.productsInfo}>
     <span className={styles.greetings}>
-      Hello, {name}
+      Hello,
     </span>
     <div className={styles.info}>
       <p>
@@ -17,4 +31,4 @@ export const ProductsInfo = ({ name, products }: TProductsInfoProps) => (
     </div>
     <a className={styles.categories} href="#">Go to categories</a>
   </div>
-)
+)}
