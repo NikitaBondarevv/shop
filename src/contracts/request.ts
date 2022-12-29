@@ -1,5 +1,7 @@
-const makeRequest = async (url, method = 'GET', data) => {
-  const options = {
+import { IData } from 'interfaces/IData'
+
+const makeRequest = async (url: string, data?: IData, method = 'GET') => {
+  const options: RequestInit = {
     method,
     credentials: 'include'
   }
@@ -19,15 +21,15 @@ const makeRequest = async (url, method = 'GET', data) => {
 }
 
 export const request = {
-  get(url) {
+  get(url: string) {
     return makeRequest(url)
   },
 
-  post(url, data) {
-    return makeRequest(url, 'POST', data)
+  post(url: string, data: IData) {
+    return makeRequest(url, data, 'POST')
   },
 
-  put(url, data) {
-    return makeRequest(url, 'PUT', data)
+  put(url: string, data: IData) {
+    return makeRequest(url, data, 'PUT')
   }
 }

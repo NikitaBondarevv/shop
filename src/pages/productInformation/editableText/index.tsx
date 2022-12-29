@@ -1,17 +1,18 @@
-import { useState } from 'react'
+import { useState, FormEvent } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
+import { TEditableText, TTarget } from './types'
 
-export const EditableText = ({ multiLine, stylesInput, text }) => {
+export const EditableText = ({ multiLine, stylesInput, text }: TEditableText) => {
   const [hidden, setHidden] = useState(true)
   const [value, setValue] = useState(text)
 
-  const setValueInput = ({ target: { value } }) => {
+  const setValueInput = ({ target: { value } }: TTarget) => {
     setValue(value)
   }
 
-  const handleBlur = e => {
+  const handleBlur = (e: FormEvent) => {
     e.preventDefault()
 
     setHidden(true)
