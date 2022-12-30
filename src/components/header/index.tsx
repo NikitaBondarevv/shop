@@ -4,8 +4,8 @@ import { useContext } from 'react'
 import styles from './styles.css'
 import logo from './images/logo.png'
 import loginPage from './images/loginPage.png'
-import { links } from 'helpers/links'
-import { linksNotLogin } from 'helpers/linksNotLogin'
+import { navigation } from 'helpers/navigation'
+import { notLoggedNavigation } from 'helpers/notLoggedNavigation'
 import { UserContext } from 'contexts/userContext'
 import { AuthorizedUser } from './authorizedUser'
 
@@ -21,14 +21,14 @@ export const Header = () => {
         {
           isAuthenticated
             ? <ul className={styles.list}>
-              {links.map((link, index) => (
+              {navigation.map((link, index) => (
                 <li key={index}>
                   <Link to={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</Link>
                 </li>
               ))}
             </ul>
             : <ul className={styles.list}>
-              {linksNotLogin.map((link, index) => (
+              {notLoggedNavigation.map((link, index) => (
                 <li key={index}>
                   <Link to={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</Link>
                 </li>
