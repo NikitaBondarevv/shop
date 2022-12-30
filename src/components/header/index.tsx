@@ -20,20 +20,24 @@ export const Header = () => {
       <nav>
         {
           isAuthenticated
-            ? <ul className={styles.list}>
-              {navigation.map((link, index) => (
-                <li key={index}>
-                  <Link to={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</Link>
-                </li>
-              ))}
-            </ul>
-            : <ul className={styles.list}>
-              {notLoggedNavigation.map((link, index) => (
-                <li key={index}>
-                  <Link to={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</Link>
-                </li>
-              ))}
-            </ul>
+            ? (
+              <ul className={styles.list}>
+                {navigation.map((link, index) => (
+                  <li key={index}>
+                    <Link to={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</Link>
+                  </li>
+                ))}
+              </ul>
+            )
+            : (
+              <ul className={styles.list}>
+                {notLoggedNavigation.map((link, index) => (
+                  <li key={index}>
+                    <Link to={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</Link>
+                  </li>
+                ))}
+              </ul>
+            )
         }
       </nav>
       {

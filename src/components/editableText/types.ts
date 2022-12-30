@@ -1,6 +1,6 @@
 export type TEditableText = {
   multiLine: boolean
-  stylesInput: string
+  price?: boolean
   text: string
 }
 

@@ -1,0 +1,30 @@
+.description {
+  font: 25px "MyriadProRegular";
+  width: 713px;
+  height: 88px;
+  background: none;
+  color: rgb(202, 202, 202);
+  resize: vertical;
+  border: 1px solid rgb(202, 202, 202);
+  outline: none;
+}
+
+.text {
+  border: 1px solid rgba(16 18 27 / 40%);
+}
+
+.editableTitle,
+.editablePrice {
+  font: 25px/30px "MyriadProRegular";
+  background: none;
+  width: 130px;
+  height: 25px;
+  border: 1px solid rgb(202, 202, 202);
+  outline: none;
+  color: rgb(202, 202, 202);
+}
+
+.editablePrice {
+  width: 25px;
+  height: 25px;
+}

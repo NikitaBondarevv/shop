@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styles from './styles.css'
 import { TEditableText, TTarget } from './types'
 
-export const EditableText = ({ multiLine, stylesInput, text }: TEditableText) => {
+export const EditableText = ({ multiLine, price, text }: TEditableText) => {
   const [hidden, setHidden] = useState(true)
   const [value, setValue] = useState(text)
 
@@ -37,7 +37,7 @@ export const EditableText = ({ multiLine, stylesInput, text }: TEditableText) =>
     )
     : (
       <input
-        className={stylesInput}
+        className={price ? styles.editablePrice : styles.editableTitle}
         name="text"
         value={value}
         onChange={setValueInput}

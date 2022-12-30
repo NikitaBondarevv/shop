@@ -16,23 +16,6 @@
   margin: 0 0 0 280px;
 }
 
-.editableTitle,
-.editablePrice {
-  font: 25px/30px "MyriadProRegular";
-  background: none;
-  width: 130px;
-  height: 25px;
-  border: 1px solid rgb(202, 202, 202);
-  outline: none;
-  color: rgb(202, 202, 202);
-  padding: 0 0 0 5px;
-}
-
-.editablePrice {
-  width: 25px;
-  height: 25px;
-}
-
 .price {
   display: block;
   margin: 0 0 30px;
