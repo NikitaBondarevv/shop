@@ -6,7 +6,7 @@ const descriptionText = `Enjoy new movie-themed thrills ad a favorite Radiator S
 location - Willys Butte! Inspired by Disney Pixar Cars 3,
 this hair-raising set uses multiple wild driving skills and transforms for 3 ways play.`
 
-export const ProductInformation = () => (
+export const Products = () => (
   <div className={styles.productInformation}>
     <span className={styles.title}>
       TITLE:

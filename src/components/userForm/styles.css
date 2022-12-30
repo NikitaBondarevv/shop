@@ -1,0 +1,118 @@
+.loginForm {
+  background-color: rgba(16 18 27 / 40%);
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 0px 10px black;
+  width: 650px;
+  min-height: 200px;
+  border-radius: 20px;
+  font-size: 25px;
+  padding: 40px 20px 20px;
+  border: 1px solid rgba(113 119 144 / 25%);
+  color: rgb(202, 202, 202);
+  margin: 0 auto;
+}
+
+.loginForm ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.loginForm li {
+  position: relative;
+}
+
+.loginForm input {
+  font: 24px/24px "MyriadProLight";
+  padding: 5px 35px 5px 30px;
+  width: 212px;
+  height: 55px;
+  border-radius: 7px;
+  margin: 0 20px 15px 0;
+  border: 1px solid #fff;
+  font-style: italic;
+}
+
+.loginForm input:disabled {
+  background-color: rgb(255 255 255 / 50%);
+  border: 3px solid rgb(255 255 255 / 50%);
+}
+
+.loginForm .email::before,
+.loginForm .name::before,
+.loginForm .password::before {
+  background: url(./images/form-elements.png) no-repeat;
+  content: "";
+  width: 17px;
+  position: absolute;
+  z-index: 2;
+  left: 250px;
+  top: 29px;
+}
+
+.loginForm .email::before {
+  height: 13px;
+}
+
+.loginForm .name::before {
+  background-position: 0 -15px;
+  height: 17px;
+}
+
+.loginForm .password::before {
+  background-position: 0 -33px;
+  height: 18px;
+}
+
+.loginForm  .error {
+  border: 3px solid #f17777;
+}
+
+.loginForm .success {
+  border: 3px solid #fff;
+}
+
+.loginForm input::placeholder {
+  color: #000;
+}
+
+.loginForm input[type=submit] {
+  padding: 0;
+  margin: 0;
+  background: #0ff;
+  color: #fff;
+  height: 53px;
+  width: 143px;
+  border: 1px solid #b1bad8;
+  box-shadow: 0 0 5px #b1bad8;
+}
+
+.info {
+  background: #f9f8c9;
+  border-radius: 4px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 23px;
+  left: 310px;
+  padding: 0 25px;
+}
+
+.info::before {
+  background: url(./images/msg-figure.png) no-repeat;
+  content: "";
+  width: 14px;
+  position: absolute;
+  height: 12px;
+  left: -12px;
+  top: 15px;
+}
+
+.textInfo {
+  color: #ed2323;
+  font-size: 22px;
+  line-height: 24px;
+  margin: 0 0 0 8px;
+}
