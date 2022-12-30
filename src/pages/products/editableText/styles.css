@@ -1,8 +1,7 @@
 .description {
-  font: 25px/30px "MyriadProRegular";
-  min-width: 733.48px;
-  min-height: 87.5px;
-  padding: 0 0 0 5px;
+  font: 25px "MyriadProRegular";
+  width: 713.48px;
+  height: 88px;
   background: none;
   color: rgb(202, 202, 202);
   resize: vertical;
@@ -11,6 +10,5 @@
 }
 
 .text {
-  padding: 0 0 0 5px;
   border: 1px solid rgba(16 18 27 / 40%);
 }
