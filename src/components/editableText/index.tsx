@@ -1,4 +1,4 @@
-import { useState, FormEvent, useRef, useEffect } from 'react'
+import { useState, FormEvent, useRef } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
@@ -25,10 +25,6 @@ export const EditableText = ({ multiLine, text }: TEditableText) => {
 
     setHidden(false)
   }
-
-  useEffect(() => {
-
-  }, [hidden])
 
   if (hidden) return <span
     ref={spanRef}

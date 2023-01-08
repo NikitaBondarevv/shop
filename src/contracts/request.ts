@@ -1,6 +1,7 @@
 import { IProductInfo } from 'interfaces/IProductInfo'
+import { IUser } from 'interfaces/IUser'
 
-const makeRequest = async (url: string, data?: IProductInfo, method = 'GET') => {
+const makeRequest = async (url: string, data?: IProductInfo | IUser, method = 'GET') => {
   const options: RequestInit = {
     method,
     credentials: 'include'
@@ -25,11 +26,11 @@ export const request = {
     return makeRequest(url)
   },
 
-  post(url: string, data: IProductInfo) {
+  post(url: string, data: IProductInfo | IUser) {
     return makeRequest(url, data, 'POST')
   },
 
-  put(url: string, data: IProductInfo) {
+  put(url: string, data: IProductInfo | IUser) {
     return makeRequest(url, data, 'PUT')
   }
 }
