@@ -1,0 +1,65 @@
+.menu {
+  position: relative;
+  padding: 0 0 15px;
+  transform: translate(-127px, 0);
+}
+
+.dropDown {
+  background: rgba(93 93 93 / 40%);
+  flex-direction: column;
+  padding: 7px 17px 0;
+  min-width: 90px;
+  position: absolute;
+  align-items: center;
+  top: 33px;
+  display: none;
+  left: 50%;
+  transform: translate(-50%, 0);
+  list-style: none;
+  margin: 0;
+  border-radius: 15px;
+}
+
+.dropDown a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.dropDown a:hover {
+  text-decoration: underline 1px;
+  text-underline-offset: 5px
+}
+
+.dropDown li {
+  font-size: 26px;
+  line-height: 24px;
+  white-space: nowrap;
+  margin: 0 0 7px;
+}
+
+.menu:hover .dropDown {
+  display: flex;
+}
+
+.userName {
+  display: block;
+  font-size: 25px;
+  line-height: 25px;
+  color: #fff;
+  text-decoration: none;
+  position: relative;
+}
+
+.userName::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: url(./images/user.png) no-repeat;
+  width: 24px;
+  height: 24px;
+  right: -35px;
+}
+
+.userName:hover {
+  color: rgb(157, 157, 157);
+}

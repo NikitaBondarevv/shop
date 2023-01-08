@@ -1,4 +1,4 @@
-import { EditableText } from './editableText'
+import { EditableText } from 'components/editableText'
 
 import styles from './styles.css'
 
@@ -6,15 +6,13 @@ const descriptionText = `Enjoy new movie-themed thrills ad a favorite Radiator S
 location - Willys Butte! Inspired by Disney Pixar Cars 3,
 this hair-raising set uses multiple wild driving skills and transforms for 3 ways play.`
 
-export const ProductInformation = () => (
+export const Products = () => (
   <div className={styles.productInformation}>
     <span className={styles.title}>
-      TITLE:
-      <EditableText text="TOW TRACK" stylesInput={styles.editableTitle} />
+      TITLE: <EditableText text="TOW TRACK" />
     </span>
     <span className={styles.price}>
-      $
-      <EditableText text="32" stylesInput={styles.editablePrice} />
+      $ <EditableText text="32" price />
     </span>
     <div className={styles.description}>
       <EditableText text={descriptionText} multiLine />

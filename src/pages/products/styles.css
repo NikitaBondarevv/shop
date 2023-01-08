@@ -2,8 +2,8 @@
   background-color: rgba(16 18 27 / 40%);
   backdrop-filter: blur(20px);
   box-shadow: 0px 0px 10px black;
-  width: 550px;
-  min-height: 200px;
+  width: 750px;
+  min-height: 300px;
   border-radius: 20px;
   font-size: 25px;
   padding: 40px 20px 20px;
@@ -13,27 +13,11 @@
 }
 
 .title {
-  display: flex;
-  justify-content: center;
-}
-
-.editableTitle,
-.editablePrice {
-  font: 25px/25px "MyriadProRegular";
-  background: none;
-  width: 130px;
-  height: 25px;
-  border: 1px solid rgb(202, 202, 202);
-  outline: none;
-  color: rgb(202, 202, 202);
-}
-
-.editablePrice {
-  width: 25px;
+  margin: 0 0 0 280px;
 }
 
 .price {
-  display: flex;
+  display: block;
   margin: 0 0 30px;
 }
 
@@ -57,6 +41,7 @@ button:hover {
 }
 
 .description {
+  width: 730px;
   margin: 0 0 30px;
   line-height: 30px;
 }

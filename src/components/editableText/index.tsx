@@ -1,12 +1,14 @@
-import { useState, FormEvent } from 'react'
+import { useState, FormEvent, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
 import { TEditableText, TTarget } from './types'
 
-export const EditableText = ({ multiLine, stylesInput, text }: TEditableText) => {
+export const EditableText = ({ multiLine, text }: TEditableText) => {
   const [hidden, setHidden] = useState(true)
   const [value, setValue] = useState(text)
+  const spanRef = useRef<HTMLElement>(null)
+  const [inputWidth, setInputWidth] = useState(15)
 
   const setValueInput = ({ target: { value } }: TTarget) => {
     setValue(value)
@@ -19,10 +21,21 @@ export const EditableText = ({ multiLine, stylesInput, text }: TEditableText) =>
   }
 
   const showInput = () => {
+    setInputWidth(spanRef.current!.clientWidth + 5)
+
     setHidden(false)
   }
 
-  if (hidden) return <span className={styles.text} onClick={showInput}>{value ? value : text}</span>
+  useEffect(() => {
+
+  }, [hidden])
+
+  if (hidden) return <span
+    ref={spanRef}
+    className={styles.text}
+    onClick={showInput}>
+    {value || text}
+  </span>
 
   return multiLine
     ? (
@@ -37,12 +50,15 @@ export const EditableText = ({ multiLine, stylesInput, text }: TEditableText) =>
     )
     : (
       <input
-        className={stylesInput}
+        className={styles.textInput}
         name="text"
         value={value}
         onChange={setValueInput}
         onBlur={handleBlur}
         autoFocus
+        style={{
+          width: `${inputWidth}px`
+        }}
       />
     )
 }
