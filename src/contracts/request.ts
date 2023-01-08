@@ -1,6 +1,6 @@
-import { IData } from 'interfaces/IData'
+import { IProductInfo } from 'interfaces/IProductInfo'
 
-const makeRequest = async (url: string, data?: IData, method = 'GET') => {
+const makeRequest = async (url: string, data?: IProductInfo, method = 'GET') => {
   const options: RequestInit = {
     method,
     credentials: 'include'
@@ -25,11 +25,11 @@ export const request = {
     return makeRequest(url)
   },
 
-  post(url: string, data: IData) {
+  post(url: string, data: IProductInfo) {
     return makeRequest(url, data, 'POST')
   },
 
-  put(url: string, data: IData) {
+  put(url: string, data: IProductInfo) {
     return makeRequest(url, data, 'PUT')
   }
 }

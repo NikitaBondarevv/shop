@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { IData } from 'interfaces/IData'
+import { IProductInfo } from 'interfaces/IProductInfo'
 import { UserContext } from 'contexts/userContext'
 import { getCategories } from 'contracts/getCategories'
 import styles from './styles.css'
 import { Link } from 'react-router-dom'
 
 export const ProductsInfo = () => {
-  const [products, setProducts] = useState<IData>({})
+  const [products, setProducts] = useState<IProductInfo>({})
   const { user } = useContext(UserContext)
 
   useEffect(() => {
