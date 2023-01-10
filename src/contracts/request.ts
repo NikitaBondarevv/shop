@@ -1,6 +1,4 @@
-import { IUser } from 'interfaces/IUser'
-
-const makeRequest = async <T extends IUser>(url: string, data?: T, method = 'GET') => {
+const makeRequest = async <T>(url: string, data?: T, method = 'GET') => {
   const options: RequestInit = {
     method,
     credentials: 'include'
@@ -25,11 +23,11 @@ export const request = {
     return makeRequest(url)
   },
 
-  post(url: string, data: IUser) {
+  post<T>(url: string, data: T) {
     return makeRequest(url, data, 'POST')
   },
 
-  put(url: string, data: IUser) {
+  put<T>(url: string, data: T) {
     return makeRequest(url, data, 'PUT')
   }
 }
