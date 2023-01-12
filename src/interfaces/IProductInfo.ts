@@ -1,5 +1,5 @@
 export interface IProductInfo {
-  categories?: number
-  products?: number
-  publishedCategories?: number
+  categories: number
+  products: number
+  publishedCategories: number
 }

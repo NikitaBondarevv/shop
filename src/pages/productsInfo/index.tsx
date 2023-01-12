@@ -7,7 +7,7 @@ import styles from './styles.css'
 import { Link } from 'react-router-dom'
 
 export const ProductsInfo = () => {
-  const [products, setProducts] = useState<IProductInfo>({})
+  const [products, setProducts] = useState<IProductInfo>({} as IProductInfo)
   const { user } = useContext(UserContext)
 
   useEffect(() => {
