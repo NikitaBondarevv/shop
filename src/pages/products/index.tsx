@@ -1,22 +1,53 @@
-import { EditableText } from 'components/editableText'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 
+import { EditableText } from 'components/editableText'
+import { findProducts } from 'contracts/findProducts'
 import styles from './styles.css'
 
-const descriptionText = `Enjoy new movie-themed thrills ad a favorite Radiator Springs
-location - Willys Butte! Inspired by Disney Pixar Cars 3,
-this hair-raising set uses multiple wild driving skills and transforms for 3 ways play.`
+export const Products = ({ authorised }) => {
+  const [product, setProduct] = useState({})
+  const { title } = useParams()
 
-export const Products = () => (
-  <div className={styles.productInformation}>
-    <span className={styles.title}>
-      TITLE: <EditableText text="TOW TRACK" />
-    </span>
-    <span className={styles.price}>
-      $ <EditableText text="32" price />
-    </span>
-    <div className={styles.description}>
-      <EditableText text={descriptionText} multiLine />
-    </div>
-    <button type="button" className={styles.button}>SAVE</button>
-  </div>
-)
+  useEffect(() => {
+    const getData = async () => {
+      setProduct(await findProducts(title))
+    }
+
+    getData()
+  }, [])
+
+  console.log(product);
+
+
+  return (
+    authorised
+      ? (
+        <div className={styles.productInformation} >
+          <span className={styles.title}>
+            TITLE: <EditableText text={product.title} />
+          </span>
+          <span className={styles.price}>
+            $ <EditableText text={product.price} price />
+          </span>
+          <div className={styles.description}>
+            <EditableText text={product.description || 'No description'} multiLine />
+          </div>
+          <button type="button" className={styles.button}>SAVE</button>
+        </div >
+      )
+      : (
+        <div className={styles.productInformation} >
+          <span className={styles.title}>
+            TITLE: {product.title}
+          </span>
+          <span className={styles.price}>
+            $ {product.price}
+          </span>
+          <div className={styles.description}>
+            {product.description || 'No description'}
+          </div>
+        </div >
+      )
+  )
+}

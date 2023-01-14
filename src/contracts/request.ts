@@ -23,7 +23,7 @@ export const request = {
     return makeRequest(url)
   },
 
-  post<T>(url: string, data: T) {
+  post<T>(url: string, data?: T) {
     return makeRequest(url, data, 'POST')
   },
 

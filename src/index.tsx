@@ -29,7 +29,7 @@ const App = () => {
   const contextValue = useMemo(() => ({
     isAuthenticated: user && !user.error,
     user,
-    setUser
+    setUser,
   }), [user])
 
   return (

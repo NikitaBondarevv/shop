@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 
 import { IProductInfo } from 'interfaces/IProductInfo'
 import { UserContext } from 'contexts/userContext'
-import { getCategories } from 'contracts/getCategories'
+import { getGeneralInfo } from 'contracts/getGeneralInfo'
 import styles from './styles.css'
 import { Link } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ export const ProductsInfo = () => {
 
   useEffect(() => {
     const getData = async () => {
-      setProducts(await getCategories())
+      setProducts(await getGeneralInfo())
     }
 
     getData()

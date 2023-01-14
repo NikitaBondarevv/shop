@@ -1,4 +1,4 @@
-import { useState, FormEvent, useRef } from 'react'
+import { useState, FormEvent, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
@@ -9,6 +9,10 @@ export const EditableText = ({ multiLine, text }: TEditableText) => {
   const [value, setValue] = useState(text)
   const spanRef = useRef<HTMLElement>(null)
   const [inputWidth, setInputWidth] = useState(15)
+
+  useEffect(() => {
+    setValue(text)
+  }, [text])
 
   const setValueInput = ({ target: { value } }: TTarget) => {
     setValue(value)
