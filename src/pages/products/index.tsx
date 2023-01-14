@@ -5,7 +5,7 @@ import { EditableText } from 'components/editableText'
 import { findProducts } from 'contracts/findProducts'
 import styles from './styles.css'
 
-export const Products = ({ authorised }) => {
+export const Products = ({ authorised = false }) => {
   const [product, setProduct] = useState({})
   const { title } = useParams()
 

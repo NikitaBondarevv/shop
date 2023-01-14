@@ -9,6 +9,7 @@ import { CreateUser } from './createUser'
 import { Profile } from './profile'
 import { Categories } from './categories'
 import { CertainCategory } from './categories/certainCategory'
+import { Welcome } from './welcome'
 
 export const Pages = () => {
   const { isAuthenticated, setUser } = useContext(UserContext)
@@ -19,17 +20,18 @@ export const Pages = () => {
         isAuthenticated ? (
           <Routes>
             <Route path='/' element={<ProductsInfo />} />
-            <Route path='/products' element={<Products />} />
+            <Route path='/products' element={<Products authorised/>} />
             <Route path='/profile' element={<Profile />} />
           </Routes>
         )
           : (
             <Routes>
-              <Route path='/' element={<LoginForm setUser={setUser} />} />
+              <Route path='/signIn' element={<LoginForm setUser={setUser} />} />
               <Route path='/signUp' element={<CreateUser />} />
               <Route path='/categories' element={<Categories />} />
               <Route path='/categories/:title' element={<CertainCategory />} />
-            <Route path='/products/:title' element={<Products />} />
+              <Route path='/products/:title' element={<Products />} />
+              <Route path='/' element={<Welcome />} />
             </Routes>
           )
       }
