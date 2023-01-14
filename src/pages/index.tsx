@@ -10,6 +10,7 @@ import { Profile } from './profile'
 import { Categories } from './categories'
 import { CertainCategory } from './categories/certainCategory'
 import { Welcome } from './welcome'
+import { Contacts } from './contacts'
 
 export const Pages = () => {
   const { isAuthenticated, setUser } = useContext(UserContext)
@@ -22,6 +23,7 @@ export const Pages = () => {
             <Route path='/' element={<ProductsInfo />} />
             <Route path='/products' element={<Products authorised/>} />
             <Route path='/profile' element={<Profile />} />
+            <Route path='/contacts' element={<Contacts />} />
           </Routes>
         )
           : (
@@ -31,6 +33,7 @@ export const Pages = () => {
               <Route path='/categories' element={<Categories />} />
               <Route path='/categories/:title' element={<CertainCategory />} />
               <Route path='/products/:title' element={<Products />} />
+              <Route path='/contacts' element={<Contacts />} />
               <Route path='/' element={<Welcome />} />
             </Routes>
           )

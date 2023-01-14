@@ -1,0 +1,68 @@
+.contacts {
+  background-color: rgba(16 18 27 / 40%);
+  backdrop-filter: blur(20px);
+  box-shadow: 0px 0px 10px black;
+  width: 550px;
+  min-height: 200px;
+  border-radius: 20px;
+  font-size: 25px;
+  padding: 40px;
+  border: 1px solid rgba(113 119 144 / 25%);
+  color: rgb(202, 202, 202);
+  margin: 0 auto;
+}
+
+.contacts h1 {
+  font-size: 30px;
+  margin: 0 0 20px;
+  text-align: center;
+}
+
+.contacts form {
+  text-align: center;
+}
+
+.contacts textarea {
+  width: 450px;
+  height: 200px;
+  resize: none;
+  border-radius: 10px;
+  font-size: 25px;
+}
+
+.name {
+  margin: 0 15px 0 0;
+}
+
+.contacts input {
+  font: 24px/24px "MyriadProLight";
+  padding: 5px;
+  width: 147px;
+  height: 25px;
+  border-radius: 7px;
+  margin: 0 0 15px 0;
+  border: 1px solid #fff;
+}
+
+.contacts input[type="submit"] {
+  margin: 0 20px 0 0;
+}
+
+.contacts input[type="submit"],
+.contacts input[type="reset"] {
+  padding: 0;
+  background: rgb(93 93 93 / 40%);
+  color: #fff;
+  height: 53px;
+  width: 143px;
+  border: 1px solid rgba(113 119 144 / 25%);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.5s;
+  backdrop-filter: blur(15px);
+}
+
+.contacts input[type=submit]:hover,
+.contacts input[type="reset"]:hover {
+  background-color: rgba(36, 36, 36, 0.4);
+}
