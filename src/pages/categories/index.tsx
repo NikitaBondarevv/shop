@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom'
 
 import { getCategories } from 'contracts/getCategories'
 import styles from './styles.css'
+import { IProduct } from 'interfaces/IProduct'
 
 export const Categories = () => {
-  const [categories, setCategories] = useState([])
+  const [categories, setCategories] = useState<IProduct[]>([])
 
   useEffect(() => {
     const getData = async () => {

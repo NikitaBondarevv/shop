@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
+import { IProduct } from 'interfaces/IProduct'
 import { EditableText } from 'components/editableText'
 import { findProducts } from 'contracts/findProducts'
 import styles from './styles.css'
 
 export const Products = ({ authorised = false }) => {
-  const [product, setProduct] = useState({})
+  const [product, setProduct] = useState<IProduct>({} as IProduct)
   const { title } = useParams()
 
   useEffect(() => {

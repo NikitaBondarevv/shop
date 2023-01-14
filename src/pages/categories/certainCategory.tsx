@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
+import { TCategory } from './types'
 import { findCategories } from 'contracts/findCategories'
 import styles from './styles.css'
 
 export const CertainCategory = () => {
-  const [category, setCategory] = useState({})
+  const [category, setCategory] = useState<TCategory>({} as TCategory)
   const { title } = useParams()
 
   useEffect(() => {

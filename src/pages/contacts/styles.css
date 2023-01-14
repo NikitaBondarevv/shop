@@ -34,6 +34,10 @@
   margin: 0 15px 0 0;
 }
 
+.comments {
+  margin: 0 0 15px;
+}
+
 .contacts input {
   font: 24px/24px "MyriadProLight";
   padding: 5px;

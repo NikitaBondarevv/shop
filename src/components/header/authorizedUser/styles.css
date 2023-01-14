@@ -8,7 +8,7 @@
   background: rgba(93 93 93 / 40%);
   flex-direction: column;
   padding: 7px 17px 0;
-  min-width: 90px;
+  min-width: 120px;
   position: absolute;
   align-items: center;
   top: 33px;
@@ -42,7 +42,6 @@
 }
 
 .userName {
-  display: block;
   font-size: 25px;
   line-height: 25px;
   color: #fff;
@@ -62,4 +61,9 @@
 
 .userName:hover {
   color: rgb(157, 157, 157);
+}
+
+.info {
+  color: #fff;
+  margin: 0 0 0 45px;
 }

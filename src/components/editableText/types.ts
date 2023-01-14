@@ -1,7 +1,7 @@
 export type TEditableText = {
   multiLine: boolean
   price?: boolean
-  text: string
+  text: string | number
 }
 
 export type TTarget = {

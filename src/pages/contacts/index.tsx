@@ -10,7 +10,7 @@ export const Contacts = () => (
       <label htmlFor="email">
         Email: <input type="text" name="email" />
       </label>
-      <div>
+      <div className={styles.comments}>
         <label>Comments:</label>
         <br />
         <textarea name="comments" placeholder="Send your comments to us." />
