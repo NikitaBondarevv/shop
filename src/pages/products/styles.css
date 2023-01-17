@@ -22,7 +22,7 @@
   margin: 0 0 30px;
 }
 
-button {
+.save {
   display: block;
   width: 120px;
   height: 50px;
@@ -37,7 +37,7 @@ button {
   box-shadow: 0px 0px 10px black;
 }
 
-button:hover {
+.save:hover {
   background-color: rgba(36, 36, 36, 0.4);
 }
 

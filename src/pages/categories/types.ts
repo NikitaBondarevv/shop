@@ -6,3 +6,9 @@ export type TCategory = {
   published: boolean
   title: string
 }
+
+export type TTarget = {
+  target : {
+    value: string
+  }
+}

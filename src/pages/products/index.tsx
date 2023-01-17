@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { IProduct } from 'interfaces/IProduct'
+import { UserContext } from 'contexts/userContext'
 import { EditableText } from 'components/editableText'
 import { findProducts } from 'contracts/findProducts'
 import styles from './styles.css'
 
-export const Products = ({ authorised = false }) => {
+export const Products = () => {
   const [product, setProduct] = useState<IProduct>({} as IProduct)
   const { title } = useParams()
+  const { isAuthenticated } = useContext(UserContext)
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +24,7 @@ export const Products = ({ authorised = false }) => {
 
 
   return (
-    authorised
+    isAuthenticated
       ? (
         <div className={styles.productInformation} >
           <span className={styles.title}>
@@ -34,7 +36,7 @@ export const Products = ({ authorised = false }) => {
           <div className={styles.description}>
             <EditableText text={product.description || 'No description'} multiLine />
           </div>
-          <button type="button" className={styles.button}>SAVE</button>
+          <button type="button" className={styles.save}>SAVE</button>
         </div >
       )
       : (

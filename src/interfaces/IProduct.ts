@@ -4,4 +4,5 @@ export interface IProduct {
   description?: string
   image?: string
   price?: number
+  published?: boolean
 }

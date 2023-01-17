@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useContext } from 'react'
 
 import styles from './styles.css'
@@ -8,6 +8,12 @@ import { navigation } from 'helpers/navigation'
 import { notLoggedNavigation } from 'helpers/notLoggedNavigation'
 import { UserContext } from 'contexts/userContext'
 import { AuthorizedUser } from './authorizedUser'
+
+const getNavLinkName = (isActive: boolean, value: string = '') => {
+  const activeClassName = isActive ? styles.active : ''
+
+  return `${value} ${activeClassName}`
+}
 
 export const Header = () => {
   const { isAuthenticated } = useContext(UserContext)
@@ -24,7 +30,7 @@ export const Header = () => {
               <ul className={styles.list}>
                 {navigation.map((link, index) => (
                   <li key={index}>
-                    <Link to={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</Link>
+                    <NavLink to={`/${link.value}`} className={({ isActive }) => getNavLinkName(isActive, styles[link.value])}>{link.text}</NavLink>
                   </li>
                 ))}
               </ul>
@@ -33,7 +39,7 @@ export const Header = () => {
               <ul className={styles.list}>
                 {notLoggedNavigation.map((link, index) => (
                   <li key={index}>
-                    <Link to={`/${link.value}`} className={styles[`${link.value}`]}>{link.text}</Link>
+                    <NavLink to={`/${link.value}`} className={({ isActive }) => getNavLinkName(isActive, styles[link.value])}>{link.text}</NavLink>
                   </li>
                 ))}
               </ul>

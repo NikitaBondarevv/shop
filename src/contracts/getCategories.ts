@@ -1,3 +1,3 @@
 import { request } from './request'
 
-export const getCategories = async () => request.get(`public/categories`)
+export const getCategories = async () => request.get('public/categories')

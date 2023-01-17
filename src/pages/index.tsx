@@ -21,9 +21,11 @@ export const Pages = () => {
         isAuthenticated ? (
           <Routes>
             <Route path='/' element={<ProductsInfo />} />
-            <Route path='/products' element={<Products authorised/>} />
+            <Route path='/products/:title' element={<Products />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/contacts' element={<Contacts />} />
+            <Route path='/categories' element={<Categories />} />
+            <Route path='/categories/:title' element={<CertainCategory />} />
           </Routes>
         )
           : (

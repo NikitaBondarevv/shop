@@ -29,5 +29,9 @@ export const request = {
 
   put<T>(url: string, data: T) {
     return makeRequest(url, data, 'PUT')
+  },
+  
+  delete(url: string) {
+    return makeRequest(url, undefined, 'DELETE')
   }
 }
