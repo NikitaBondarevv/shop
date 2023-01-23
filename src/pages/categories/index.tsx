@@ -12,7 +12,7 @@ import styles from './styles.css'
 
 export const Categories = () => {
   const { isAuthenticated } = useContext(UserContext)
-  const [publishedCategories, setPublishedCategories] = useState<IProduct[]>([])
+  const [originCategories, setOriginCategories] = useState<IProduct[]>([])
   const [categories, setCategories] = useState<IProduct[]>([])
   const [showWarningWindow, setShowWarningWindow] = useState(false)
   const [title, setTitle] = useState('')
@@ -20,7 +20,7 @@ export const Categories = () => {
   const [id, setId] = useState(0)
 
   const getData = async () => {
-    setPublishedCategories(await getCategories())
+    setOriginCategories(await getCategories())
     setCategories(await getCategories())
   }
 
@@ -31,7 +31,7 @@ export const Categories = () => {
   const searchCategory = ({ target: { value } }: TTarget) => {
     setValue(value)
 
-    setCategories(value.length > 1 ? categories.filter(todo => todo.title.includes(value)) : publishedCategories)
+    setCategories(value.length > 1 ? categories.filter(category => category.title.includes(value)) : originCategories)
   }
 
   const hideWarningWindow = (id: number = 0, title: string = '') => {
@@ -54,7 +54,7 @@ export const Categories = () => {
               </span>
               <ul>
                 {
-                  publishedCategories.map(category => (
+                  originCategories.map(category => (
                     category.published && (
                       <li className={styles.category} key={category.id}>
                         <Link to={`${category.title}`}>
@@ -113,7 +113,7 @@ export const Categories = () => {
           </h1>
           <ul>
             {
-              publishedCategories.map(category => (
+              categories.map(category => (
                 <li key={category.id}>
                   <Link to={`${category.title}`}>
                     {category.title.toUpperCase()}
