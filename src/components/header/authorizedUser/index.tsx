@@ -32,7 +32,7 @@ export const AuthorizedUser = () => {
       </Link>
       <span className={styles.info}>
         {
-          `(${products.categories} / ${products.products})`
+         !Object.keys(products).length ? '(0 / 0)' : `(${products.categories} / ${products.products})`
         }
       </span>
       <ul className={styles.dropDown}>
