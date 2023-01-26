@@ -1,42 +1,37 @@
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import { IProduct } from 'interfaces/IProduct'
 import { WarningWindow } from 'components/warningWindow'
-import { getCategories } from 'contracts/getCategories'
 import { TAuthorisedProps, TTarget } from './types'
 import editIcon from './images/edit.png'
 import deleteIcon from './images/delete.png'
 import styles from './styles.css'
+import { updateCategory } from 'contracts/updateCategory'
 
-export const Authorised = ({ categories, setCategories }: TAuthorisedProps) => {
-  const [originCategories, setOriginCategories] = useState<IProduct[]>([])
-  const [showWarningWindow, setShowWarningWindow] = useState(false)
-  const [title, setTitle] = useState('')
+export const Authorised = ({ categories, getData }: TAuthorisedProps) => {
+  const publishedCatigories = categories.filter(data => data.published)
   const [value, setValue] = useState('')
-  const [id, setId] = useState(0)
+  const unpublishedCatigories = categories.filter(data => !data.published && (!value || data.title.includes(value)))
+  const [id, setId] = useState<number | undefined>(undefined)
+  const description = useMemo(() => {
+    const category = publishedCatigories.find(data => data.id)
 
-  const getData = async () => {
-    setOriginCategories(await getCategories())
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
+    return `You're going to unpublish "${category?.title}" category. Press "Ok" to confirm.`
+  }, [id])
 
   const searchCategory = ({ target: { value } }: TTarget) => {
     setValue(value)
-
-    setCategories(value.length > 1 ? categories.filter(category => category.title.includes(value)) : originCategories)
   }
 
-  const hideWarningWindow = (id: number = 0, title: string = '') => {
-    setShowWarningWindow(!showWarningWindow)
+  const handleConfirmUnpublish = async () => {
+    const category = publishedCatigories.find(data => data.id)
 
-    setId(id)
-    setTitle(title)
+    setId(undefined)
+
+    await updateCategory({ ...category!, published: false })
+    getData()
   }
-  
+
   return (
     <div className={styles.content}>
       <h1 className={styles.title}>
@@ -49,23 +44,20 @@ export const Authorised = ({ categories, setCategories }: TAuthorisedProps) => {
           </span>
           <ul>
             {
-              originCategories.map(category => (
-                category.published && (
-                  <li className={styles.category} key={category.id}>
-                    <Link to={`${category.title}`}>
-                      {category.title.toUpperCase()}
-                    </Link>
-                    <div className={styles.buttons}>
-                      <button className={styles.edit}>
-                        <img src={editIcon} alt="edit" />
-                      </button>
-                      <button className={styles.delete}>
-                        <img src={deleteIcon} onClick={() => hideWarningWindow(category.id, category.title)} alt="delete" />
-                      </button>
-                    </div>
-                  </li>
-                )
-
+              publishedCatigories.map(category => (
+                <li className={styles.category} key={category.id}>
+                  <Link to={`${category.title}`}>
+                    {category.title.toUpperCase()}
+                  </Link>
+                  <div className={styles.buttons}>
+                    <button className={styles.edit}>
+                      <img src={editIcon} alt="edit" />
+                    </button>
+                    <button className={styles.delete} onClick={() => setId(category.id)} >
+                      <img src={deleteIcon} alt="delete" />
+                    </button>
+                  </div>
+                </li>
               ))
             }
           </ul>
@@ -84,20 +76,17 @@ export const Authorised = ({ categories, setCategories }: TAuthorisedProps) => {
           />
           <ul>
             {
-              categories.map(category => (
-                !category.published && (
-                  <li key={category.id}>
-                    {category.title}
-                  </li>
-                )
-
+              unpublishedCatigories.map(category => (
+                <li key={category.id}>
+                  {category.title}
+                </li>
               ))
             }
           </ul>
         </div>
       </div>
       {
-        showWarningWindow && <WarningWindow title={title} id={id} hideWarningWindow={hideWarningWindow} getData={getData} />
+        id && <WarningWindow description={description} onConfirm={handleConfirmUnpublish} onCancel={() => setId(undefined)} />
       }
     </div>
   )

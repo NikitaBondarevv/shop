@@ -44,12 +44,14 @@ export const Header = () => {
       {
         isAuthenticated
           ? <AuthorizedUser />
-          : <div className={styles.loginPanel}>
-            <img src={loginPage} alt="login page" />
-            <Link to="/signIn">Sign In</Link>
-            <span>/</span>
-            <Link to="/signUp">Sign Up</Link>
-          </div>
+          : (
+            <div className={styles.loginPanel}>
+              <img src={loginPage} alt="login page" />
+              <Link to="/signIn">Sign In</Link>
+              <span>/</span>
+              <Link to="/signUp">Sign Up</Link>
+            </div>
+          )
       }
     </header>
   )

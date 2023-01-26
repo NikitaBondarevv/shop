@@ -1,31 +1,22 @@
-import { deleteCategory } from 'contracts/deleteCategory'
 import { TWarningWindow } from './types'
 import close from './images/close.png'
 import styles from './styles.css'
 
-export const WarningWindow = ({ title, id, hideWarningWindow, getData }: TWarningWindow) => {
-  const unpublishCategory = async (id: number) => {
-    await deleteCategory(id)
-
-    hideWarningWindow()
-    getData()
-  }
-
+export const WarningWindow = ({ description, onCancel, onConfirm }: TWarningWindow) => {
   return (
     <div className={styles.window}>
-      <button onClick={hideWarningWindow} className={styles.close}>
+      <button onClick={onCancel} className={styles.close}>
         <img src={close} alt="close" />
       </button>
       <h1>Warning</h1>
       <p>
-        You're going to unpublish "{title}" category.
-        Press "Ok" to confirm. 
+        {description}
       </p>
       <div className={styles.buttons}>
-        <button type='button' onClick={() => unpublishCategory(id)}>
+        <button type='button' onClick={onConfirm}>
           OK
         </button>
-        <button type='button' onClick={hideWarningWindow}>
+        <button type='button' onClick={onCancel}>
           Cancel
         </button>
       </div>

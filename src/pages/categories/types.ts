@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction } from 'react'
-
 import { IProduct } from 'interfaces/IProduct'
+import { ICategory } from 'interfaces/ICategories'
 
 export type TCategory = {
   id: number
@@ -16,10 +15,10 @@ export type TTarget = {
 }
 
 export type TAuthorisedProps = {
-  categories: IProduct[]
-  setCategories: Dispatch<SetStateAction<IProduct[]>>
+  categories: ICategory[]
+  getData: () => void
 }
 
 export type TNoAuthorisedProps = {
-  categories: IProduct[]
+  categories: ICategory[]
 }

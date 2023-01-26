@@ -18,30 +18,24 @@ export const Pages = () => {
 
   return (
     <main>
-      {
-        isAuthenticated ? (
-          <Routes>
-            <Route path='/' element={<ProductsInfo />} />
-            <Route path='/products/:title' element={<Products />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/contacts' element={<Contacts />} />
-            <Route path='/categories' element={<Categories />} />
-            <Route path='/categories/:title' element={<CertainCategory />} />
-          </Routes>
-        )
-          : (
-            <Routes>
+      <Routes>
+        {
+          !isAuthenticated && (
+            <>
+              <Route path='/' element={<Welcome />} />
               <Route path='/signIn' element={<LoginForm setUser={setUser} />} />
               <Route path='/signUp' element={<CreateUser />} />
               <Route path='/success' element={<Registered />} />
-              <Route path='/categories' element={<Categories />} />
-              <Route path='/categories/:title' element={<CertainCategory />} />
-              <Route path='/products/:title' element={<Products />} />
-              <Route path='/contacts' element={<Contacts />} />
-              <Route path='/' element={<Welcome />} />
-            </Routes>
+            </>
           )
-      }
+        }
+        <Route path='/' element={<ProductsInfo />} />
+        <Route path='/products/:title' element={<Products />} />
+        <Route path='/profile' element={<Profile />} />
+        <Route path='/contacts' element={<Contacts />} />
+        <Route path='/categories' element={<Categories />} />
+        <Route path='/categories/:title' element={<CertainCategory />} />
+      </Routes>
     </main>
   )
 }

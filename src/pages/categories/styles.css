@@ -67,6 +67,13 @@
   column-gap: 15px;
 }
 
+.noPublished ul {
+  width: 206px;
+  word-break: break-word;
+  overflow: auto;
+  height: 255px;
+}
+
 .noPublished li {
   padding: 5px;
   margin: 0;

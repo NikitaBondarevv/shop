@@ -1,7 +1,7 @@
 .menu {
   position: relative;
   padding: 0 0 15px;
-  transform: translate(-127px, 0);
+  margin: 15px 0 0;
 }
 
 .dropDown {
