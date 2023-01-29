@@ -16,8 +16,8 @@ export type TPublishItemsProps = {
   message: string
   anotherMessage: string
   setIdUnPublish?: Dispatch<SetStateAction<number | undefined>>
-  onRename: () => void
-  edit: boolean
+  onRename?: () => void
+  edit?: boolean
 }
 
 export type TTarget = {
