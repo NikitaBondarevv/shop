@@ -10,7 +10,7 @@ export const NoAuthorised = ({ categories }: TNoAuthorisedProps) => {
       <h1 className={styles.title}>
         CATEGORIES
       </h1>
-      <ul>
+      <ul className={styles.noLogged} >
         {
           categories.map(category => (
             <li key={category.id}>

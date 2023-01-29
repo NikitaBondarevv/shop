@@ -1,30 +1,23 @@
 import { useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
 
-import { WarningWindow } from 'components/warningWindow'
-import { TAuthorisedProps, TTarget } from './types'
-import editIcon from './images/edit.png'
-import deleteIcon from './images/delete.png'
-import styles from './styles.css'
-import { updateCategory } from 'contracts/updateCategory'
+import { TAuthorisedProps } from './types'
+import { updateCategory } from 'contracts/categories'
+import { PublishItems } from 'components/publishItems'
 
 export const Authorised = ({ categories, getData }: TAuthorisedProps) => {
-  const publishedCatigories = categories.filter(data => data.published)
-  const [value, setValue] = useState('')
-  const unpublishedCatigories = categories.filter(data => !data.published && (!value || data.title.includes(value)))
+  const publishedCategories = categories.filter(data => data.published)
   const [id, setId] = useState<number | undefined>(undefined)
+  const [idUnPublish, setIdUnPublish] = useState<number | undefined>(undefined)
+  const unpublishedCategories = categories.filter(data => !data.published)
+  const [edit, setEdit] = useState(false)
   const description = useMemo(() => {
-    const category = publishedCatigories.find(data => data.id)
+    const category = publishedCategories.find(data => data.id === id)
 
     return `You're going to unpublish "${category?.title}" category. Press "Ok" to confirm.`
   }, [id])
 
-  const searchCategory = ({ target: { value } }: TTarget) => {
-    setValue(value)
-  }
-
   const handleConfirmUnpublish = async () => {
-    const category = publishedCatigories.find(data => data.id)
+    const category = publishedCategories.find(data => data.id === id)
 
     setId(undefined)
 
@@ -32,62 +25,33 @@ export const Authorised = ({ categories, getData }: TAuthorisedProps) => {
     getData()
   }
 
+  const handleConfirmPublish = async () => {
+    const category = unpublishedCategories.find(data => data.id === idUnPublish)
+
+    await updateCategory({ ...category!, published: true })
+    getData()
+  }
+
+  const handleConformRename = async () => {
+    setEdit(true)
+  }
+
   return (
-    <div className={styles.content}>
-      <h1 className={styles.title}>
-        CATEGORIES
-      </h1>
-      <div className={styles.categories}>
-        <div className={styles.published}>
-          <span>
-            Published Categories:
-          </span>
-          <ul>
-            {
-              publishedCatigories.map(category => (
-                <li className={styles.category} key={category.id}>
-                  <Link to={`${category.title}`}>
-                    {category.title.toUpperCase()}
-                  </Link>
-                  <div className={styles.buttons}>
-                    <button className={styles.edit}>
-                      <img src={editIcon} alt="edit" />
-                    </button>
-                    <button className={styles.delete} onClick={() => setId(category.id)} >
-                      <img src={deleteIcon} alt="delete" />
-                    </button>
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-          <Link className={styles.addNew} to="/new">ADD NEW</Link>
-        </div>
-        <div className={styles.noPublished}>
-          <span>
-            Categories:
-          </span>
-          <input
-            className={styles.search}
-            type="text"
-            placeholder="SEARCH"
-            value={value}
-            onChange={searchCategory}
-          />
-          <ul>
-            {
-              unpublishedCatigories.map(category => (
-                <li key={category.id}>
-                  {category.title}
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-      {
-        id && <WarningWindow description={description} onConfirm={handleConfirmUnpublish} onCancel={() => setId(undefined)} />
-      }
-    </div>
+    <PublishItems
+      className="CATEGORIES"
+      anotherName="Published Categories:"
+      name="Categories:"
+      items={categories}
+      onRemove={() => handleConfirmUnpublish()}
+      description={description}
+      setId={setId}
+      id={id}
+      setIdUnPublish={setIdUnPublish}
+      onPublished={handleConfirmPublish}
+      message="There are no published categories"
+      anotherMessage="No categories"
+      onRename={() => handleConformRename()}
+      edit={edit}
+    />
   )
 }

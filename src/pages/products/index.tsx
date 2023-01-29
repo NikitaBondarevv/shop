@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { IProduct } from 'interfaces/IProduct'
 import { UserContext } from 'contexts/userContext'
 import { EditableText } from 'components/editableText'
-import { findProducts } from 'contracts/findProducts'
+import { findProducts } from 'contracts/products'
 import styles from './styles.css'
 
 export const Products = () => {

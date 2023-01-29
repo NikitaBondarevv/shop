@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 
-import { getCategories } from 'contracts/getCategories'
+import { getCategories } from 'contracts/categories'
 import { UserContext } from 'contexts/userContext'
 import { Authorised } from './authorised'
 import { NoAuthorised } from './noAuthorised'
