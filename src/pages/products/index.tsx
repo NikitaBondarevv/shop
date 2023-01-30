@@ -31,7 +31,7 @@ export const Products = () => {
             TITLE: <EditableText text={product.title} />
           </span>
           <span className={styles.price}>
-            $ <EditableText text={product.price} price />
+            $ <EditableText text={String(product.price)} price />
           </span>
           <div className={styles.description}>
             <EditableText text={product.description || 'No description'} multiLine />

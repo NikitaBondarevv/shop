@@ -1,22 +1,17 @@
-import { Dispatch, SetStateAction } from 'react'
-
 import { ICategory } from 'interfaces/ICategories'
 
 export type TPublishItemsProps = {
-  className: string
-  anotherName: string
-  name: string
+  title: string
+  publishListTitle: string
+  listTitle: string
   items: ICategory[]
-  onRemove: () => void
+  onRemove: (item: ICategory) => Promise<void>
   description: string
-  setId: Dispatch<SetStateAction<number | undefined>>
-  id: number | undefined
-  products?: boolean
-  onPublished?: () => void
+  showEditButton?: boolean
+  onPublish?: (data: ICategory) => void
   message: string
   anotherMessage: string
-  setIdUnPublish?: Dispatch<SetStateAction<number | undefined>>
-  onRename?: () => void
+  onRename?: (data: ICategory, name: string) => Promise<void>
   edit?: boolean
 }
 

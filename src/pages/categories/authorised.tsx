@@ -1,55 +1,44 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 import { TAuthorisedProps } from './types'
 import { updateCategory } from 'contracts/categories'
 import { PublishItems } from 'components/publishItems'
+import { ICategory } from 'interfaces/ICategories'
 
 export const Authorised = ({ categories, getData }: TAuthorisedProps) => {
-  const [id, setId] = useState<number | undefined>(undefined)
-  const [idUnPublish, setIdUnPublish] = useState<number | undefined>(undefined)
-  const [edit, setEdit] = useState(false)
   const description = useMemo(() => {
-    const category = categories.find(data => data.id === id)
+    const category = categories.find(data => data.id)
 
     return `You're going to unpublish "${category?.title}" category. Press "Ok" to confirm.`
-  }, [id])
+  }, ['id'])
 
-  const handleConfirmUnpublish = async () => {
-    const category = categories.find(data => data.id === id)
-
-    setId(undefined)
-
-    await updateCategory({ ...category!, published: false })
+  const handleConfirmRemove = async (category: ICategory) => {
+    await updateCategory({ ...category, published: false })
     getData()
   }
 
-  const handleConfirmPublish = async () => {
-    const category = categories.find(data => data.id === idUnPublish)
-
-    await updateCategory({ ...category!, published: true })
+  const handlePublish = async (category: ICategory) => {
+    await updateCategory({ ...category, published: true })
     getData()
   }
 
-  const handleConfirmRename = async () => {
-    setEdit(true)
+  const handleRename = async (category: ICategory, name: string) => {
+    await updateCategory({ ...category, title: name })
+    getData()
   }
 
   return (
     <PublishItems
-      className="CATEGORIES"
-      anotherName="Published Categories:"
-      name="Categories:"
+      title="CATEGORIES"
+      publishListTitle="Published Categories:"
+      listTitle="Categories:"
       items={categories}
-      onRemove={() => handleConfirmUnpublish()}
+      onRemove={handleConfirmRemove}
       description={description}
-      setId={setId}
-      id={id}
-      setIdUnPublish={setIdUnPublish}
-      onPublished={handleConfirmPublish}
+      onPublish={handlePublish}
       message="There are no published categories"
       anotherMessage="No categories"
-      onRename={() => handleConfirmRename()}
-      edit={edit}
+      onRename={handleRename}
     />
   )
 }

@@ -1,7 +1,9 @@
 export type TEditableText = {
   multiLine: boolean
   price?: boolean
-  text: string | number
+  text: string
+  isEdit?: boolean
+  onBlur?: (value: string) => void
 }
 
 export type TTarget = {

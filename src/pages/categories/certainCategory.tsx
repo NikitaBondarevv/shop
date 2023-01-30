@@ -51,9 +51,9 @@ export const CertainCategory = () => {
     isAuthenticated
       ? (
         <PublishItems
-          className={`CATEGORY: ${title?.toUpperCase()}`}
-          anotherName="Products in category:"
-          name="All products:"
+          title={`CATEGORY: ${title?.toUpperCase()}`}
+          publishListTitle="Products in category:"
+          listTitle="All products:"
           items={category.products!}
           onRemove={() => handleConfirmDelete()}
           onPublished={() => handleConfirmPublish()}

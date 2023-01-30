@@ -59,6 +59,10 @@
   margin: 0 0 50px;
 }
 
+.published li span {
+  margin: 0;
+}
+
 .content .category,
 .product {
   margin: 0 0 10px;
