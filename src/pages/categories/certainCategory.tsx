@@ -4,16 +4,15 @@ import { Link, useParams } from 'react-router-dom'
 import { findCategories } from 'contracts/categories'
 import { UserContext } from 'contexts/userContext'
 import { TCategory } from './types'
-import styles from './styles.css'
 import { PublishItems } from 'components/publishItems'
 import { deleteProduct, updateProduct } from 'contracts/products'
+import styles from './styles.css'
 
 export const CertainCategory = () => {
   const [category, setCategory] = useState<TCategory>({} as TCategory)
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
   const [id, setId] = useState<number | undefined>(undefined)
-  const [idUnPublish, setIdUnPublish] = useState<number | undefined>(undefined)
   const description = useMemo(() => {
     const findProduct = category.products?.find(data => data.id === id)
 
@@ -41,7 +40,7 @@ export const CertainCategory = () => {
   }
 
   const handleConfirmPublish = async () => {
-    const product = unpublished!.find(data => data.id === idUnPublish)
+    const product = unpublished!.find(data => data.id)
 
     await updateProduct({ ...product!, published: true })
     getData()
@@ -56,13 +55,10 @@ export const CertainCategory = () => {
           listTitle="All products:"
           items={category.products!}
           onRemove={() => handleConfirmDelete()}
-          onPublished={() => handleConfirmPublish()}
+          onPublish={() => handleConfirmPublish()}
           description={description}
-          setId={setId}
-          id={id}
           message="There are no products in this category"
           anotherMessage ="No products"
-          setIdUnPublish={setIdUnPublish}
         />
       )
       : (

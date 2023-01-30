@@ -21,12 +21,16 @@ export const PublishItems = ({
   message,
   anotherMessage,
   onRename,
+  create,
+  textForEditable,
+  onSave
 }: TPublishItemsProps) => {
   const published = items?.filter(data => data.published)
   const [value, setValue] = useState('')
   const [editIndex, setEditIndex] = useState(-1)
   const unpublished = items?.filter(data => !data.published && (!value || data.title.includes(value)))
   const [id, setId] = useState<number | undefined>(undefined)
+  const [valueEdit, setValueEdit] = useState('')
 
 
 
@@ -37,7 +41,7 @@ export const PublishItems = ({
   const onConfirm = () => {
     const item = items.find(data => data.id === id)
 
-    onRemove(item!)
+    onRemove!(item!)
     setId(undefined)
   }
 
@@ -50,6 +54,14 @@ export const PublishItems = ({
     <div className={styles.content}>
       <h1 className={styles.title}>
         {title}
+        {
+          create &&
+          <EditableText
+            text={textForEditable}
+            className={styles.editableText}
+            onBlur={(name) => setValueEdit(name)}
+          />
+        }
       </h1>
       <div className={styles.categories}>
         <div className={styles.published}>
@@ -85,7 +97,11 @@ export const PublishItems = ({
                 ))
             }
           </ul>
-          <Link className={styles.addNew} to="/new">ADD NEW</Link>
+          {
+            create
+              ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit)} to={`/categories/${valueEdit}`}>SAVE</Link>
+              : <Link className={styles.addNew} to="/new">ADD NEW</Link>
+          }
         </div>
         <div className={styles.noPublished}>
           <span>

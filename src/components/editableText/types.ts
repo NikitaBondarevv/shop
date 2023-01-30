@@ -4,6 +4,7 @@ export type TEditableText = {
   text: string
   isEdit?: boolean
   onBlur?: (value: string) => void
+  className?: string
 }
 
 export type TTarget = {

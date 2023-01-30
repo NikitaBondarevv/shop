@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { useContext } from 'react'
 
-import { LoginForm } from 'components/loginForm/LoginForm'
+import { LoginForm } from 'pages/loginForm/LoginForm'
 import { UserContext } from 'contexts/userContext'
 import { ProductsInfo } from './productsInfo'
 import { Products } from './products'
@@ -12,6 +12,7 @@ import { CertainCategory } from './categories/certainCategory'
 import { Welcome } from './welcome'
 import { Contacts } from './contacts'
 import { Registered } from './registered'
+import { CreateCategory } from './createCategory'
 
 export const Pages = () => {
   const { isAuthenticated, setUser } = useContext(UserContext)
@@ -35,6 +36,7 @@ export const Pages = () => {
         <Route path='/contacts' element={<Contacts />} />
         <Route path='/categories' element={<Categories />} />
         <Route path='/categories/:title' element={<CertainCategory />} />
+        <Route path='/new' element={<CreateCategory />} />
       </Routes>
     </main>
   )
