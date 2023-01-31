@@ -18,8 +18,8 @@ export const PublishItems = ({
   description,
   showEditButton,
   onPublish,
-  message,
-  anotherMessage,
+  postingMessage,
+  listMessage,
   onRename,
   create,
   textForEditable,
@@ -71,7 +71,7 @@ export const PublishItems = ({
           <ul>
             {
               !published?.length
-                ? <span>{message}</span>
+                ? <span>{postingMessage}</span>
                 : published?.map(data => (
                   <li className={styles.category} key={data.id}>
                     <Link to={`${data.title}`}>
@@ -117,7 +117,7 @@ export const PublishItems = ({
           <ul>
             {
               !unpublished?.length
-                ? <span>{anotherMessage}</span>
+                ? <span>{listMessage}</span>
                 : unpublished?.map(data => (
                   <li key={data.id} onDoubleClick={() => onPublish!(data)}>
                     {data.title}

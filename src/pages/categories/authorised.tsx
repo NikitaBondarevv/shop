@@ -36,8 +36,8 @@ export const Authorised = ({ categories, getData }: TAuthorisedProps) => {
       onRemove={handleConfirmRemove}
       description={description}
       onPublish={handlePublish}
-      message="There are no published categories"
-      anotherMessage="No categories"
+      postingMessage="There are no published categories"
+      listMessage="No categories"
       onRename={handleRename}
     />
   )

@@ -57,8 +57,8 @@ export const CertainCategory = () => {
           onRemove={() => handleConfirmDelete()}
           onPublish={() => handleConfirmPublish()}
           description={description}
-          message="There are no products in this category"
-          anotherMessage ="No products"
+          postingMessage="There are no products in this category"
+          listMessage ="No products"
         />
       )
       : (

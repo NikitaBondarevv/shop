@@ -9,8 +9,8 @@ export type TPublishItemsProps = {
   description: string
   showEditButton?: boolean
   onPublish?: (data: ICategory) => void
-  message: string
-  anotherMessage: string
+  postingMessage: string
+  listMessage: string
   onRename?: (data: ICategory, name: string) => Promise<void>
   create?: boolean
   textForEditable?: string
