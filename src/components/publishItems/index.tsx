@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { WarningWindow } from 'components/warningWindow'
@@ -7,15 +7,14 @@ import editIcon from './images/edit.png'
 import deleteIcon from './images/delete.png'
 import styles from './styles.css'
 import { EditableText } from 'components/editableText'
-import { ICategory } from 'interfaces/ICategories'
 
-export const PublishItems = ({
+export function PublishItems <T extends { id: number, title: string }>({
   title,
   publishListTitle,
   listTitle,
   items,
   onRemove,
-  description,
+  getDescription,
   showEditButton,
   onPublish,
   postingMessage,
@@ -23,14 +22,16 @@ export const PublishItems = ({
   onRename,
   create,
   textForEditable,
-  onSave
-}: TPublishItemsProps) => {
-  const published = items?.filter(data => data.published)
+  onSave,
+  filterPredicate
+}: TPublishItemsProps<T>) {
+  const published = items?.filter(filterPredicate)
   const [value, setValue] = useState('')
   const [editIndex, setEditIndex] = useState(-1)
-  const unpublished = items?.filter(data => !data.published && (!value || data.title.includes(value)))
+  const unpublished = items?.filter(data => !filterPredicate(data) && (!value || data.title.includes(value)))
   const [id, setId] = useState<number | undefined>(undefined)
   const [valueEdit, setValueEdit] = useState('')
+  const description = useMemo(() => getDescription(id!), [id])
 
 
 
@@ -45,7 +46,7 @@ export const PublishItems = ({
     setId(undefined)
   }
 
-  const onBlur = (data: ICategory, name: string) => {
+  const onBlur = (data: T, name: string) => {
     onRename!(data, name)
     setEditIndex(-1)
   }
@@ -128,7 +129,12 @@ export const PublishItems = ({
         </div>
       </div>
       {
-        id && <WarningWindow description={description} onConfirm={() => onConfirm()} onCancel={() => setId(undefined)} />
+        id &&
+        <WarningWindow
+          description={description}
+          onConfirm={() => onConfirm()}
+          onCancel={() => setId(undefined)}
+        />
       }
     </div>
   )

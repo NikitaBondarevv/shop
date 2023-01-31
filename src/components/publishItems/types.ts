@@ -1,20 +1,19 @@
-import { ICategory } from 'interfaces/ICategories'
-
-export type TPublishItemsProps = {
+export type TPublishItemsProps<T> = {
   title: string
   publishListTitle?: string
   listTitle?: string
-  items: ICategory[]
-  onRemove?: (item: ICategory) => Promise<void>
-  description: string
+  items: T[]
+  onRemove?: (item: T) => Promise<void>
+  getDescription: (id: number) => string
   showEditButton?: boolean
-  onPublish?: (data: ICategory) => void
+  onPublish?: (data: T) => Promise<void>
   postingMessage: string
   listMessage: string
-  onRename?: (data: ICategory, name: string) => Promise<void>
+  onRename?: (data: T, name: string) => Promise<void>
   create?: boolean
   textForEditable?: string
   onSave?: (name: string) => Promise<void>
+  filterPredicate: (data: T) => boolean
 }
 
 export type TTarget = {

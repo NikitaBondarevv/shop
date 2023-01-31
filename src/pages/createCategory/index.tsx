@@ -25,15 +25,17 @@ export const CreateCategory = () => {
 
   return (
     <PublishItems
-      title={'CATEGORY: '}
-      textForEditable={'NEW CATEGORY'}
-      listTitle={'All products:'}
+      title="CATEGORY: "
+      textForEditable="NEW CATEGORY"
+      listTitle="All products:"
       items={products}
-      description={''}
-      message={'There are no products in this category.'}
-      anotherMessage={''}
+      getDescription={() => ""}
+      postingMessage="There are no products in this category."
+      listMessage=""
       create
       onSave={handleSave}
-    />
+      filterPredicate={function (data: never): boolean {
+        throw new Error('Function not implemented.')
+      } }    />
   )
 }

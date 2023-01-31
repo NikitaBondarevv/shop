@@ -1,29 +1,33 @@
-import { useContext, useEffect, useMemo, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
 import { findCategories } from 'contracts/categories'
 import { UserContext } from 'contexts/userContext'
-import { TCategory } from './types'
 import { PublishItems } from 'components/publishItems'
-import { deleteProduct, updateProduct } from 'contracts/products'
+import { deleteProduct, getProducts, updateProduct } from 'contracts/products'
 import styles from './styles.css'
+import { IProduct } from 'interfaces/IProduct'
+import { ICategory } from 'interfaces/ICategories'
 
-export const CertainCategory = () => {
-  const [category, setCategory] = useState<TCategory>({} as TCategory)
+export const Category = () => {
+  const [category, setCategory] = useState<ICategory>({} as ICategory)
+  const [allProducts, setAllProducts] = useState<IProduct[]>([])
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
   const [id, setId] = useState<number | undefined>(undefined)
-  const description = useMemo(() => {
-    const findProduct = category.products?.find(data => data.id === id)
+  const getDescription = (id: number) => {
+    const findProduct = category?.products?.find(data => data.id === id)
 
     return `You're going to remove "${findProduct?.title}" product. Press "Ok" to confirm.`
-  }, [id])
+  }
 
-  const unpublished = category.products?.filter(data => !data.published)
-  const published = category.products?.filter(data => data.published)
+
+  const unpublished = category?.products?.filter(data => !data.published)
+  const published = category?.products?.filter(data => data.published)
 
   const getData = async () => {
     setCategory(await findCategories(title))
+    setAllProducts(await getProducts())
   }
 
   useEffect(() => {
@@ -49,17 +53,17 @@ export const CertainCategory = () => {
   return (
     isAuthenticated
       ? (
-        <PublishItems
+        <PublishItems<IProduct>
           title={`CATEGORY: ${title?.toUpperCase()}`}
           publishListTitle="Products in category:"
           listTitle="All products:"
-          items={category.products!}
+          items={allProducts}
           onRemove={() => handleConfirmDelete()}
           onPublish={() => handleConfirmPublish()}
-          description={description}
+          getDescription={getDescription}
           postingMessage="There are no products in this category"
-          listMessage ="No products"
-        />
+          listMessage="No products"
+          filterPredicate={() => false} />
       )
       : (
         <div className={`${styles.content} ${styles.noAuthorised}`}>
@@ -67,7 +71,7 @@ export const CertainCategory = () => {
             {title?.toUpperCase()}
           </span>
           {
-            category.products === undefined
+            category?.products === undefined
               ? <span>No products</span>
               : <ul className={styles.products}>
                 {

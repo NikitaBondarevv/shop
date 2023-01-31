@@ -8,7 +8,7 @@ import { Products } from './products'
 import { CreateUser } from './createUser'
 import { Profile } from './profile'
 import { Categories } from './categories'
-import { CertainCategory } from './categories/certainCategory'
+import { Category } from './categories/category'
 import { Welcome } from './welcome'
 import { Contacts } from './contacts'
 import { Registered } from './registered'
@@ -35,7 +35,7 @@ export const Pages = () => {
         <Route path='/profile' element={<Profile />} />
         <Route path='/contacts' element={<Contacts />} />
         <Route path='/categories' element={<Categories />} />
-        <Route path='/categories/:title' element={<CertainCategory />} />
+        <Route path='/categories/:title' element={<Category />} />
         <Route path='/new' element={<CreateCategory />} />
       </Routes>
     </main>
