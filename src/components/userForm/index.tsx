@@ -6,11 +6,13 @@ import msg from './images/msg-element.png'
 import { fields } from './registerFields'
 import { TUserForm, TTarget, TRegisterFields } from './types'
 import { IUser } from 'interfaces/IUser'
+import { useNavigate } from 'react-router-dom'
 
 export const UserForm = ({ disabledFields, user, onSubmit }: TUserForm) => {
   const [registerFields, setRegisterFields] = useState<TRegisterFields>(fields.reduce<TRegisterFields>((prev, next) =>
   (prev[next.label] = { value: user[next.label as keyof IUser] ?? '' }) && prev,
   {}))
+  const navigate = useNavigate()
 
   const setValue = ({ target: { value, name } }: TTarget) => {
     setRegisterFields(registerFields => ({
@@ -66,6 +68,7 @@ export const UserForm = ({ disabledFields, user, onSubmit }: TUserForm) => {
     }, {} as IUser)
 
     onSubmit(data)
+    navigate('/success')
   }
 
   return (

@@ -23,11 +23,15 @@ export const request = {
     return makeRequest(url)
   },
 
-  post<T>(url: string, data: T) {
+  post<T>(url: string, data?: T) {
     return makeRequest(url, data, 'POST')
   },
 
   put<T>(url: string, data: T) {
     return makeRequest(url, data, 'PUT')
+  },
+  
+  delete(url: string) {
+    return makeRequest(url, undefined, 'DELETE')
   }
 }

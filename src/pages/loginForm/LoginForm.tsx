@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
+import { FormEvent } from 'react'
 
 import { login } from 'contracts/login'
 import { TLoginFormProps } from './types'
 import styles from './styles.css'
-import { FormEvent } from 'react';
 
 export const LoginForm = ({ setUser }: TLoginFormProps) => {
+  const navigate = useNavigate()
+  
   const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
     const {
       currentTarget: {
@@ -20,6 +23,7 @@ export const LoginForm = ({ setUser }: TLoginFormProps) => {
     const user = await login(email.value, password.value)
 
     setUser(user)
+    navigate('/')
   }
 
   return (

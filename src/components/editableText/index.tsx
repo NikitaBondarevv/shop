@@ -1,14 +1,22 @@
-import { useState, FormEvent, useRef } from 'react'
+import { useState, FormEvent, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
 import { TEditableText, TTarget } from './types'
 
-export const EditableText = ({ multiLine, text }: TEditableText) => {
+export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEditableText) => {
   const [hidden, setHidden] = useState(true)
   const [value, setValue] = useState(text)
   const spanRef = useRef<HTMLElement>(null)
   const [inputWidth, setInputWidth] = useState(15)
+
+  useEffect(() => {
+    setValue(text)
+  }, [text])
+
+  useEffect(() => {
+    if (isEdit) showInput()
+  }, [isEdit])
 
   const setValueInput = ({ target: { value } }: TTarget) => {
     setValue(value)
@@ -18,6 +26,7 @@ export const EditableText = ({ multiLine, text }: TEditableText) => {
     e.preventDefault()
 
     setHidden(true)
+    onBlur!(value)
   }
 
   const showInput = () => {
@@ -46,7 +55,7 @@ export const EditableText = ({ multiLine, text }: TEditableText) => {
     )
     : (
       <input
-        className={styles.textInput}
+        className={`${styles.textInput} ${className}`}
         name="text"
         value={value}
         onChange={setValueInput}

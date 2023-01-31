@@ -1,4 +1,4 @@
-.productsInfo {
+.registered {
   background-color: rgba(16 18 27 / 40%);
   backdrop-filter: blur(20px);
   box-shadow: 0px 0px 10px black;
@@ -12,26 +12,20 @@
   margin: 0 auto;
 }
 
-.greetings {
+.registered span {
+  margin: 0 0 40px;
   display: block;
-  margin: 0 0 50px;
-  color: rgb(255, 255, 255);
 }
 
-.info {
-  margin: 0 0 80px;
-}
-
-.info mark {
+.registered a {
   color: rgb(202, 202, 202);
-  background: none;
-  font-family: "MyriadProBold";
+  text-decoration: none;
 }
 
-.categories {
-  color: rgb(255, 255, 255);
+.registered p {
+  margin: 0 0 50px;
 }
 
-.categories:hover {
-  color: rgb(157, 157, 157);
+.registered a:hover {
+  text-decoration: underline;
 }
