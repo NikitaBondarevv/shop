@@ -3,7 +3,7 @@ export type TPublishItemsProps<T> = {
   publishListTitle?: string
   listTitle?: string
   items: T[]
-  onRemove?: (item: T) => Promise<void>
+  onRemove?: (data: T) => Promise<void>
   getDescription: (id: number) => string
   showEditButton?: boolean
   onPublish?: (data: T) => Promise<void>

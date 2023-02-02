@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 
-import { findCategories } from 'contracts/categories'
+import { findCategories, updateCategory } from 'contracts/categories'
 import { UserContext } from 'contexts/userContext'
 import { PublishItems } from 'components/publishItems'
-import { deleteProduct, getProducts, updateProduct } from 'contracts/products'
+import { getProducts } from 'contracts/products'
 import styles from './styles.css'
 import { IProduct } from 'interfaces/IProduct'
 import { ICategory } from 'interfaces/ICategories'
@@ -14,16 +14,12 @@ export const Category = () => {
   const [allProducts, setAllProducts] = useState<IProduct[]>([])
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
-  const [id, setId] = useState<number | undefined>(undefined)
   const getDescription = (id: number) => {
     const findProduct = category?.products?.find(data => data.id === id)
 
     return `You're going to remove "${findProduct?.title}" product. Press "Ok" to confirm.`
   }
-
-
-  const unpublished = category?.products?.filter(data => !data.published)
-  const published = category?.products?.filter(data => data.published)
+  const categoryProductsIds = useMemo(() => (category.products || []).map(product => product.id), [category.products])
 
   const getData = async () => {
     setCategory(await findCategories(title))
@@ -34,21 +30,22 @@ export const Category = () => {
     getData()
   }, [])
 
-  const handleConfirmDelete = async () => {
-    const product = published!.find(data => data.id === id)
+  const handleRemove = async (product: IProduct) => {
+    const index = category.products?.indexOf(product)
+    category.products?.splice(index!, 1)
 
-    setId(undefined)
-
-    await deleteProduct(product!)
+    await updateCategory(category)
     getData()
   }
 
-  const handleConfirmPublish = async () => {
-    const product = unpublished!.find(data => data.id)
+  const handleConfirmPublish = async ({id, title}: IProduct) => {
+    category.products?.push({id, title})
 
-    await updateProduct({ ...product!, published: true })
+    await updateCategory(category)
     getData()
   }
+
+  const getCategoryProducts = (product: IProduct) => categoryProductsIds?.includes(product.id)
 
   return (
     isAuthenticated
@@ -58,12 +55,14 @@ export const Category = () => {
           publishListTitle="Products in category:"
           listTitle="All products:"
           items={allProducts}
-          onRemove={() => handleConfirmDelete()}
-          onPublish={() => handleConfirmPublish()}
+          onRemove={handleRemove}
+          onPublish={handleConfirmPublish}
           getDescription={getDescription}
           postingMessage="There are no products in this category"
           listMessage="No products"
-          filterPredicate={() => false} />
+          filterPredicate={getCategoryProducts}
+          showEditButton
+        />
       )
       : (
         <div className={`${styles.content} ${styles.noAuthorised}`}>

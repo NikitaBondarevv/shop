@@ -28,12 +28,10 @@ export function PublishItems <T extends { id: number, title: string }>({
   const published = items?.filter(filterPredicate)
   const [value, setValue] = useState('')
   const [editIndex, setEditIndex] = useState(-1)
-  const unpublished = items?.filter(data => !filterPredicate(data) && (!value || data.title.includes(value)))
+  const unpublished = items?.filter(data => create ? !filterPredicate(data) && (!value || data.title.includes(value)))
   const [id, setId] = useState<number | undefined>(undefined)
   const [valueEdit, setValueEdit] = useState('')
   const description = useMemo(() => getDescription(id!), [id])
-
-
 
   const searchCategory = ({ target: { value } }: TTarget) => {
     setValue(value)
