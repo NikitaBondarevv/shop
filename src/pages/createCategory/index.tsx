@@ -4,14 +4,17 @@ import { getProducts } from 'contracts/products'
 import { PublishItems } from 'components/publishItems'
 import { createCategory } from 'contracts/categories'
 import { IProduct } from 'interfaces/IProduct'
+import { EditableText } from 'components/editableText'
+import styles from './styles.css'
 
 export const CreateCategory = () => {
   const [allProducts, setAllProducts] = useState<IProduct[]>([])
   const products: IProduct[] = []
   const productsIds = useMemo(() => (products || []).map(product => product.id), [products])
+  const [valueEdit, setValueEdit] = useState('')
 
   console.log(productsIds);
-  
+
 
   const getData = async () => {
     setAllProducts(await getProducts())
@@ -44,25 +47,36 @@ export const CreateCategory = () => {
   }
 
   console.log(products);
-  
+
 
   const getCategoryProducts = (product: IProduct) => productsIds?.includes(product.id)
 
   return (
-    <PublishItems
-      title="CATEGORY: "
-      textForEditable="NEW CATEGORY"
-      listTitle="All products:"
-      items={allProducts}
-      getDescription={() => ""}
-      postingMessage="There are no products in this category."
-      listMessage=""
-      create
-      onRemove={handleRemove}
-      onPublish={handleConfirmPublish}
-      onSave={handleSave}
-      filterPredicate={getCategoryProducts}
-      showEditButton
-    />
+    <>
+      <h1 className={styles.title}>
+        CATEGORY:
+        {
+          <EditableText
+            text={'NEW CATEGORY'}
+            className={styles.editableText}
+            onBlur={(name) => setValueEdit(name)}
+          />
+        }
+      </h1>
+      <PublishItems
+        listTitle="All products:"
+        items={allProducts}
+        getDescription={() => ""}
+        postingMessage="There are no products in this category."
+        listMessage=""
+        create
+        onRemove={handleRemove}
+        onPublish={handleConfirmPublish}
+        onSave={handleSave}
+        filterPredicate={getCategoryProducts}
+        showEditButton
+        valueEdit={valueEdit}
+      />
+    </>
   )
 }

@@ -13,12 +13,13 @@ import { Welcome } from './welcome'
 import { Contacts } from './contacts'
 import { Registered } from './registered'
 import { CreateCategory } from './createCategory'
+import styles from './styles.css'
 
 export const Pages = () => {
   const { isAuthenticated, setUser } = useContext(UserContext)
 
   return (
-    <main>
+    <main className={styles.main}>
       <Routes>
         {
           !isAuthenticated && (

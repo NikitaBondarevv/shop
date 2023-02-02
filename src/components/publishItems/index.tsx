@@ -5,11 +5,10 @@ import { WarningWindow } from 'components/warningWindow'
 import { TPublishItemsProps, TTarget } from './types'
 import editIcon from './images/edit.png'
 import deleteIcon from './images/delete.png'
-import styles from './styles.css'
 import { EditableText } from 'components/editableText'
+import styles from './styles.css'
 
 export function PublishItems <T extends { id: number, title: string }>({
-  title,
   publishListTitle,
   listTitle,
   items,
@@ -21,16 +20,15 @@ export function PublishItems <T extends { id: number, title: string }>({
   listMessage,
   onRename,
   create,
-  textForEditable,
   onSave,
-  filterPredicate
+  filterPredicate,
+  valueEdit
 }: TPublishItemsProps<T>) {
   const published = items?.filter(filterPredicate)
   const [value, setValue] = useState('')
   const [editIndex, setEditIndex] = useState(-1)
-  const unpublished = items?.filter(data => create ? !filterPredicate(data) && (!value || data.title.includes(value)))
+  const unpublished = items?.filter(data => !filterPredicate(data) && (!value || data.title.includes(value)))
   const [id, setId] = useState<number | undefined>(undefined)
-  const [valueEdit, setValueEdit] = useState('')
   const description = useMemo(() => getDescription(id!), [id])
 
   const searchCategory = ({ target: { value } }: TTarget) => {
@@ -50,18 +48,7 @@ export function PublishItems <T extends { id: number, title: string }>({
   }
 
   return (
-    <div className={styles.content}>
-      <h1 className={styles.title}>
-        {title}
-        {
-          create &&
-          <EditableText
-            text={textForEditable}
-            className={styles.editableText}
-            onBlur={(name) => setValueEdit(name)}
-          />
-        }
-      </h1>
+    <>
       <div className={styles.categories}>
         <div className={styles.published}>
           <span>
@@ -98,7 +85,7 @@ export function PublishItems <T extends { id: number, title: string }>({
           </ul>
           {
             create
-              ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit)} to={`/categories/${valueEdit}`}>SAVE</Link>
+              ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit!)} to={`/categories/${valueEdit}`}>SAVE</Link>
               : <Link className={styles.addNew} to="/new">ADD NEW</Link>
           }
         </div>
@@ -134,6 +121,6 @@ export function PublishItems <T extends { id: number, title: string }>({
           onCancel={() => setId(undefined)}
         />
       }
-    </div>
+    </>
   )
 }

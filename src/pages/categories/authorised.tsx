@@ -2,6 +2,7 @@ import { TAuthorisedProps } from './types'
 import { updateCategory } from 'contracts/categories'
 import { PublishItems } from 'components/publishItems'
 import { ICategory } from 'interfaces/ICategories'
+import styles from './styles.css'
 
 export const Authorised = ({ categories, getData }: TAuthorisedProps) => {
   const getDescription = (id: number) => {
@@ -26,18 +27,22 @@ export const Authorised = ({ categories, getData }: TAuthorisedProps) => {
   }
 
   return (
-    <PublishItems
-      title="CATEGORIES"
-      publishListTitle="Published Categories:"
-      listTitle="Categories:"
-      items={categories}
-      onRemove={handleConfirmRemove}
-      getDescription={getDescription}
-      onPublish={handlePublish}
-      postingMessage="There are no published categories"
-      listMessage="No categories"
-      onRename={handleRename}
-      filterPredicate={(data: ICategory) => Boolean(data.published)}
-    />
+    <>
+      <h1 className={styles.title}>
+        CATEGORIES
+      </h1>
+      <PublishItems
+        publishListTitle="Published Categories:"
+        listTitle="Categories:"
+        items={categories}
+        onRemove={handleConfirmRemove}
+        getDescription={getDescription}
+        onPublish={handlePublish}
+        postingMessage="There are no published categories"
+        listMessage="No categories"
+        onRename={handleRename}
+        filterPredicate={(data: ICategory) => Boolean(data.published)}
+      />
+    </>
   )
 }

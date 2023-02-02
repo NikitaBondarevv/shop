@@ -38,8 +38,8 @@ export const Category = () => {
     getData()
   }
 
-  const handleConfirmPublish = async ({id, title}: IProduct) => {
-    category.products?.push({id, title})
+  const handleConfirmPublish = async ({ id, title }: IProduct) => {
+    category.products?.push({ id, title })
 
     await updateCategory(category)
     getData()
@@ -50,19 +50,23 @@ export const Category = () => {
   return (
     isAuthenticated
       ? (
-        <PublishItems<IProduct>
-          title={`CATEGORY: ${title?.toUpperCase()}`}
-          publishListTitle="Products in category:"
-          listTitle="All products:"
-          items={allProducts}
-          onRemove={handleRemove}
-          onPublish={handleConfirmPublish}
-          getDescription={getDescription}
-          postingMessage="There are no products in this category"
-          listMessage="No products"
-          filterPredicate={getCategoryProducts}
-          showEditButton
-        />
+        <>
+          <h1 className={styles.title}>
+          {`CATEGORY: ${title?.toUpperCase()}`}
+          </h1>
+          <PublishItems<IProduct>
+            publishListTitle="Products in category:"
+            listTitle="All products:"
+            items={allProducts}
+            onRemove={handleRemove}
+            onPublish={handleConfirmPublish}
+            getDescription={getDescription}
+            postingMessage="There are no products in this category"
+            listMessage="No products"
+            filterPredicate={getCategoryProducts}
+            showEditButton
+          />
+        </>
       )
       : (
         <div className={`${styles.content} ${styles.noAuthorised}`}>
