@@ -30,7 +30,7 @@ export const AuthorizedUser = () => {
     <div className={styles.menu}>
       <Link to="/" className={styles.userName}>
         {user?.firstName}
-        <UserIcon/>
+        <UserIcon />
       </Link>
       <span className={styles.info}>
         {

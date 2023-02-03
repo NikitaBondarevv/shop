@@ -1,7 +1,7 @@
 export const MenuIcon = () => (
    <svg fill="#fff" width="25px" height="25px" viewBox="0 0 512 512" id="_45_Menu" data-name="45 Menu" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
-      <g id="SVGRepo_bgCarrier" stroke-width="0" />
-      <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+      <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
       <g id="SVGRepo_iconCarrier">
          <g id="Group_117" data-name="Group 117">
             <rect id="Rectangle_56" data-name="Rectangle 56" width="256" height="64" transform="translate(128 320)" />
