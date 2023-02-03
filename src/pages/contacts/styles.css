@@ -1,6 +1,7 @@
 .contacts a {
-  color: rgb(202, 202, 202);
   text-decoration: none;
+  margin: 0 0 0 10px;
+  display: block;
 }
 
 .contacts a:hover {
