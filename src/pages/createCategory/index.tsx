@@ -76,6 +76,7 @@ export const CreateCategory = () => {
         filterPredicate={getCategoryProducts}
         showEditButton
         valueEdit={valueEdit}
+        vievMode={true}
       />
     </>
   )

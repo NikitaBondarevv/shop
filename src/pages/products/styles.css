@@ -28,7 +28,7 @@
 }
 
 .description {
-  width: 730px;
+  word-break: break-word;
   margin: 0 0 30px;
   line-height: 30px;
 }

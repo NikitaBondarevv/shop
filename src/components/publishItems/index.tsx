@@ -8,7 +8,7 @@ import deleteIcon from './images/delete.png'
 import { EditableText } from 'components/editableText'
 import styles from './styles.css'
 
-export function PublishItems <T extends { id: number, title: string }>({
+export function PublishItems<T extends { id: number, title: string }>({
   publishListTitle,
   listTitle,
   items,
@@ -22,7 +22,9 @@ export function PublishItems <T extends { id: number, title: string }>({
   create,
   onSave,
   filterPredicate,
-  valueEdit
+  valueEdit,
+  vievMode,
+  getLink
 }: TPublishItemsProps<T>) {
   const published = items?.filter(filterPredicate)
   const [value, setValue] = useState('')
@@ -51,34 +53,38 @@ export function PublishItems <T extends { id: number, title: string }>({
     <>
       <div className={styles.categories}>
         <div className={styles.published}>
-          <span>
-            {publishListTitle}
-          </span>
+          {
+            vievMode && <span>
+              {publishListTitle}
+            </span>
+          }
           <ul>
             {
               !published?.length
                 ? <span>{noAllItemsMessage}</span>
                 : published?.map(data => (
                   <li className={styles.category} key={data.id}>
-                    <Link to={`${data.title}`}>
+                    <Link to={getLink!(data)}>
                       <EditableText
                         text={data.title.toUpperCase()}
                         isEdit={editIndex === data.id}
                         onBlur={(name: string) => onBlur(data, name)}
                       />
                     </Link>
-                    <div className={styles.buttons}>
-                      {
-                        !showEditButton && (
-                          <button className={styles.edit} onClick={() => setEditIndex(data.id)}>
-                            <img src={editIcon} alt="edit" />
-                          </button>
-                        )
-                      }
-                      <button className={styles.delete} onClick={() => setId(data.id)}>
-                        <img src={deleteIcon} alt="delete" />
-                      </button>
-                    </div>
+                    {
+                      vievMode && <div className={styles.buttons}>
+                        {
+                          !showEditButton && (
+                            <button className={styles.edit} onClick={() => setEditIndex(data.id)}>
+                              <img src={editIcon} alt="edit" />
+                            </button>
+                          )
+                        }
+                        <button className={styles.delete} onClick={() => setId(data.id)}>
+                          <img src={deleteIcon} alt="delete" />
+                        </button>
+                      </div>
+                    }
                   </li>
                 ))
             }
@@ -86,32 +92,34 @@ export function PublishItems <T extends { id: number, title: string }>({
           {
             create
               ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit!)} to={`/categories/${valueEdit}`}>SAVE</Link>
-              : <Link className={styles.addNew} to="/new">ADD NEW</Link>
+              : vievMode && <Link className={styles.addNew} to="/new">ADD NEW</Link>
           }
         </div>
-        <div className={styles.noPublished}>
-          <span>
-            {listTitle}
-          </span>
-          <input
-            className={styles.search}
-            type="text"
-            placeholder="SEARCH"
-            value={value}
-            onChange={searchCategory}
-          />
-          <ul>
-            {
-              !unpublished?.length
-                ? <span>{noFilteredItemsMessage}</span>
-                : unpublished?.map(data => (
-                  <li key={data.id} onDoubleClick={() => onPublish!(data)}>
-                    {data.title}
-                  </li>
-                ))
-            }
-          </ul>
-        </div>
+        {
+          vievMode && <div className={styles.noPublished}>
+            <span>
+              {listTitle}
+            </span>
+            <input
+              className={styles.search}
+              type="text"
+              placeholder="SEARCH"
+              value={value}
+              onChange={searchCategory}
+            />
+            <ul>
+              {
+                !unpublished?.length
+                  ? <span>{noFilteredItemsMessage}</span>
+                  : unpublished?.map(data => (
+                    <li key={data.id} onDoubleClick={() => onPublish!(data)}>
+                      {data.title}
+                    </li>
+                  ))
+              }
+            </ul>
+          </div>
+        }
       </div>
       {
         id &&
