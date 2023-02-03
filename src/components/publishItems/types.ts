@@ -14,8 +14,8 @@ export type TPublishItemsProps<T> = {
   valueEdit?: string
   onSave?: (name: string) => Promise<void>
   filterPredicate: (data: T) => boolean
-  vievMode: boolean | undefined
-  getLink?: (data: T) => string
+  viewMode?: boolean
+  getLink: (data: T) => string
 }
 
 export type TTarget = {

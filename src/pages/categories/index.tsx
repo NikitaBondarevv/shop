@@ -56,7 +56,7 @@ export const Categories = () => {
         onRename={handleRename}
         filterPredicate={(data: ICategory) => Boolean(data.published)}
         getLink={(category) => `/categories/${category.title}`}
-        vievMode={isAuthenticated}
+        viewMode={isAuthenticated}
       />
     </>
   )

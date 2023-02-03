@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { IProduct } from 'interfaces/IProduct'
 import { UserContext } from 'contexts/userContext'
 import { EditableText } from 'components/editableText'
-import { findProducts, updateProduct } from 'contracts/products'
+import { findProduct, updateProduct } from 'contracts/products'
 import styles from './styles.css'
 
 export const Products = () => {
@@ -14,14 +14,14 @@ export const Products = () => {
   const [description, setDescription] = useState('')
 
   const getData = async () => {
-    setProduct(await findProducts(title))
+    setProduct(await findProduct(title))
   }
 
   useEffect(() => {
     getData()
   }, [])
 
-  const onSave = async () => {
+  const handleSave = async () => {
    await updateProduct({...product, description: description})
    getData()
   }
@@ -39,7 +39,7 @@ export const Products = () => {
           <div className={styles.description}>
             <EditableText onBlur={(description) => setDescription(description)} text={product.description || 'No description'} multiLine />
           </div>
-          <button type="button" className={styles.save} onClick={onSave}>SAVE</button>
+          <button type="button" className={styles.save} onClick={handleSave}>SAVE</button>
         </div>
       )
       : (

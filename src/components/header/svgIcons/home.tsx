@@ -1,5 +1,7 @@
+import styles from '../styles.css'
+
 export const HomeIcon = () => (
-  <svg viewBox="0 0 600 600" version="1.1" id="svg9724" width="25px" height="25px" xmlns="http://www.w3.org/2000/svg" fill="#fff" stroke="#fff">
+  <svg className={styles.icon} viewBox="0 0 600 600" version="1.1" id="svg9724" width="25px" height="25px" xmlns="http://www.w3.org/2000/svg" fill="#fff" stroke="#fff">
     <g id="SVGRepo_bgCarrier" strokeWidth="0" />
     <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
     <g id="SVGRepo_iconCarrier">

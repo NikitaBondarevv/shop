@@ -13,9 +13,6 @@ export const CreateCategory = () => {
   const productsIds = useMemo(() => (products || []).map(product => product.id), [products])
   const [valueEdit, setValueEdit] = useState('')
 
-  console.log(productsIds);
-
-
   const getData = async () => {
     setAllProducts(await getProducts())
   }
@@ -46,9 +43,6 @@ export const CreateCategory = () => {
     getData()
   }
 
-  console.log(products);
-
-
   const getCategoryProducts = (product: IProduct) => productsIds?.includes(product.id)
 
   return (
@@ -76,7 +70,8 @@ export const CreateCategory = () => {
         filterPredicate={getCategoryProducts}
         showEditButton
         valueEdit={valueEdit}
-        vievMode={true}
+        viewMode
+        getLink={(product) => `/products/${product.title}`}
       />
     </>
   )

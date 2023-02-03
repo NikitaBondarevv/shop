@@ -64,7 +64,7 @@ export const Category = () => {
         filterPredicate={getCategoryProducts}
         showEditButton
         getLink={(product) => `/products/${product.title}`}
-        vievMode={isAuthenticated}
+        viewMode={isAuthenticated}
       />
     </>
   )

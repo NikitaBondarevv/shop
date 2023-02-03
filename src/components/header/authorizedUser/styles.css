@@ -57,5 +57,11 @@
 
 .info {
   color: #fff;
-  margin: 0 0 0 45px;
+  margin: 0 0 0 35px;
+}
+
+.icon {
+  margin: 0 0 0 5px;
+  position: absolute;
+  right: -30px;
 }

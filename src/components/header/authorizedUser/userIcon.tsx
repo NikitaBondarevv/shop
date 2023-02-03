@@ -1,5 +1,8 @@
+import styles from './styles.css'
+
 export const UserIcon = () => (
   <svg
+    className={styles.icon}
     fill="#fff"
     version="1.1"
     id="Layer_1"

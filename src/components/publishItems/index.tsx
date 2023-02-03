@@ -23,7 +23,7 @@ export function PublishItems<T extends { id: number, title: string }>({
   onSave,
   filterPredicate,
   valueEdit,
-  vievMode,
+  viewMode,
   getLink
 }: TPublishItemsProps<T>) {
   const published = items?.filter(filterPredicate)
@@ -54,7 +54,7 @@ export function PublishItems<T extends { id: number, title: string }>({
       <div className={styles.categories}>
         <div className={styles.published}>
           {
-            vievMode && <span>
+            viewMode && <span>
               {publishListTitle}
             </span>
           }
@@ -72,7 +72,7 @@ export function PublishItems<T extends { id: number, title: string }>({
                       />
                     </Link>
                     {
-                      vievMode && <div className={styles.buttons}>
+                      viewMode && <div className={styles.buttons}>
                         {
                           !showEditButton && (
                             <button className={styles.edit} onClick={() => setEditIndex(data.id)}>
@@ -92,11 +92,11 @@ export function PublishItems<T extends { id: number, title: string }>({
           {
             create
               ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit!)} to={`/categories/${valueEdit}`}>SAVE</Link>
-              : vievMode && <Link className={styles.addNew} to="/new">ADD NEW</Link>
+              : viewMode && <Link className={styles.addNew} to="/new">ADD NEW</Link>
           }
         </div>
         {
-          vievMode && <div className={styles.noPublished}>
+          viewMode && <div className={styles.noPublished}>
             <span>
               {listTitle}
             </span>

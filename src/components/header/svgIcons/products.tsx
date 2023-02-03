@@ -1,5 +1,7 @@
+import styles from '../styles.css'
+
 export const ProductsIcon = () => (
-	<svg fill="#fff" height="25px" width="25px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
+	<svg className={styles.icon} fill="#fff" height="25px" width="25px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"
 		viewBox="0 0 372.372 372.372" xmlSpace="preserve">
 		<g>
 			<path d="M368.712,219.925c-5.042-8.951-14.563-14.511-24.848-14.511c-4.858,0-9.682,1.27-13.948,3.672l-83.024,46.756

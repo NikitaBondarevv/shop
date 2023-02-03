@@ -1,5 +1,7 @@
+import styles from '../styles.css'
+
 export const MenuIcon = () => (
-   <svg fill="#fff" width="25px" height="25px" viewBox="0 0 512 512" id="_45_Menu" data-name="45 Menu" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+   <svg className={styles.icon} fill="#fff" width="25px" height="25px" viewBox="0 0 512 512" id="_45_Menu" data-name="45 Menu" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
       <g id="SVGRepo_bgCarrier" strokeWidth="0" />
       <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round" />
       <g id="SVGRepo_iconCarrier">
