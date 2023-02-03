@@ -54,15 +54,17 @@ export function PublishItems<T extends { id: number, title: string }>({
       <div className={styles.categories}>
         <div className={styles.published}>
           {
-            viewMode && <span>
-              {publishListTitle}
-            </span>
+            viewMode && (
+              <span>
+                {publishListTitle}
+              </span>
+            )
           }
-          <ul>
-            {
-              !published?.length
-                ? <span>{noAllItemsMessage}</span>
-                : published?.map(data => (
+          {!published?.length
+            ? <span>{noAllItemsMessage}</span>
+            : <ul>
+              {
+                published?.map(data => (
                   <li className={styles.category} key={data.id}>
                     <Link to={getLink!(data)}>
                       <EditableText
@@ -87,8 +89,9 @@ export function PublishItems<T extends { id: number, title: string }>({
                     }
                   </li>
                 ))
-            }
-          </ul>
+              }
+            </ul>
+          }
           {
             create
               ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit!)} to={`/categories/${valueEdit}`}>SAVE</Link>
@@ -107,17 +110,19 @@ export function PublishItems<T extends { id: number, title: string }>({
               value={value}
               onChange={searchCategory}
             />
-            <ul>
-              {
-                !unpublished?.length
-                  ? <span>{noFilteredItemsMessage}</span>
-                  : unpublished?.map(data => (
-                    <li key={data.id} onDoubleClick={() => onPublish!(data)}>
-                      {data.title}
-                    </li>
-                  ))
-              }
-            </ul>
+            {
+              !unpublished?.length
+                ? <span className={styles.noFilteredItemsMessage}>{noFilteredItemsMessage}</span>
+                : <ul>
+                  {
+                    unpublished?.map(data => (
+                      <li key={data.id} onDoubleClick={() => onPublish!(data)}>
+                        {data.title}
+                      </li>
+                    ))
+                  }
+                </ul>
+            }
           </div>
         }
       </div>

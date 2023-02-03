@@ -115,3 +115,9 @@
 .editableText {
   font-size: 30px;
 }
+
+.noFilteredItemsMessage {
+  border: 1px solid #fff;
+  padding: 5px;
+  text-align: center;
+}
