@@ -9,6 +9,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
   const [value, setValue] = useState(text)
   const spanRef = useRef<HTMLElement>(null)
   const [inputWidth, setInputWidth] = useState(15)
+  const [textareaHeight, setTextareaHeight] = useState(25)
 
   useEffect(() => {
     setValue(text)
@@ -31,6 +32,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
 
   const showInput = () => {
     setInputWidth(spanRef.current!.clientWidth + 5)
+    setTextareaHeight(spanRef.current!.clientHeight + 5)
 
     setHidden(false)
   }
@@ -51,6 +53,10 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
         onBlur={handleBlur}
         value={value}
         autoFocus
+        style={{
+          width: `${inputWidth}px`,
+          height: `${textareaHeight}px`
+        }}
       />
     )
     : (

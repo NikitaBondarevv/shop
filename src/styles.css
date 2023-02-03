@@ -18,3 +18,14 @@
 :global #app {
   margin: 0 auto;
 }
+
+:global ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+:global a {
+  text-decoration: none;
+  color: rgb(202, 202, 202);
+}

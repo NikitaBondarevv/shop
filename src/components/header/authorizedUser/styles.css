@@ -49,21 +49,19 @@
   position: relative;
 }
 
-.userName::before {
-  content: "";
-  display: block;
-  position: absolute;
-  background: url(./images/user.png) no-repeat;
-  width: 24px;
-  height: 24px;
-  right: -35px;
-}
-
-.userName:hover {
+.userName:hover,
+.userName:hover svg {
   color: rgb(157, 157, 157);
+  fill: rgb(157, 157, 157);
 }
 
 .info {
   color: #fff;
-  margin: 0 0 0 45px;
+  margin: 0 0 0 35px;
+}
+
+.icon {
+  margin: 0 0 0 5px;
+  position: absolute;
+  right: -30px;
 }

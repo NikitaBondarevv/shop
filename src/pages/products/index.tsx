@@ -4,24 +4,27 @@ import { useParams } from 'react-router-dom'
 import { IProduct } from 'interfaces/IProduct'
 import { UserContext } from 'contexts/userContext'
 import { EditableText } from 'components/editableText'
-import { findProducts } from 'contracts/products'
+import { findProduct, updateProduct } from 'contracts/products'
 import styles from './styles.css'
 
 export const Products = () => {
   const [product, setProduct] = useState<IProduct>({} as IProduct)
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
+  const [description, setDescription] = useState('')
+
+  const getData = async () => {
+    setProduct(await findProduct(title))
+  }
 
   useEffect(() => {
-    const getData = async () => {
-      setProduct(await findProducts(title))
-    }
-
     getData()
   }, [])
 
-  console.log(product);
-
+  const handleSave = async () => {
+   await updateProduct({...product, description: description})
+   getData()
+  }
 
   return (
     isAuthenticated
@@ -34,10 +37,10 @@ export const Products = () => {
             $ <EditableText text={String(product.price)} price />
           </span>
           <div className={styles.description}>
-            <EditableText text={product.description || 'No description'} multiLine />
+            <EditableText onBlur={(description) => setDescription(description)} text={product.description || 'No description'} multiLine />
           </div>
-          <button type="button" className={styles.save}>SAVE</button>
-        </div >
+          <button type="button" className={styles.save} onClick={handleSave}>SAVE</button>
+        </div>
       )
       : (
         <div className={styles.productInformation} >

@@ -1,5 +1,5 @@
 export type TPublishItemsProps<T> = {
-  title: string
+  title?: string
   publishListTitle?: string
   listTitle?: string
   items: T[]
@@ -7,13 +7,15 @@ export type TPublishItemsProps<T> = {
   getDescription: (id: number) => string
   showEditButton?: boolean
   onPublish?: (data: T) => Promise<void>
-  postingMessage: string
-  listMessage: string
+  noAllItemsMessage: string
+  noFilteredItemsMessage: string
   onRename?: (data: T, name: string) => Promise<void>
   create?: boolean
-  textForEditable?: string
+  valueEdit?: string
   onSave?: (name: string) => Promise<void>
   filterPredicate: (data: T) => boolean
+  viewMode?: boolean
+  getLink: (data: T) => string
 }
 
 export type TTarget = {

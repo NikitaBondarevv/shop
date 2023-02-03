@@ -6,3 +6,10 @@ export interface ICategory {
   published?: boolean
   products?: IProduct[]
 }
+
+export interface ICategoryCreate {
+  title: string
+  id: number
+  published?: boolean
+  products?: number[]
+}

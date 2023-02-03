@@ -6,6 +6,7 @@ import { getGeneralInfo } from 'contracts/getGeneralInfo'
 import { UserContext } from 'contexts/userContext'
 import { logout } from 'contracts/logout'
 import styles from './styles.css'
+import { UserIcon } from './userIcon'
 
 export const AuthorizedUser = () => {
   const { user, setUser } = useContext(UserContext)
@@ -29,6 +30,7 @@ export const AuthorizedUser = () => {
     <div className={styles.menu}>
       <Link to="/" className={styles.userName}>
         {user?.firstName}
+        <UserIcon />
       </Link>
       <span className={styles.info}>
         {

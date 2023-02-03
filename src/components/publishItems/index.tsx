@@ -5,11 +5,10 @@ import { WarningWindow } from 'components/warningWindow'
 import { TPublishItemsProps, TTarget } from './types'
 import editIcon from './images/edit.png'
 import deleteIcon from './images/delete.png'
-import styles from './styles.css'
 import { EditableText } from 'components/editableText'
+import styles from './styles.css'
 
-export function PublishItems <T extends { id: number, title: string }>({
-  title,
+export function PublishItems<T extends { id: number, title: string }>({
   publishListTitle,
   listTitle,
   items,
@@ -17,20 +16,21 @@ export function PublishItems <T extends { id: number, title: string }>({
   getDescription,
   showEditButton,
   onPublish,
-  postingMessage,
-  listMessage,
+  noAllItemsMessage,
+  noFilteredItemsMessage,
   onRename,
   create,
-  textForEditable,
   onSave,
-  filterPredicate
+  filterPredicate,
+  valueEdit,
+  viewMode,
+  getLink
 }: TPublishItemsProps<T>) {
   const published = items?.filter(filterPredicate)
   const [value, setValue] = useState('')
   const [editIndex, setEditIndex] = useState(-1)
-  const unpublished = items?.filter(data => create ? !filterPredicate(data) && (!value || data.title.includes(value)))
+  const unpublished = items?.filter(data => !filterPredicate(data) && (!value || data.title.includes(value)))
   const [id, setId] = useState<number | undefined>(undefined)
-  const [valueEdit, setValueEdit] = useState('')
   const description = useMemo(() => getDescription(id!), [id])
 
   const searchCategory = ({ target: { value } }: TTarget) => {
@@ -50,81 +50,76 @@ export function PublishItems <T extends { id: number, title: string }>({
   }
 
   return (
-    <div className={styles.content}>
-      <h1 className={styles.title}>
-        {title}
-        {
-          create &&
-          <EditableText
-            text={textForEditable}
-            className={styles.editableText}
-            onBlur={(name) => setValueEdit(name)}
-          />
-        }
-      </h1>
+    <>
       <div className={styles.categories}>
         <div className={styles.published}>
-          <span>
-            {publishListTitle}
-          </span>
+          {
+            viewMode && <span>
+              {publishListTitle}
+            </span>
+          }
           <ul>
             {
               !published?.length
-                ? <span>{postingMessage}</span>
+                ? <span>{noAllItemsMessage}</span>
                 : published?.map(data => (
                   <li className={styles.category} key={data.id}>
-                    <Link to={`${data.title}`}>
+                    <Link to={getLink!(data)}>
                       <EditableText
                         text={data.title.toUpperCase()}
                         isEdit={editIndex === data.id}
                         onBlur={(name: string) => onBlur(data, name)}
                       />
                     </Link>
-                    <div className={styles.buttons}>
-                      {
-                        !showEditButton && (
-                          <button className={styles.edit} onClick={() => setEditIndex(data.id)}>
-                            <img src={editIcon} alt="edit" />
-                          </button>
-                        )
-                      }
-                      <button className={styles.delete} onClick={() => setId(data.id)}>
-                        <img src={deleteIcon} alt="delete" />
-                      </button>
-                    </div>
+                    {
+                      viewMode && <div className={styles.buttons}>
+                        {
+                          !showEditButton && (
+                            <button className={styles.edit} onClick={() => setEditIndex(data.id)}>
+                              <img src={editIcon} alt="edit" />
+                            </button>
+                          )
+                        }
+                        <button className={styles.delete} onClick={() => setId(data.id)}>
+                          <img src={deleteIcon} alt="delete" />
+                        </button>
+                      </div>
+                    }
                   </li>
                 ))
             }
           </ul>
           {
             create
-              ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit)} to={`/categories/${valueEdit}`}>SAVE</Link>
-              : <Link className={styles.addNew} to="/new">ADD NEW</Link>
+              ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit!)} to={`/categories/${valueEdit}`}>SAVE</Link>
+              : viewMode && <Link className={styles.addNew} to="/new">ADD NEW</Link>
           }
         </div>
-        <div className={styles.noPublished}>
-          <span>
-            {listTitle}
-          </span>
-          <input
-            className={styles.search}
-            type="text"
-            placeholder="SEARCH"
-            value={value}
-            onChange={searchCategory}
-          />
-          <ul>
-            {
-              !unpublished?.length
-                ? <span>{listMessage}</span>
-                : unpublished?.map(data => (
-                  <li key={data.id} onDoubleClick={() => onPublish!(data)}>
-                    {data.title}
-                  </li>
-                ))
-            }
-          </ul>
-        </div>
+        {
+          viewMode && <div className={styles.noPublished}>
+            <span>
+              {listTitle}
+            </span>
+            <input
+              className={styles.search}
+              type="text"
+              placeholder="SEARCH"
+              value={value}
+              onChange={searchCategory}
+            />
+            <ul>
+              {
+                !unpublished?.length
+                  ? <span>{noFilteredItemsMessage}</span>
+                  : unpublished?.map(data => (
+                    <li key={data.id} onDoubleClick={() => onPublish!(data)}>
+                      {data.title}
+                    </li>
+                  ))
+              }
+            </ul>
+          </div>
+        }
       </div>
       {
         id &&
@@ -134,6 +129,6 @@ export function PublishItems <T extends { id: number, title: string }>({
           onCancel={() => setId(undefined)}
         />
       }
-    </div>
+    </>
   )
 }
