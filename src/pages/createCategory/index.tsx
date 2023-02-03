@@ -67,8 +67,8 @@ export const CreateCategory = () => {
         listTitle="All products:"
         items={allProducts}
         getDescription={() => ""}
-        postingMessage="There are no products in this category."
-        listMessage=""
+        noAllItemsMessage="There are no products in this category."
+        noFilteredItemsMessage="No products"
         create
         onRemove={handleRemove}
         onPublish={handleConfirmPublish}

@@ -16,8 +16,8 @@ export function PublishItems <T extends { id: number, title: string }>({
   getDescription,
   showEditButton,
   onPublish,
-  postingMessage,
-  listMessage,
+  noAllItemsMessage,
+  noFilteredItemsMessage,
   onRename,
   create,
   onSave,
@@ -57,7 +57,7 @@ export function PublishItems <T extends { id: number, title: string }>({
           <ul>
             {
               !published?.length
-                ? <span>{postingMessage}</span>
+                ? <span>{noAllItemsMessage}</span>
                 : published?.map(data => (
                   <li className={styles.category} key={data.id}>
                     <Link to={`${data.title}`}>
@@ -103,7 +103,7 @@ export function PublishItems <T extends { id: number, title: string }>({
           <ul>
             {
               !unpublished?.length
-                ? <span>{listMessage}</span>
+                ? <span>{noFilteredItemsMessage}</span>
                 : unpublished?.map(data => (
                   <li key={data.id} onDoubleClick={() => onPublish!(data)}>
                     {data.title}

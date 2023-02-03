@@ -61,8 +61,8 @@ export const Category = () => {
             onRemove={handleRemove}
             onPublish={handleConfirmPublish}
             getDescription={getDescription}
-            postingMessage="There are no products in this category"
-            listMessage="No products"
+            noAllItemsMessage="There are no products in this category"
+            noFilteredItemsMessage="No products"
             filterPredicate={getCategoryProducts}
             showEditButton
           />

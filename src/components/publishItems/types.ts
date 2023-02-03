@@ -7,8 +7,8 @@ export type TPublishItemsProps<T> = {
   getDescription: (id: number) => string
   showEditButton?: boolean
   onPublish?: (data: T) => Promise<void>
-  postingMessage: string
-  listMessage: string
+  noAllItemsMessage: string
+  noFilteredItemsMessage: string
   onRename?: (data: T, name: string) => Promise<void>
   create?: boolean
   valueEdit?: string

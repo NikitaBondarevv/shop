@@ -38,8 +38,8 @@ export const Authorised = ({ categories, getData }: TAuthorisedProps) => {
         onRemove={handleConfirmRemove}
         getDescription={getDescription}
         onPublish={handlePublish}
-        postingMessage="There are no published categories"
-        listMessage="No categories"
+        noAllItemsMessage="There are no published categories"
+        noFilteredItemsMessage="No categories"
         onRename={handleRename}
         filterPredicate={(data: ICategory) => Boolean(data.published)}
       />

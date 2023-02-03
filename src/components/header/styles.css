@@ -26,6 +26,10 @@
   column-gap: 68px;
 }
 
+.list a {
+  position: relative;
+}
+
 .loginPanel {
   display: flex;
   align-items: center;
@@ -59,24 +63,25 @@
 }
 
 .list a:hover,
-.list .active {
+.list .active,
+.list a:hover svg,
+.active svg {
   color: rgb(157, 157, 157);
+  fill: rgb(157, 157, 157);
 }
 
-.list a::before {
-  background: url(./images/menu.png) no-repeat;
-  content: "";
-  display: block;
-  width: 25px;
-  height: 25px;
-  right: -30px;
-  bottom: 2px;
+svg {
+  margin: 0 0 0 5px;
   position: absolute;
+  right: -30px;
 }
 
-.list .categories::before,
-.list .products::before {
+.list .categories::before {
   background-position: -25px 0;
+}
+
+.list .products::before {
+  background-position: -80px 0;
 }
 
 .list .contacts::before {

@@ -25,7 +25,10 @@ export const Header = () => {
               <ul className={styles.list}>
                 {navigation.map((link, index) => (
                   <li key={index}>
-                    <NavLink to={`/${link.value}`} className={({ isActive }) => getNavLinkName(isActive, styles[link.value], styles)}>{link.text}</NavLink>
+                    <NavLink to={`/${link.value}`} className={({ isActive }) => getNavLinkName(isActive, styles[link.value], styles)}>
+                      {link.text}
+                      {link.icon && <link.icon />}
+                    </NavLink>
                   </li>
                 ))}
               </ul>
@@ -34,7 +37,7 @@ export const Header = () => {
               <ul className={styles.list}>
                 {notLoggedNavigation.map((link, index) => (
                   <li key={index}>
-                    <NavLink to={`/${link.value}`} className={({ isActive }) => getNavLinkName(isActive, styles[link.value], styles)}>{link.text}</NavLink>
+                    <NavLink to={`/${link.value}`} className={({ isActive }) => getNavLinkName(isActive, styles[link.value], styles)}>{link.text}{link.icon && <link.icon />}</NavLink>
                   </li>
                 ))}
               </ul>
