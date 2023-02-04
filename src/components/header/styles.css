@@ -5,17 +5,11 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   column-gap: 75px;
-  margin: 0 0 60px;
   background-color: rgba(16 18 27 / 40%);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(113 119 144 / 25%);
   min-width: 1070px;
-  padding: 0 40px 0 0;
-}
-
-.navigation {
-  display: flex;
-  align-items: center;
+  padding: 10px 40px;
 }
 
 .list {
@@ -52,10 +46,6 @@
   color: rgb(157, 157, 157);
 }
 
-.logo {
-  width: 170px;
-}
-
 .list a {
   color: #fff;
   text-decoration: none;
@@ -70,20 +60,19 @@
   fill: rgb(157, 157, 157);
 }
 
-.list .categories::before {
-  background-position: -25px 0;
-}
-
-.list .products::before {
-  background-position: -80px 0;
-}
-
-.list .contacts::before {
-  background-position: -52px 0;
-}
-
 .icon {
   margin: 0 0 0 5px;
   position: absolute;
   right: -30px;
+}
+
+@media (max-width: 1080px) {
+  .list {
+    display: none;
+  }
+
+  .header {
+    min-width: 635px;
+    padding: 10px 5px 0 15px;
+  }
 }
