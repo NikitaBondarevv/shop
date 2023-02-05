@@ -8,7 +8,10 @@ import styles from './styles.css'
 export const HamburgerMenu = ({ setMarginHeader }: THamburgerMenu) => {
   const [toggleMenu, setToggleMenu] = useState(false)
 
-  window.addEventListener('resize', () => setToggleMenu(false))
+  window.addEventListener('resize', () => {
+    setToggleMenu(false)
+    setMarginHeader(60)
+  })
 
   const toggle = () => {
     setToggleMenu(!toggleMenu)
