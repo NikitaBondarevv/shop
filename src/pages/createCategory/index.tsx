@@ -9,15 +9,15 @@ import styles from './styles.css'
 
 export const CreateCategory = () => {
   const [allProducts, setAllProducts] = useState<IProduct[]>([])
-  const products: IProduct[] = []
-  const productsIds = useMemo(() => (products || []).map(product => product.id), [products])
-  const [valueEdit, setValueEdit] = useState('')
-
-  const getData = async () => {
-    setAllProducts(await getProducts())
-  }
+  const [products, setProducts] = useState<IProduct[]>([])
+  const productsIds = useMemo(() => (products!).map(product => product.id), [products])
+  const [valueEdit, setValueEdit] = useState('NEW CATEGORY')
 
   useEffect(() => {
+    const getData = async () => {
+      setAllProducts(await getProducts())
+    }
+
     getData()
   }, [])
 
@@ -25,22 +25,19 @@ export const CreateCategory = () => {
     await createCategory({
       title: name,
       published: true,
-      id: 0,
-      products: productsIds
+      products: products
     })
   }
 
   const handleRemove = async (product: IProduct) => {
-    const index = products.indexOf(product)
-    products.splice(index!, 1)
-
-    getData()
+    const index = products!.indexOf(product)
+    products!.splice(index!, 1)
+    setProducts([...products])
   }
 
   const handleConfirmPublish = async ({ id, title }: IProduct) => {
-    products.push({ id, title })
-
-    getData()
+    products!.push({ id, title })
+    setProducts([...products])
   }
 
   const getCategoryProducts = (product: IProduct) => productsIds?.includes(product.id)
@@ -50,7 +47,7 @@ export const CreateCategory = () => {
       <h1 className={styles.title}>
         CATEGORY: {
           <EditableText
-            text={'NEW CATEGORY'}
+            text={valueEdit}
             className={styles.editableText}
             onBlur={(name) => setValueEdit(name)}
           />

@@ -9,7 +9,6 @@ export interface ICategory {
 
 export interface ICategoryCreate {
   title: string
-  id: number
   published?: boolean
-  products?: number[]
+  products?: IProduct[]
 }
