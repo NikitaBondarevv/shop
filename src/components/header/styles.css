@@ -10,6 +10,9 @@
   border-bottom: 1px solid rgba(113 119 144 / 25%);
   min-width: 1000px;
   padding: 10px 40px;
+  margin: 0 0 60px;
+  z-index: 1;
+  position: relative;
 }
 
 .list {

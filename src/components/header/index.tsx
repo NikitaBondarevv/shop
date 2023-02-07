@@ -1,5 +1,5 @@
 import { Link, NavLink } from 'react-router-dom'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import styles from './styles.css'
 import loginPage from './images/loginPage.png'
@@ -13,10 +13,9 @@ import { Logo } from './svgIcons/logo'
 
 export const Header = () => {
   const { isAuthenticated } = useContext(UserContext)
-  const [marginHeader, setMarginHeader] = useState(60)
 
   return (
-    <header className={styles.header} style={{ margin: `0 0 ${marginHeader}px` }}>
+    <header className={styles.header}>
       <Link to="/">
         <Logo />
       </Link>
@@ -45,7 +44,7 @@ export const Header = () => {
               </ul>
             )
         }
-        <HamburgerMenu setMarginHeader={setMarginHeader} />
+        <HamburgerMenu />
       </nav>
       {
         isAuthenticated

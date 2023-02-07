@@ -32,21 +32,23 @@
 }
 
 .hamburgerMenu {
-  padding: 10px 0;
   width: 100%;
   position: absolute;
-  top: 100%;
+  top: 101%;
   left: 50%;
   transform: translate(-50%, 0);
   list-style: none;
   margin: 0;
-  text-align: center;
-  background-color: rgba(16 18 27 / 40%);
+  background-color: rgba(16 18 27);
   border-bottom: 1px solid rgba(113 119 144 / 25%);
+  backdrop-filter: blur(20px);
+  display: none;
 }
 
 .hamburgerMenu li {
-  margin: 0 0 5px;
+  padding: 10px 0 10px 30px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
 }
 
 .hamburgerMenu a:hover {
@@ -56,5 +58,11 @@
 @media (max-width: 1080px) {
   .hamburger {
     display: block;
+  }
+}
+
+@media screen {
+  .hamburgerMenu {
+    display: none;
   }
 }
