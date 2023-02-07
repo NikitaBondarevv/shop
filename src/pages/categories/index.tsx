@@ -49,7 +49,7 @@ export const Categories = () => {
         listTitle="Categories:"
         items={categories}
         onRemove={handleConfirmRemove}
-        getDescription={getDescription}
+        getWarningDescription={getDescription}
         onPublish={handlePublish}
         noAllItemsMessage="There are no published categories"
         noFilteredItemsMessage="No categories"

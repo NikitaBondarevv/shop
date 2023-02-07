@@ -58,7 +58,7 @@ export const Category = () => {
         items={allProducts}
         onRemove={handleRemove}
         onPublish={handleConfirmPublish}
-        getDescription={getDescription}
+        getWarningDescription={getDescription}
         noAllItemsMessage="There are no products in this category"
         noFilteredItemsMessage="No products"
         filterPredicate={getCategoryProducts}

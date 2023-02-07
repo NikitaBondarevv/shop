@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { getProducts } from 'contracts/products'
 import { PublishItems } from 'components/publishItems'
@@ -10,8 +10,12 @@ import styles from './styles.css'
 export const CreateCategory = () => {
   const [allProducts, setAllProducts] = useState<IProduct[]>([])
   const [products, setProducts] = useState<IProduct[]>([])
-  const productsIds = useMemo(() => (products!).map(product => product.id), [products])
   const [valueEdit, setValueEdit] = useState('NEW CATEGORY')
+  const getWarningDescription = (id: number) => {
+    const findProduct = products?.find(data => data.id === id)
+
+    return `You're going to remove "${findProduct?.title}" product. Press "Ok" to confirm.`
+  }
 
   useEffect(() => {
     const getData = async () => {
@@ -25,7 +29,7 @@ export const CreateCategory = () => {
     await createCategory({
       title: name,
       published: true,
-      products: products
+      products
     })
   }
 
@@ -36,11 +40,10 @@ export const CreateCategory = () => {
   }
 
   const handleConfirmPublish = async ({ id, title }: IProduct) => {
-    products!.push({ id, title })
-    setProducts([...products])
+    setProducts([...products, { id, title }])
   }
 
-  const getCategoryProducts = (product: IProduct) => productsIds?.includes(product.id)
+  const getCategoryProducts = (product: IProduct) => !!products.find(item => product.id === item.id)
 
   return (
     <>
@@ -56,7 +59,7 @@ export const CreateCategory = () => {
       <PublishItems
         listTitle="All products:"
         items={allProducts}
-        getDescription={() => ""}
+        getWarningDescription={(id) => getWarningDescription(id)}
         noAllItemsMessage="There are no products in this category."
         noFilteredItemsMessage="No products"
         publishListTitle="Products in category:"

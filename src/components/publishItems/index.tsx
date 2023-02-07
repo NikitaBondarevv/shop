@@ -13,7 +13,7 @@ export function PublishItems<T extends { id: number, title: string }>({
   listTitle,
   items,
   onRemove,
-  getDescription,
+  getWarningDescription,
   showEditButton,
   onPublish,
   noAllItemsMessage,
@@ -31,7 +31,7 @@ export function PublishItems<T extends { id: number, title: string }>({
   const [editIndex, setEditIndex] = useState(-1)
   const unpublished = items?.filter(data => !filterPredicate(data) && (!value || data.title.includes(value)))
   const [id, setId] = useState<number | undefined>(undefined)
-  const description = useMemo(() => getDescription(id!), [id])
+  const description = useMemo(() => getWarningDescription(id!), [id])
 
   const searchCategory = ({ target: { value } }: TTarget) => {
     setValue(value)

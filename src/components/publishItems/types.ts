@@ -4,7 +4,7 @@ export type TPublishItemsProps<T> = {
   listTitle?: string
   items: T[]
   onRemove?: (data: T) => Promise<void>
-  getDescription: (id: number) => string
+  getWarningDescription: (id: number) => string
   showEditButton?: boolean
   onPublish?: (data: T) => Promise<void>
   noAllItemsMessage: string

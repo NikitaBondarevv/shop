@@ -49,8 +49,7 @@
     "react/jsx-one-expression-per-line": "off",
     "jsx-a11y/no-autofocus": 0,
     "jsx-a11y/anchor-is-valid": 0,
-    "jsx-a11y/control-has-associated-label": 0,
-    "@typescript-eslint/no-non-null-assertion": "warn"
+    "jsx-a11y/control-has-associated-label": 0
   },
   "parser": "babel-eslint",
   "plugins": [
