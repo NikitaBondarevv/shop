@@ -48,8 +48,7 @@ export const CreateCategory = () => {
   return (
     <>
       <h1 className={styles.title}>
-        CATEGORY:
-        {
+        CATEGORY: {
           <EditableText
             text={'NEW CATEGORY'}
             className={styles.editableText}
@@ -63,6 +62,7 @@ export const CreateCategory = () => {
         getDescription={() => ""}
         noAllItemsMessage="There are no products in this category."
         noFilteredItemsMessage="No products"
+        publishListTitle="Products in category:"
         create
         onRemove={handleRemove}
         onPublish={handleConfirmPublish}
