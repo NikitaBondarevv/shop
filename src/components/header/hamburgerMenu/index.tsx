@@ -28,7 +28,7 @@ export const HamburgerMenu = () => {
             <ul ref={hamburgerMenuRef} className={styles.hamburgerMenu} style={{ display: toggleDisplayMenu }}>
               {navigation.map((link, index) => (
                 <li key={index}>
-                  <Link to={`/${link.value}`} className={styles[link.value]}>
+                  <Link to={`/${link.value}`} className={styles[link.value]} onClick={() => setToggleDisplayMenu('none')}>
                     {link.text}
                   </Link>
                 </li>
@@ -39,7 +39,7 @@ export const HamburgerMenu = () => {
             <ul ref={hamburgerMenuRef} className={styles.hamburgerMenu} style={{ display: toggleDisplayMenu }}>
               {notLoggedNavigation.map((link, index) => (
                 <li key={index}>
-                  <Link to={`/${link.value}`} className={styles[link.value]}>
+                  <Link to={`/${link.value}`} className={styles[link.value]} onClick={() => setToggleDisplayMenu('none')}>
                     {link.text}
                   </Link>
                 </li>
