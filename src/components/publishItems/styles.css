@@ -49,6 +49,7 @@
   margin: 0 0 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   column-gap: 15px;
 }
 
@@ -113,4 +114,10 @@
 
 .editableText {
   font-size: 30px;
+}
+
+.noFilteredItemsMessage {
+  border: 1px solid #fff;
+  padding: 5px;
+  text-align: center;
 }

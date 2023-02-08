@@ -1,4 +1,4 @@
-import { useState, FormEvent, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, DetailedHTMLProps, InputHTMLAttributes } from 'react'
 import PropTypes from 'prop-types'
 
 import styles from './styles.css'
@@ -9,7 +9,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
   const [value, setValue] = useState(text)
   const spanRef = useRef<HTMLElement>(null)
   const [inputWidth, setInputWidth] = useState(15)
-  const [textareaHeight, setTextareaHeight] = useState(25)
+  const [inputHeight, setInputHeight] = useState(25)
 
   useEffect(() => {
     setValue(text)
@@ -23,18 +23,22 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
     setValue(value)
   }
 
-  const handleBlur = (e: FormEvent) => {
-    e.preventDefault()
-
+  const handleBlur = () => {
     setHidden(true)
     onBlur!(value)
   }
 
   const showInput = () => {
     setInputWidth(spanRef.current!.clientWidth + 5)
-    setTextareaHeight(spanRef.current!.clientHeight + 5)
+    setInputHeight(spanRef.current!.clientHeight + 5)
 
     setHidden(false)
+  }
+  
+  const handleKeyDown = (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleBlur()
+    }
   }
 
   if (hidden) return <span
@@ -55,7 +59,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
         autoFocus
         style={{
           width: `${inputWidth}px`,
-          height: `${textareaHeight}px`
+          height: `${inputHeight}px`
         }}
       />
     )
@@ -68,8 +72,10 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
         onBlur={handleBlur}
         autoFocus
         style={{
-          width: `${inputWidth}px`
+          width: `${inputWidth}px`,
+          height: `${inputHeight}px`
         }}
+        onKeyDown={handleKeyDown}
       />
     )
 }

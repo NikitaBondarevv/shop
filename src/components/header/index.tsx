@@ -2,13 +2,14 @@ import { Link, NavLink } from 'react-router-dom'
 import { useContext } from 'react'
 
 import styles from './styles.css'
-import logo from './images/logo.png'
 import loginPage from './images/loginPage.png'
 import { navigation } from 'helpers/navigation'
 import { notLoggedNavigation } from 'helpers/notLoggedNavigation'
 import { getNavLinkName } from 'helpers/getNavLinkName'
 import { UserContext } from 'contexts/userContext'
 import { AuthorizedUser } from './authorizedUser'
+import { HamburgerMenu } from './hamburgerMenu'
+import { Logo } from './svgIcons/logo'
 
 export const Header = () => {
   const { isAuthenticated } = useContext(UserContext)
@@ -16,7 +17,7 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <Link to="/">
-        <img src={logo} className={styles.logo} alt="logo" />
+        <Logo />
       </Link>
       <nav>
         {
@@ -43,10 +44,13 @@ export const Header = () => {
               </ul>
             )
         }
+        <HamburgerMenu />
       </nav>
       {
         isAuthenticated
-          ? <AuthorizedUser />
+          ? (
+            <AuthorizedUser />
+          )
           : (
             <div className={styles.loginPanel}>
               <img src={loginPage} alt="login page" />
