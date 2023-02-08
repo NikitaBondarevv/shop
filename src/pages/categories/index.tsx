@@ -57,6 +57,7 @@ export const Categories = () => {
         filterPredicate={(data: ICategory) => Boolean(data.published)}
         getLink={(category) => `/categories/${category.title}`}
         viewMode={isAuthenticated}
+        showAddNewButton={isAuthenticated}
       />
     </>
   )

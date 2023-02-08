@@ -16,6 +16,7 @@ export type TPublishItemsProps<T> = {
   filterPredicate: (data: T) => boolean
   viewMode?: boolean
   getLink: (data: T) => string
+  showAddNewButton?:boolean
 }
 
 export type TTarget = {

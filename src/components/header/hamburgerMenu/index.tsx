@@ -1,12 +1,15 @@
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { navigation } from 'helpers/navigation'
 import styles from './styles.css'
+import { UserContext } from 'contexts/userContext'
+import { notLoggedNavigation } from 'helpers/notLoggedNavigation'
 
 export const HamburgerMenu = () => {
   const [toggleDisplayMenu, setToggleDisplayMenu] = useState('none')
   const hamburgerMenuRef = useRef<HTMLUListElement>(null)
+  const { isAuthenticated } = useContext(UserContext)
 
   useEffect(() => window.addEventListener('resize', () => setToggleDisplayMenu('none')), [])
 
@@ -19,15 +22,31 @@ export const HamburgerMenu = () => {
   return (
     <>
       <div className={styles.hamburger} onClick={toggle}></div>
-      <ul ref={hamburgerMenuRef} className={styles.hamburgerMenu} style={{ display: toggleDisplayMenu }}>
-        {navigation.map((link, index) => (
-          <li key={index}>
-            <Link to={`/${link.value}`} className={styles[link.value]}>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {
+        isAuthenticated
+          ? (
+            <ul ref={hamburgerMenuRef} className={styles.hamburgerMenu} style={{ display: toggleDisplayMenu }}>
+              {navigation.map((link, index) => (
+                <li key={index}>
+                  <Link to={`/${link.value}`} className={styles[link.value]}>
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )
+          : (
+            <ul ref={hamburgerMenuRef} className={styles.hamburgerMenu} style={{ display: toggleDisplayMenu }}>
+              {notLoggedNavigation.map((link, index) => (
+                <li key={index}>
+                  <Link to={`/${link.value}`} className={styles[link.value]}>
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )
+      }
     </>
   )
 }
