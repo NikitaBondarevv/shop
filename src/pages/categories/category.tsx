@@ -34,6 +34,8 @@ export const Category = () => {
     const index = category.products?.indexOf(product)
     category.products?.splice(index!, 1)
 
+    console.log(category.products?.indexOf(product));
+    
     await updateCategory(category)
     getData()
   }

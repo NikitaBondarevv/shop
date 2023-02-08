@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import { IProduct } from 'interfaces/IProduct'
 import { UserContext } from 'contexts/userContext'
@@ -7,11 +7,13 @@ import { EditableText } from 'components/editableText'
 import { findProduct, updateProduct } from 'contracts/products'
 import styles from './styles.css'
 
-export const Products = () => {
+export const Product = () => {
   const [product, setProduct] = useState<IProduct>({} as IProduct)
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
-  const [description, setDescription] = useState('')
+  const [description, setDescription] = useState(product.description)
+  const [titleProduct, setTitleProduct] = useState(product.title)
+  const [price, setPrice] = useState(product.price)
 
   const getData = async () => {
     setProduct(await findProduct(title))
@@ -22,8 +24,12 @@ export const Products = () => {
   }, [])
 
   const handleSave = async () => {
-   await updateProduct({...product, description: description})
-   getData()
+    await updateProduct({
+      ...product,
+      title: titleProduct,
+      price,
+      description: description
+    })
   }
 
   return (
@@ -31,15 +37,15 @@ export const Products = () => {
       ? (
         <div className={styles.productInformation} >
           <span className={styles.title}>
-            TITLE: <EditableText text={product.title} />
+            TITLE: <EditableText onBlur={(titleProduct) => setTitleProduct(titleProduct)} text={product.title} />
           </span>
           <span className={styles.price}>
-            $ <EditableText text={String(product.price)} price />
+            $ <EditableText onBlur={(price) => setPrice(price)} text={String(product.price)} price />
           </span>
           <div className={styles.description}>
             <EditableText onBlur={(description) => setDescription(description)} text={product.description || 'No description'} multiLine />
           </div>
-          <button type="button" className={styles.save} onClick={handleSave}>SAVE</button>
+          <Link to="" className={styles.save} onClick={handleSave}>SAVE</Link>
         </div>
       )
       : (

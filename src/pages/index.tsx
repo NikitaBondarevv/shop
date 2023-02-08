@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { LoginForm } from 'pages/loginForm/LoginForm'
 import { UserContext } from 'contexts/userContext'
 import { ProductsInfo } from './productsInfo'
-import { Products } from './products'
+import { Product } from './products/product'
 import { CreateUser } from './createUser'
 import { Profile } from './profile'
 import { Categories } from './categories'
@@ -32,7 +32,7 @@ export const Pages = () => {
           )
         }
         <Route path='/' element={<ProductsInfo />} />
-        <Route path='/products/:title' element={<Products />} />
+        <Route path='/products/:title' element={<Product />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/contacts' element={<Contacts />} />
         <Route path='/categories' element={<Categories />} />
