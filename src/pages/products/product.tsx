@@ -45,7 +45,7 @@ export const Product = () => {
           <div className={styles.description}>
             <EditableText onBlur={(description) => setDescription(description)} text={product.description || 'No description'} multiLine />
           </div>
-          <Link to="" className={styles.save} onClick={handleSave}>SAVE</Link>
+          <Link to={`/products/${titleProduct}`} className={styles.save} onClick={handleSave}>SAVE</Link>
         </div>
       )
       : (

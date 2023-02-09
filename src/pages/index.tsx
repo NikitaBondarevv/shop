@@ -14,6 +14,8 @@ import { Contacts } from './contacts'
 import { Registered } from './registered'
 import { CreateCategory } from './createCategory'
 import styles from './styles.css'
+import { Products } from './products'
+import { CreateProduct } from './createProduct'
 
 export const Pages = () => {
   const { isAuthenticated, setUser } = useContext(UserContext)
@@ -38,6 +40,8 @@ export const Pages = () => {
         <Route path='/categories' element={<Categories />} />
         <Route path='/categories/:title' element={<Category />} />
         <Route path='/new' element={<CreateCategory />} />
+        <Route path='/products' element={<Products />} />
+        <Route path='/products/new' element={<CreateProduct />} />
       </Routes>
     </main>
   )

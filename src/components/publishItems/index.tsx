@@ -40,9 +40,6 @@ export function PublishItems<T extends { id: number, title: string }>({
   const onConfirm = () => {
     const item = items.find(data => data.id === id)
 
-    console.log(item);
-    
-
     onRemove!(item!)
     setId(undefined)
   }
