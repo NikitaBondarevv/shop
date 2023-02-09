@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 
 import { WarningWindow } from 'components/warningWindow'
 import { TPublishItemsProps, TTarget } from './types'
-import editIcon from './images/edit.png'
-import deleteIcon from './images/delete.png'
 import { EditableText } from 'components/editableText'
 import styles from './styles.css'
 import { Edit } from './svgIcons/edit'
