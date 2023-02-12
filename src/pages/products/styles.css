@@ -44,7 +44,7 @@
   border: 1px solid #fff;
   font-size: 25px;
   padding: 0 10px;
-  margin: 0 0 30px 45px;
+  margin: 0 0 30px 15px;
 }
 
 .productImage {
@@ -122,11 +122,8 @@
 
 .noImage {
   border-radius: 20px;
-  width: 200px;
   border: 1px solid rgba(113 119 144 / 25%);
   height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0 0 10px;
+  padding: 0 41px;
 }

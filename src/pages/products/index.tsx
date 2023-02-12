@@ -9,6 +9,7 @@ import { Delete } from './svgIcons/delete'
 import styles from './styles.css'
 import { Link } from 'react-router-dom'
 import { WarningWindow } from 'components/warningWindow'
+import BagIcon from './images/bag.png'
 
 export const Products = () => {
   const [value, setValue] = useState('')
@@ -82,7 +83,7 @@ export const Products = () => {
                     {
                       product.image
                         ? <img className={styles.productImage} src={product.image} />
-                        : <span className={styles.noImage}>No image</span>
+                        : <img src={BagIcon} className={styles.noImage} />
                     }
                     <EditableText isEdit={editId === product.id} text={product.title} onBlur={(name) => handleRename(product, name)} />
                   </Link>
