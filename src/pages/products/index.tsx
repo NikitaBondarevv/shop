@@ -13,9 +13,9 @@ import { WarningWindow } from 'components/warningWindow'
 export const Products = () => {
   const [value, setValue] = useState('')
   const [products, setProducts] = useState<IProduct[]>([])
-  const [editIndex, setEditIndex] = useState(-1)
+  const [editId, setEditId] = useState(-1)
   const [id, setId] = useState<number | undefined>(undefined)
-  const productsWithImages = products.filter(product => value.length >= 2 ? product.title.includes(value) : product.image)
+  const allProducts = products.filter(product => value.length >= 2 ? product.title.includes(value) : product.title)
   const getDescription = (id: number) => {
     const findProduct = products.find(data => data.id === id)
 
@@ -39,7 +39,7 @@ export const Products = () => {
     await updateProduct({ ...product, title: name })
     getData()
 
-    setEditIndex(-1)
+    setEditId(-1)
   }
 
   const onConfirm = async () => {
@@ -54,24 +54,24 @@ export const Products = () => {
         Products
       </h1>
       {
-        productsWithImages.length
-        ? <input
-          className={styles.search}
-          type="text"
-          placeholder="Enter at list 2 chars"
-          value={value}
-          onChange={searchCategory}
-        />
-        : ''
+        allProducts.length
+          ? <input
+            className={styles.search}
+            type="text"
+            placeholder="Enter at list 2 chars"
+            value={value}
+            onChange={searchCategory}
+          />
+          : <span></span>
       }
       {
-        productsWithImages.length
+        allProducts.length
           ? <ul className={styles.products}>
             {
-              productsWithImages.map(product => (
+              allProducts.map(product => (
                 <li key={product.id}>
                   <div className={styles.buttons}>
-                    <button type="button" onClick={() => setEditIndex(product.id!)}>
+                    <button type="button" onClick={() => setEditId(product.id!)}>
                       <Edit />
                     </button>
                     <button type="button" onClick={() => setId(product.id)}>
@@ -79,8 +79,12 @@ export const Products = () => {
                     </button>
                   </div>
                   <Link to={`/products/${product.title}`}>
-                    <img className={styles.productImage} src={product.image} alt="Product image" />
-                    <EditableText isEdit={editIndex === product.id} text={product.title} onBlur={(name) => handleRename(product, name)} />
+                    {
+                      product.image
+                        ? <img className={styles.productImage} src={product.image} />
+                        : <span className={styles.noImage}>No image</span>
+                    }
+                    <EditableText isEdit={editId === product.id} text={product.title} onBlur={(name) => handleRename(product, name)} />
                   </Link>
                 </li>
               ))

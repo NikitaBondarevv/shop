@@ -1,34 +1,16 @@
-import { EditableText } from 'components/editableText'
+import { ProductItems } from 'components/product'
 import { createProduct } from 'contracts/products'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import styles from './styles.css'
 
 export const CreateProduct = () => {
-  const [description, setDescription] = useState('')
-  const [title, setTitle] = useState('')
-  const [price, setPrice] = useState('')
-
-  const handleSave = async () => {
+  const handleSave = async (title: string, price: string, description: string) => {
     await createProduct({
-      title: title,
+      title,
       price,
-      description: description,
+      description,
     })
   }
 
   return (
-    <div className={styles.productInformation} >
-      <span className={styles.title}>
-        TITLE: <EditableText onBlur={(titleProduct) => setTitle(titleProduct)} text={title || 'NEW PRODUCT'} />
-      </span>
-      <span className={styles.price}>
-        $ <EditableText onBlur={(price) => setPrice(price)} text={price || '0'} price />
-      </span>
-      <div className={styles.description}>
-        <EditableText onBlur={(description) => setDescription(description)} text={description || 'Add some brief description here.'} multiLine />
-      </div>
-      <Link to={`/products/${title}`} className={styles.save} onClick={handleSave}>SAVE</Link>
-    </div>
+    <ProductItems onSave={handleSave} title="NEW PRODUCT" price="0" description="Add some brief description here." create />
   )
 }

@@ -44,7 +44,7 @@
   border: 1px solid #fff;
   font-size: 25px;
   padding: 0 10px;
-  margin: 0 0 30px;
+  margin: 0 0 30px 45px;
 }
 
 .productImage {
@@ -62,8 +62,11 @@
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
-  justify-content: space-between;
+  justify-content: space-evenly;
   margin: 0 0 40px;
+  row-gap: 20px;
+  overflow: auto;
+  height: 450px;
 }
 
 .products li {
@@ -115,4 +118,15 @@
 
 .addNew:hover {
   background-color: rgba(36, 36, 36, 0.4);
+}
+
+.noImage {
+  border-radius: 20px;
+  width: 200px;
+  border: 1px solid rgba(113 119 144 / 25%);
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 10px;
 }
