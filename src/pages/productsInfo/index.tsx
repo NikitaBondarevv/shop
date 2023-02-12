@@ -19,7 +19,7 @@ export const ProductsInfo = () => {
   }, [])
   
   return (
-  <div className={styles.productsInfo}>
+  <>
     <span className={styles.greetings}>
       Hello, {user?.firstName}
     </span>
@@ -33,5 +33,5 @@ export const ProductsInfo = () => {
       </p>
     </div>
     <Link className={styles.categories} to="/categories">Go to categories</Link>
-  </div>
+  </>
 )}
