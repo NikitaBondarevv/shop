@@ -4,11 +4,17 @@ import { useParams } from 'react-router-dom'
 import { IProduct } from 'interfaces/IProduct'
 import { UserContext } from 'contexts/userContext'
 import { findProduct, updateProduct } from 'contracts/products'
-import { ProductItems } from 'components/product'
+import { ProductItems } from 'components/productItems'
 import styles from './styles.css'
 
 export const Product = () => {
-  const [product, setProduct] = useState<IProduct>({} as IProduct)
+  const [product, setProduct] = useState<IProduct>({
+    id: 0,
+    title: '',
+    description: '',
+    image: '',
+    price: 0
+  })
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
 
@@ -31,7 +37,7 @@ export const Product = () => {
 
   return (
     isAuthenticated
-      ? <ProductItems onSave={handleSave} product={product} messageForDescription="No description" />
+      ? <ProductItems onSave={handleSave} title={product.title} price={String(product.price)} description={product.description || 'No description'} />
       : (
         <>
           <span className={styles.title}>

@@ -4,11 +4,11 @@
   box-shadow: 0px 0px 10px black;
   max-width: 682px;
   min-height: 250px;
+  min-width: 478px;
   border-radius: 20px;
   font-size: 25px;
   padding: 60px 85px;
   border: 1px solid rgba(113 119 144 / 25%);
   color: rgb(202, 202, 202);
   margin: 0 auto 50px;
-  position: relative;
 }

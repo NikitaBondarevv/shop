@@ -44,7 +44,7 @@
   border: 1px solid #fff;
   font-size: 25px;
   padding: 0 10px;
-  margin: 0 0 30px 15px;
+  margin: 0 0 30px;
 }
 
 .productImage {
@@ -62,9 +62,8 @@
 .products {
   display: grid;
   grid-template-columns: repeat(auto-fit, 200px);
-  justify-content: space-evenly;
   margin: 0 0 40px;
-  row-gap: 20px;
+  gap: 20px;
   overflow: auto;
   height: 450px;
 }
@@ -123,7 +122,7 @@
 .noImage {
   border-radius: 20px;
   border: 1px solid rgba(113 119 144 / 25%);
-  height: 150px;
+  height: 120px;
   margin: 0 0 10px;
-  padding: 0 41px;
+  padding: 15px 52px;
 }

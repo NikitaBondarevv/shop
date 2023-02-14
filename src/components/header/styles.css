@@ -8,7 +8,7 @@
   background-color: rgba(16 18 27 / 40%);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(113 119 144 / 25%);
-  min-width: 1000px;
+  min-width: 630px;
   padding: 10px 40px;
   margin: 0 0 60px;
   z-index: 1;
@@ -69,13 +69,12 @@
   right: -30px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1100px) {
   .list {
     display: none;
   }
 
   .header {
-    min-width: 635px;
     padding: 10px 5px 0 15px;
   }
 }

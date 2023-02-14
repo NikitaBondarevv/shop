@@ -2,9 +2,12 @@
   font: 25px "MyriadProRegular";
   background: none;
   color: rgb(202, 202, 202);
-  resize: vertical;
+  resize: none;
   border: 1px solid rgb(202, 202, 202);
   outline: none;
+  width: 100%;
+  padding: 5px;
+  border-radius: 4px;
 }
 
 .text {
@@ -13,12 +16,13 @@
 }
 
 .textInput {
-  font: 25px/30px "MyriadProRegular";
+  font: 25px/20px "MyriadProRegular";
   background: none;
-  width: 130px;
   border: 1px solid rgb(202, 202, 202);
   outline: none;
   color: rgb(202, 202, 202);
+  box-sizing: border-box;
+  border-radius: 4px;
 }
 
 .editablePrice {

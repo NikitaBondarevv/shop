@@ -34,19 +34,23 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
 
     setHidden(false)
   }
-  
+
   const handleKeyDown = (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleBlur()
+    if (e.key === 'Enter') handleBlur()
+    if (e.key === 'Escape') {
+      setValue(text)
+      setHidden(true)
     }
   }
 
-  if (hidden) return <span
-    ref={spanRef}
-    className={styles.text}
-    onClick={showInput}>
-    {value || text}
-  </span>
+  if (hidden) return (
+    <span
+      ref={spanRef}
+      className={styles.text}
+      onClick={showInput}>
+      {value || text}
+    </span>
+  )
 
   return multiLine
     ? (
@@ -57,10 +61,6 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
         onBlur={handleBlur}
         value={value}
         autoFocus
-        style={{
-          width: `${inputWidth}px`,
-          height: `${inputHeight}px`
-        }}
       />
     )
     : (
