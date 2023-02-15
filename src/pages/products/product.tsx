@@ -27,12 +27,14 @@ export const Product = () => {
   }, [])
 
   const handleSave = async (title: string, price: string, description: string) => {
-    await updateProduct({
-      ...product,
-      title,
-      price,
-      description
-    })
+    if (title !== '' || price !== '0' || description !== 'No description') {
+      await updateProduct({
+        ...product,
+        title,
+        price,
+        description
+      })
+    }
   }
 
   return (

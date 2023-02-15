@@ -25,5 +25,11 @@
 .description {
   word-break: break-word;
   margin: 0 0 30px;
-  line-height: 30px;
+}
+
+.descriptionText {
+  height: 71px;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid transparent;
 }

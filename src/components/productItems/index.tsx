@@ -18,13 +18,13 @@ export const ProductItems = ({
   return (
     <div>
       <span className={styles.title}>
-        TITLE: <EditableText onBlur={(title) => setTitleProductProduct(title)} text={title} />
+        TITLE: <EditableText onBlur={(title) => setTitleProductProduct(title)} text={titleProduct} />
       </span>
       <span className={styles.price}>
-        $ <EditableText onBlur={(price) => setPriceProduct(price)} text={String(price)} price />
+        $ <EditableText onBlur={(price) => setPriceProduct(price)} text={String(priceProduct)} price />
       </span>
       <div className={styles.description}>
-        <EditableText onBlur={(description) => setDescriptionProduct(description)} text={description} multiLine />
+        <EditableText classNameSpan={styles.descriptionText} onBlur={(description) => setDescriptionProduct(description)} text={descriptionProduct || 'Put your description here'} multiLine />
       </div>
       <Link to={`/products/${titleProduct}`} className={styles.save} onClick={() => onSave(titleProduct!, priceProduct, descriptionProduct!)}>SAVE</Link>
     </div>

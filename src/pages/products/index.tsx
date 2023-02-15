@@ -37,8 +37,10 @@ export const Products = () => {
   }
 
   const handleRename = async (product: IProduct, name: string) => {
-    await updateProduct({ ...product, title: name })
-    getData()
+    if (product.title !== name) {
+      await updateProduct({ ...product, title: name })
+      getData()
+    }
 
     setEditId(-1)
   }

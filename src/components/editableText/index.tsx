@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styles from './styles.css'
 import { TEditableText, TTarget } from './types'
 
-export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEditableText) => {
+export const EditableText = ({ multiLine, text, isEdit, onBlur, className, classNameSpan }: TEditableText) => {
   const [hidden, setHidden] = useState(true)
   const [value, setValue] = useState(text)
   const spanRef = useRef<HTMLElement>(null)
@@ -35,9 +35,9 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
     setHidden(false)
   }
 
-  const handleKeyDown = (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
-    if (e.key === 'Enter') handleBlur()
-    if (e.key === 'Escape') {
+  const handleKeyDown = ({ key }: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
+    if (key === 'Enter') handleBlur()
+    if (key === 'Escape') {
       setValue(text)
       setHidden(true)
     }
@@ -46,7 +46,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
   if (hidden) return (
     <span
       ref={spanRef}
-      className={styles.text}
+      className={`${styles.text} ${classNameSpan}`}
       onClick={showInput}>
       {value || text}
     </span>
@@ -56,11 +56,12 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
     ? (
       <textarea
         name="description"
-        className={styles.description}
+        className={`${styles.description}`}
         onChange={setValueInput}
         onBlur={handleBlur}
         value={value}
         autoFocus
+        placeholder="Put your description here"
       />
     )
     : (
@@ -83,11 +84,14 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
 EditableText.defaultProps = {
   multiLine: false,
   stylesInput: '',
-  text: ''
+  text: '',
+  className: ''
 }
 
 EditableText.propTypes = {
   multiLine: PropTypes.bool,
   stylesInput: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
+  onBlur: PropTypes.func,
+  className: PropTypes.string
 }
