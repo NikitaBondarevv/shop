@@ -27,6 +27,14 @@
   margin: 0 0 30px;
 }
 
+.title mark,
+.price mark {
+  background: none;
+  color: rgb(202, 202, 202);
+  font-family: "MyriadProBold";
+  margin: 0 10px 0 0;
+}
+
 .descriptionText {
   height: 71px;
   padding: 5px;

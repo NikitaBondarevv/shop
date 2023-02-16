@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 
-import { TTarget } from './types'
 import { deleteProduct, getProducts, updateProduct } from 'contracts/products'
 import { IProduct } from 'interfaces/IProduct'
 import { EditableText } from 'components/editableText'
@@ -14,15 +13,15 @@ import BagIcon from './images/bag.png'
 export const Products = () => {
   const [value, setValue] = useState('')
   const [products, setProducts] = useState<IProduct[]>([])
-  const [editId, setEditId] = useState(-1)
-  const [id, setId] = useState<number | undefined>(undefined)
+  const [editIndex, setEditIndex] = useState(-1)
+  const [removeId, setRemoveId] = useState<number | undefined>(undefined)
   const allProducts = products.filter(product => value.length >= 2 ? product.title.includes(value) : product.title)
   const getDescription = (id: number) => {
     const findProduct = products.find(data => data.id === id)
 
     return `You're going to remove "${findProduct?.title}" product. Press "Ok" to confirm.`
   }
-  const description = useMemo(() => getDescription(id!), [id])
+  const description = useMemo(() => getDescription(removeId!), [removeId])
 
   const getData = async () => {
     setProducts(await getProducts())
@@ -32,7 +31,7 @@ export const Products = () => {
     getData()
   }, [])
 
-  const searchCategory = ({ target: { value } }: TTarget) => {
+  const searchCategory = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setValue(value)
   }
 
@@ -42,12 +41,12 @@ export const Products = () => {
       getData()
     }
 
-    setEditId(-1)
+    setEditIndex(-1)
   }
 
   const onConfirm = async () => {
-    await deleteProduct(id!)
-    setId(undefined)
+    await deleteProduct(removeId!)
+    setRemoveId(undefined)
     getData()
   }
 
@@ -71,13 +70,13 @@ export const Products = () => {
         allProducts.length
           ? <ul className={styles.products}>
             {
-              allProducts.map(product => (
+              allProducts.map((product, index) => (
                 <li key={product.id}>
                   <div className={styles.buttons}>
-                    <button type="button" onClick={() => setEditId(product.id!)}>
+                    <button type="button" onClick={() => setEditIndex(index)}>
                       <Edit />
                     </button>
-                    <button type="button" onClick={() => setId(product.id)}>
+                    <button type="button" onClick={() => setRemoveId(product.id)}>
                       <Delete />
                     </button>
                   </div>
@@ -87,7 +86,7 @@ export const Products = () => {
                         ? <img className={styles.productImage} src={product.image} />
                         : <img src={BagIcon} className={styles.noImage} />
                     }
-                    <EditableText isEdit={editId === product.id} text={product.title} onBlur={(name) => handleRename(product, name)} />
+                    <EditableText isEdit={editIndex === index} text={product.title} onBlur={(name) => handleRename(product, name)} />
                   </Link>
                 </li>
               ))
@@ -97,11 +96,11 @@ export const Products = () => {
       }
       <Link className={styles.addNew} to="/products/new">ADD NEW</Link>
       {
-        id &&
+        removeId &&
         <WarningWindow
           description={description}
           onConfirm={() => onConfirm()}
-          onCancel={() => setId(undefined)}
+          onCancel={() => setRemoveId(undefined)}
         />
       }
     </>

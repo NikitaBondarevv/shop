@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { EditableText } from 'components/editableText'
@@ -11,22 +11,46 @@ export const ProductItems = ({
   price,
   description
 }: TProduct) => {
-  const [titleProduct, setTitleProductProduct] = useState(title)
-  const [priceProduct, setPriceProduct] = useState(String(price))
-  const [descriptionProduct, setDescriptionProduct] = useState(description)
+  const [titleProduct, setTitleProductProduct] = useState('')
+  const [priceProduct, setPriceProduct] = useState('')
+  const [descriptionProduct, setDescriptionProduct] = useState('')
+
+  useEffect(() => {
+    setTitleProductProduct(title)
+    setPriceProduct(price)
+    setDescriptionProduct(description)
+  }, [title, price, description])
 
   return (
-    <div>
+    <>
       <span className={styles.title}>
-        TITLE: <EditableText onBlur={(title) => setTitleProductProduct(title)} text={title} />
+        <mark>
+          TITLE:
+        </mark>
+        <EditableText
+          onBlur={(title) => title !== '' ? setTitleProductProduct(title) : setTitleProductProduct('No title')}
+          text={titleProduct}
+        />
       </span>
       <span className={styles.price}>
-        $ <EditableText onBlur={(price) => setPriceProduct(price)} text={String(price)} price />
+        <mark>
+          $
+        </mark>
+        <EditableText
+          onBlur={(price) => price !== '' ? setPriceProduct(price) : setPriceProduct('No price')}
+          text={priceProduct}
+          price
+        />
       </span>
       <div className={styles.description}>
-        <EditableText classNameSpan={styles.descriptionText} onBlur={(description) => setDescriptionProduct(description)} text={descriptionProduct === '' ? 'Put your description here' : description} multiLine />
+        <EditableText
+          classNameSpan={styles.descriptionText}
+          onBlur={(description) => description !== '' ? setDescriptionProduct(description) : setDescriptionProduct('No description')}
+          text={descriptionProduct}
+          multiLine
+        />
       </div>
-      <Link to={`/products/${titleProduct}`} className={styles.save} onClick={() => onSave(titleProduct!, priceProduct, descriptionProduct!)}>SAVE</Link>
-    </div>
+      <Link to={`/products/${titleProduct}`} className={styles.save} onClick={() => onSave(titleProduct, priceProduct, descriptionProduct)}>SAVE</Link>
+    </>
   )
 }

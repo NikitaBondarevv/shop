@@ -1,8 +1,8 @@
-import { useMemo, useState } from 'react'
+import { ChangeEvent, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { WarningWindow } from 'components/warningWindow'
-import { TPublishItemsProps, TTarget } from './types'
+import { TPublishItemsProps } from './types'
 import editIcon from './images/edit.png'
 import deleteIcon from './images/delete.png'
 import { EditableText } from 'components/editableText'
@@ -30,18 +30,18 @@ export function PublishItems<T extends { id: number, title: string }>({
   const [value, setValue] = useState('')
   const [editIndex, setEditIndex] = useState(-1)
   const unpublished = items?.filter(data => !filterPredicate(data) && (!value || data.title.includes(value)))
-  const [id, setId] = useState<number | undefined>(undefined)
-  const description = useMemo(() => getWarningDescription(id!), [id])
+  const [removeId, setRemoveId] = useState<number | undefined>(undefined)
+  const description = useMemo(() => getWarningDescription(removeId!), [removeId])
 
-  const searchCategory = ({ target: { value } }: TTarget) => {
+  const searchCategory = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
     setValue(value)
   }
 
   const onConfirm = () => {
-    const item = items.find(data => data.id === id)
+    const item = items.find(data => data.id === removeId)
 
     onRemove!(item!)
-    setId(undefined)
+    setRemoveId(undefined)
   }
 
   const onBlur = (data: T, name: string) => {
@@ -64,12 +64,12 @@ export function PublishItems<T extends { id: number, title: string }>({
             ? <span>{noAllItemsMessage}</span>
             : <ul>
               {
-                published?.map(data => (
+                published?.map((data, index) => (
                   <li className={styles.category} key={data.id}>
                     <Link to={getLink!(data)}>
                       <EditableText
                         text={data.title.toUpperCase()}
-                        isEdit={editIndex === data.id}
+                        isEdit={editIndex === index}
                         onBlur={(name: string) => onBlur(data, name)}
                       />
                     </Link>
@@ -77,12 +77,12 @@ export function PublishItems<T extends { id: number, title: string }>({
                       viewMode && <div className={styles.buttons}>
                         {
                           !showEditButton && (
-                            <button className={styles.edit} onClick={() => setEditIndex(data.id)}>
+                            <button className={styles.edit} onClick={() => setEditIndex(index)}>
                               <img src={editIcon} alt="edit" />
                             </button>
                           )
                         }
-                        <button className={styles.delete} onClick={() => setId(data.id)}>
+                        <button className={styles.delete} onClick={() => setRemoveId(data.id)}>
                           <img src={deleteIcon} alt="delete" />
                         </button>
                       </div>
@@ -127,11 +127,11 @@ export function PublishItems<T extends { id: number, title: string }>({
         }
       </div>
       {
-        id &&
+        removeId &&
         <WarningWindow
           description={description}
           onConfirm={() => onConfirm()}
-          onCancel={() => setId(undefined)}
+          onCancel={() => setRemoveId(undefined)}
         />
       }
     </>

@@ -17,9 +17,3 @@ export type TPublishItemsProps<T> = {
   viewMode?: boolean
   getLink: (data: T) => string
 }
-
-export type TTarget = {
-  target : {
-    value: string
-  }
-}

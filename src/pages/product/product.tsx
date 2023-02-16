@@ -13,7 +13,7 @@ export const Product = () => {
     title: '',
     description: '',
     image: '',
-    price: 0
+    price: '0'
   })
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
@@ -27,7 +27,7 @@ export const Product = () => {
   }, [])
 
   const handleSave = async (title: string, price: string, description: string) => {
-    if (title !== '' || price !== '0' || description !== 'No description') {
+    if (title !== product.title || price !== product.price || description !== product.description) {
       await updateProduct({
         ...product,
         title,
@@ -39,14 +39,20 @@ export const Product = () => {
 
   return (
     isAuthenticated
-      ? <ProductItems onSave={handleSave} title={product.title} price={String(product.price)} description={product.description || 'No description'} />
+      ? <ProductItems onSave={handleSave} title={product.title} price={String(product.price)} description={product.description === undefined ? 'No description' : product.description} />
       : (
         <>
           <span className={styles.title}>
-            TITLE: {product.title}
+            <mark>
+              TITLE:
+            </mark>
+            {product.title}
           </span>
           <span className={styles.price}>
-            $ {product.price}
+            <mark>
+              $
+            </mark>
+            {product.price}
           </span>
           <div className={styles.description}>
             {product.description || 'No description'}
