@@ -1,0 +1,15 @@
+.title {
+  display: block;
+  text-align: center;
+}
+
+.price {
+  display: block;
+  margin: 0 0 30px;
+}
+
+.description {
+  word-break: break-word;
+  margin: 0 0 30px;
+  line-height: 30px;
+}
