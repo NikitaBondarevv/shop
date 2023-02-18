@@ -56,15 +56,13 @@ export const Products = () => {
         Products
       </h1>
       {
-        allProducts.length
-          ? <input
+        allProducts.length !== 0 && <input
             className={styles.search}
             type="text"
             placeholder="Enter at list 2 chars"
             value={value}
             onChange={searchCategory}
           />
-          : <span></span>
       }
       {
         allProducts.length
@@ -86,7 +84,11 @@ export const Products = () => {
                         ? <img className={styles.productImage} src={product.image} />
                         : <img src={BagIcon} className={styles.noImage} />
                     }
-                    <EditableText isEdit={editIndex === index} text={product.title} onBlur={(name) => handleRename(product, name)} />
+                    <EditableText
+                      isEdit={editIndex === index}
+                      text={product.title}
+                      onBlur={(name) => handleRename(product, name)}
+                    />
                   </Link>
                 </li>
               ))

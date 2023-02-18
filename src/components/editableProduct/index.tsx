@@ -5,7 +5,7 @@ import { EditableText } from 'components/editableText'
 import styles from './styles.css'
 import { TProduct } from './types'
 
-export const ProductItems = ({
+export const EditableProduct = ({
   onSave,
   title,
   price,
@@ -44,8 +44,8 @@ export const ProductItems = ({
       </span>
       <div className={styles.description}>
         <EditableText
-          classNameSpan={styles.descriptionText}
-          onBlur={(description) => description !== '' ? setDescriptionProduct(description) : setDescriptionProduct('No description')}
+          className={styles.descriptionText}
+          onBlur={(description) => description !== '' ? setDescriptionProduct(description) : setDescriptionProduct('Add some brief description here.')}
           text={descriptionProduct}
           multiLine
         />

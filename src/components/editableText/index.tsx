@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styles from './styles.css'
 import { TEditableText, TTarget } from './types'
 
-export const EditableText = ({ multiLine, text, isEdit, onBlur, className, classNameSpan }: TEditableText) => {
+export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEditableText) => {
   const [hidden, setHidden] = useState(true)
   const [value, setValue] = useState(text)
   const spanRef = useRef<HTMLElement>(null)
@@ -46,7 +46,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className, class
   if (hidden) return (
     <span
       ref={spanRef}
-      className={`${styles.text} ${classNameSpan}`}
+      className={`${styles.text} ${className}`}
       onClick={showInput}>
       {value || text}
     </span>
@@ -56,17 +56,18 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className, class
     ? (
       <textarea
         name="description"
-        className={`${styles.description}`}
+        className={styles.description}
         onChange={setValueInput}
         onBlur={handleBlur}
         value={value}
         autoFocus
         placeholder="Put your description here"
+        onKeyDown={handleKeyDown}
       />
     )
     : (
       <input
-        className={`${styles.textInput} ${className}`}
+        className={styles.textInput}
         name="text"
         value={value}
         onChange={setValueInput}

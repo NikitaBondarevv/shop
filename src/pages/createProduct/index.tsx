@@ -1,4 +1,4 @@
-import { ProductItems } from 'components/productItems'
+import { EditableProduct } from 'components/editableProduct'
 import { createProduct } from 'contracts/products'
 
 export const CreateProduct = () => {
@@ -11,6 +11,6 @@ export const CreateProduct = () => {
   }
 
   return (
-    <ProductItems onSave={handleSave} title="NEW PRODUCT" price="0" description="Add some brief description here." />
+    <EditableProduct onSave={handleSave} title="NEW PRODUCT" price="0" description="Add some brief description here." />
   )
 }

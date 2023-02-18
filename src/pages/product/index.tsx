@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { IProduct } from 'interfaces/IProduct'
 import { UserContext } from 'contexts/userContext'
 import { findProduct, updateProduct } from 'contracts/products'
-import { ProductItems } from 'components/productItems'
+import { EditableProduct } from 'components/editableProduct'
 import styles from './styles.css'
 
 export const Product = () => {
@@ -39,7 +39,14 @@ export const Product = () => {
 
   return (
     isAuthenticated
-      ? <ProductItems onSave={handleSave} title={product.title} price={String(product.price)} description={product.description === undefined ? 'No description' : product.description} />
+      ? (
+        <EditableProduct
+          onSave={handleSave}
+          title={product.title}
+          price={String(product.price)}
+          description={product.description === undefined ? 'Add some brief description here.' : product.description}
+        />
+      )
       : (
         <>
           <span className={styles.title}>
