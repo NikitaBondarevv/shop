@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom'
 
 import { WarningWindow } from 'components/warningWindow'
 import { TPublishItemsProps } from './types'
-import editIcon from './images/edit.png'
-import deleteIcon from './images/delete.png'
 import { EditableText } from 'components/editableText'
 import styles from './styles.css'
+import { Edit } from './svgIcons/edit'
+import { Delete } from './svgIcons/delete'
 
 export function PublishItems<T extends { id: number, title: string }>({
   publishListTitle,
@@ -78,12 +78,12 @@ export function PublishItems<T extends { id: number, title: string }>({
                         {
                           !showEditButton && (
                             <button className={styles.edit} onClick={() => setEditIndex(index)}>
-                              <img src={editIcon} alt="edit" />
+                              <Edit />
                             </button>
                           )
                         }
                         <button className={styles.delete} onClick={() => setRemoveId(data.id)}>
-                          <img src={deleteIcon} alt="delete" />
+                          <Delete />
                         </button>
                       </div>
                     }
