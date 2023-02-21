@@ -28,8 +28,8 @@ export const EditableProduct = ({
           TITLE:
         </mark>
         <EditableText
-          onBlur={(title) => title !== '' ? setTitleProductProduct(title) : setTitleProductProduct('No title')}
-          text={titleProduct}
+          onBlur={(title) => setTitleProductProduct(title)}
+          text={titleProduct || 'No title'}
         />
       </span>
       <span className={styles.price}>
@@ -37,16 +37,16 @@ export const EditableProduct = ({
           $
         </mark>
         <EditableText
-          onBlur={(price) => price !== '' ? setPriceProduct(price) : setPriceProduct('No price')}
-          text={priceProduct}
+          onBlur={(price) => setPriceProduct(price)}
+          text={priceProduct || 'No price'}
           price
         />
       </span>
       <div className={styles.description}>
         <EditableText
           className={styles.descriptionText}
-          onBlur={(description) => description !== '' ? setDescriptionProduct(description) : setDescriptionProduct('Add some brief description here.')}
-          text={descriptionProduct}
+          onBlur={(description) => setDescriptionProduct(description)}
+          text={descriptionProduct || 'Add some brief description here.'}
           multiLine
         />
       </div>

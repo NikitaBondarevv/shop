@@ -77,4 +77,8 @@
   .header {
     padding: 10px 5px 0 15px;
   }
+
+  .loginPanel {
+    padding: 0 65px 0 0;
+  }
 }
