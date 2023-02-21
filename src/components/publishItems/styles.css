@@ -98,18 +98,26 @@
   display: flex;
 }
 
-.edit,
-.delete {
-  background: none;
-  border: none;
+.buttons button {
+  background-color: rgba(16 18 27 / 70%);
+  backdrop-filter: blur(20px);
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px black;
+  align-items: center;
+  flex-direction: column;
+  width: 35px;
+  height: 35px;
   cursor: pointer;
-  padding: 0;
+  margin: 0 5px 0 0;
+  border: 1px solid rgba(113 119 144 / 25%);
 }
 
-.edit img,
-.delete img {
-  height: 40px;
-  width: 40px;
+.editIcon:hover {
+  fill: rgb(106, 106, 106);
+}
+
+.deleteIcon:hover {
+  fill: red;
 }
 
 .editableText {
