@@ -44,7 +44,7 @@ export const Product = () => {
           onSave={handleSave}
           title={product.title}
           price={String(product.price)}
-          description={product.description === undefined ? 'Add some brief description here.' : product.description}
+          description={product.description!}
         />
       )
       : (
@@ -62,7 +62,7 @@ export const Product = () => {
             {product.price}
           </span>
           <div className={styles.description}>
-            {product.description || 'No description'}
+            {product.description}
           </div>
         </>
       )

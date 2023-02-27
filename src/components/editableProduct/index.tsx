@@ -29,7 +29,7 @@ export const EditableProduct = ({
         </mark>
         <EditableText
           onBlur={(title) => setTitleProductProduct(title)}
-          text={titleProduct || 'No title'}
+          text={titleProduct}
         />
       </span>
       <span className={styles.price}>
@@ -38,7 +38,7 @@ export const EditableProduct = ({
         </mark>
         <EditableText
           onBlur={(price) => setPriceProduct(price)}
-          text={priceProduct || 'No price'}
+          text={priceProduct}
           price
         />
       </span>
@@ -46,11 +46,15 @@ export const EditableProduct = ({
         <EditableText
           className={styles.descriptionText}
           onBlur={(description) => setDescriptionProduct(description)}
-          text={descriptionProduct || 'Add some brief description here.'}
+          text={descriptionProduct}
           multiLine
         />
       </div>
-      <Link to={`/products/${titleProduct}`} className={styles.save} onClick={() => onSave(titleProduct, priceProduct, descriptionProduct)}>SAVE</Link>
+      {
+      !titleProduct || !priceProduct
+      ? <span className={styles.disabledButton}>SAVE</span>
+      : <Link to={`/products/${titleProduct}`} className={styles.save} onClick={() => onSave(titleProduct, priceProduct, descriptionProduct)}>SAVE</Link>
+        }
     </>
   )
 }

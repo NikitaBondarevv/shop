@@ -56,7 +56,7 @@ export const Products = () => {
         Products
       </h1>
       {
-        allProducts.length !== 0 && <input
+        !!products.length && <input
             className={styles.search}
             type="text"
             placeholder="Enter at list 2 chars"

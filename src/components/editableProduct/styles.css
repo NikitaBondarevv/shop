@@ -36,9 +36,19 @@
 }
 
 .descriptionText {
+  padding: 5px 5px 14px;
   height: 71px;
-  padding: 5px;
   width: 100%;
   border: 1px solid transparent;
-  font: 25px/20px "MyriadProRegular";
+  font: 25px/30px "MyriadProRegular";
+}
+
+.disabledButton {
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+  padding: 15px;
+  background: rgb(93 93 93 / 40%);
+  border: 1px solid rgba(113 119 144 / 25%);
+  border-radius: 15px;
 }

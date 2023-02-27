@@ -9,7 +9,6 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
   const [value, setValue] = useState(text)
   const spanRef = useRef<HTMLElement>(null)
   const [inputWidth, setInputWidth] = useState(15)
-  const [inputHeight, setInputHeight] = useState(25)
 
   useEffect(() => {
     setValue(text)
@@ -25,12 +24,11 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
 
   const handleBlur = () => {
     setHidden(true)
-    onBlur!(value)
+    onBlur(value)
   }
 
   const showInput = () => {
     setInputWidth(spanRef.current!.clientWidth + 5)
-    setInputHeight(spanRef.current!.clientHeight + 5)
 
     setHidden(false)
   }
@@ -40,6 +38,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
     if (key === 'Escape') {
       setValue(text)
       setHidden(true)
+      onBlur(text)
     }
   }
 
@@ -74,8 +73,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
         onBlur={handleBlur}
         autoFocus
         style={{
-          width: `${inputWidth}px`,
-          height: `${inputHeight}px`
+          width: `${inputWidth}px`
         }}
         onKeyDown={handleKeyDown}
       />
