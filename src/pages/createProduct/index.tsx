@@ -11,6 +11,6 @@ export const CreateProduct = () => {
   }
 
   return (
-    <EditableProduct onSave={handleSave} title="NEW PRODUCT" price="0" description="Add some brief description here." />
+    <EditableProduct onSave={handleSave} title="NEW PRODUCT" price="0" />
   )
 }

@@ -18,7 +18,7 @@ export const EditableProduct = ({
   useEffect(() => {
     setTitleProductProduct(title)
     setPriceProduct(price)
-    setDescriptionProduct(description)
+    setDescriptionProduct(description!)
   }, [title, price, description])
 
   return (
