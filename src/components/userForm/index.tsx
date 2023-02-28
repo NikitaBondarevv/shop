@@ -12,6 +12,8 @@ export const UserForm = ({ disabledFields, user, onSubmit }: TUserForm) => {
   const [registerFields, setRegisterFields] = useState<TRegisterFields>(fields.reduce<TRegisterFields>((prev, next) =>
   (prev[next.label] = { value: user[next.label as keyof IUser] ?? '' }) && prev,
   {}))
+  console.log(registerFields);
+  
   const navigate = useNavigate()
 
   const setValue = ({ target: { value, name } }: TTarget) => {
@@ -82,7 +84,7 @@ export const UserForm = ({ disabledFields, user, onSubmit }: TUserForm) => {
               <input type={field.secure ? 'password' : 'text'}
                 name={field.label}
                 className={stateField.error ? styles.error : styles.success}
-                placeholder={field.label.toUpperCase()}
+                placeholder={field.label.replace(/([A-Z])/g, ' $1').toUpperCase()}
                 value={stateField.value}
                 onChange={setValue}
                 onBlur={e => validate(e, index)}

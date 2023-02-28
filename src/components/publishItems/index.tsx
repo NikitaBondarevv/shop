@@ -24,7 +24,8 @@ export function PublishItems<T extends { id: number, title: string }>({
   filterPredicate,
   valueEdit,
   viewMode,
-  getLink
+  getLink,
+  showAddNewButton
 }: TPublishItemsProps<T>) {
   const published = items?.filter(filterPredicate)
   const [value, setValue] = useState('')
@@ -82,6 +83,7 @@ export function PublishItems<T extends { id: number, title: string }>({
                             </button>
                           )
                         }
+
                         <button className={styles.delete} onClick={() => setRemoveId(data.id)}>
                           <Delete />
                         </button>
@@ -95,35 +97,37 @@ export function PublishItems<T extends { id: number, title: string }>({
           {
             create
               ? <Link className={styles.addNew} onClick={() => onSave!(valueEdit!)} to={`/categories/${valueEdit}`}>SAVE</Link>
-              : viewMode && <Link className={styles.addNew} to="/new">ADD NEW</Link>
+              : showAddNewButton && <Link className={styles.addNew} to="/new">ADD NEW</Link>
           }
         </div>
         {
-          viewMode && <div className={styles.noPublished}>
-            <span>
-              {listTitle}
-            </span>
-            <input
-              className={styles.search}
-              type="text"
-              placeholder="SEARCH"
-              value={value}
-              onChange={searchCategory}
-            />
-            {
-              !unpublished?.length
-                ? <span className={styles.noFilteredItemsMessage}>{noFilteredItemsMessage}</span>
-                : <ul>
-                  {
-                    unpublished?.map(data => (
-                      <li key={data.id} onDoubleClick={() => onPublish!(data)}>
-                        {data.title}
-                      </li>
-                    ))
-                  }
-                </ul>
-            }
-          </div>
+          viewMode && (
+            <div className={styles.noPublished}>
+              <span>
+                {listTitle}
+              </span>
+              <input
+                className={styles.search}
+                type="text"
+                placeholder="SEARCH"
+                value={value}
+                onChange={searchCategory}
+              />
+              {
+                !unpublished?.length
+                  ? <span className={styles.noFilteredItemsMessage}>{noFilteredItemsMessage}</span>
+                  : <ul>
+                    {
+                      unpublished?.map(data => (
+                        <li key={data.id} onDoubleClick={() => onPublish!(data)}>
+                          {data.title}
+                        </li>
+                      ))
+                    }
+                  </ul>
+              }
+            </div>
+          )
         }
       </div>
       {
