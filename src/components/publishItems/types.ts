@@ -18,9 +18,3 @@ export type TPublishItemsProps<T> = {
   getLink: (data: T) => string
   showAddNewButton?:boolean
 }
-
-export type TTarget = {
-  target : {
-    value: string
-  }
-}

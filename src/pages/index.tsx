@@ -4,16 +4,18 @@ import { useContext } from 'react'
 import { LoginForm } from 'pages/loginForm/LoginForm'
 import { UserContext } from 'contexts/userContext'
 import { ProductsInfo } from './productsInfo'
-import { Products } from './products'
+import { Product } from './product'
 import { CreateUser } from './createUser'
 import { Profile } from './profile'
 import { Categories } from './categories'
-import { Category } from './categories/category'
+import { Category } from './category'
 import { Welcome } from './welcome'
 import { Contacts } from './contacts'
 import { Registered } from './registered'
 import { CreateCategory } from './createCategory'
 import styles from './styles.css'
+import { Products } from './products'
+import { CreateProduct } from './createProduct'
 
 export const Pages = () => {
   const { isAuthenticated, setUser } = useContext(UserContext)
@@ -32,12 +34,14 @@ export const Pages = () => {
           )
         }
         <Route path='/' element={<ProductsInfo />} />
-        <Route path='/products/:title' element={<Products />} />
+        <Route path='/products/:title' element={<Product />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/contacts' element={<Contacts />} />
         <Route path='/categories' element={<Categories />} />
         <Route path='/categories/:title' element={<Category />} />
         <Route path='/new' element={<CreateCategory />} />
+        <Route path='/products' element={<Products />} />
+        <Route path='/products/new' element={<CreateProduct />} />
       </Routes>
     </main>
   )

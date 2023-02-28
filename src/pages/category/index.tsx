@@ -10,7 +10,20 @@ import { ICategory } from 'interfaces/ICategories'
 import styles from './styles.css'
 
 export const Category = () => {
-  const [category, setCategory] = useState<ICategory>({} as ICategory)
+  const [category, setCategory] = useState<ICategory>({
+    title: '',
+    id: 0,
+    published: false,
+    products: [
+      {
+        id: 0,
+        title: '',
+        description: '',
+        image: '',
+        price: 0
+      }
+    ]
+  })
   const [allProducts, setAllProducts] = useState<IProduct[]>([])
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)

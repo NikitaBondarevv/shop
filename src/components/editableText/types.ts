@@ -3,7 +3,7 @@ export type TEditableText = {
   price?: boolean
   text: string
   isEdit?: boolean
-  onBlur?: (value: string) => void
+  onBlur: (value: string) => void
   className?: string
 }
 

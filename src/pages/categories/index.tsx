@@ -35,8 +35,10 @@ export const Categories = () => {
   }
 
   const handleRename = async (category: ICategory, name: string) => {
-    await updateCategory({ ...category, title: name })
-    getData()
+    if (category.title !== name) {
+      await updateCategory({ ...category, title: name })
+      getData()
+    }
   }
 
   return (

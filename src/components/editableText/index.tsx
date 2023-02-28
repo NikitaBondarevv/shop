@@ -9,7 +9,7 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
   const [value, setValue] = useState(text)
   const spanRef = useRef<HTMLElement>(null)
   const [inputWidth, setInputWidth] = useState(15)
-  const [inputHeight, setInputHeight] = useState(25)
+  const [borderTextarea, setBorderTextarea] = useState('1px solid transparent')
 
   useEffect(() => {
     setValue(text)
@@ -25,69 +25,81 @@ export const EditableText = ({ multiLine, text, isEdit, onBlur, className }: TEd
 
   const handleBlur = () => {
     setHidden(true)
-    onBlur!(value)
+    onBlur(value)
+    setBorderTextarea('1px solid transparent')
   }
 
   const showInput = () => {
     setInputWidth(spanRef.current!.clientWidth + 5)
-    setInputHeight(spanRef.current!.clientHeight + 5)
 
     setHidden(false)
   }
-  
-  const handleKeyDown = (e: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      handleBlur()
+
+  const showTextarea = () => {
+    setBorderTextarea('1px solid rgb(202, 202, 202)')
+  }
+
+  const handleKeyDown = ({ key }: DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
+    if (key === 'Enter') handleBlur()
+    if (key === 'Escape') {
+      setValue(text)
+      setHidden(true)
+      onBlur(text)
     }
   }
 
-  if (hidden) return <span
-    ref={spanRef}
-    className={styles.text}
-    onClick={showInput}>
-    {value || text}
-  </span>
+  if (multiLine) return (
+    <textarea
+      name="description"
+      className={styles.description}
+      onChange={setValueInput}
+      onBlur={handleBlur}
+      value={value}
+      placeholder="Put your description here"
+      onKeyDown={handleKeyDown}
+      onClick={showTextarea}
+      style={{
+        border: borderTextarea
+      }}
+    />
+  )
 
-  return multiLine
-    ? (
-      <textarea
-        name="description"
-        className={styles.description}
-        onChange={setValueInput}
-        onBlur={handleBlur}
-        value={value}
-        autoFocus
-        style={{
-          width: `${inputWidth}px`,
-          height: `${inputHeight}px`
-        }}
-      />
-    )
-    : (
-      <input
-        className={`${styles.textInput} ${className}`}
-        name="text"
-        value={value}
-        onChange={setValueInput}
-        onBlur={handleBlur}
-        autoFocus
-        style={{
-          width: `${inputWidth}px`,
-          height: `${inputHeight}px`
-        }}
-        onKeyDown={handleKeyDown}
-      />
-    )
+  if (hidden) return (
+    <span
+      ref={spanRef}
+      className={`${styles.text} ${className}`}
+      onClick={showInput}>
+      {value || text}
+    </span>
+  )
+
+  return (
+    <input
+      className={styles.textInput}
+      name="text"
+      value={value}
+      onChange={setValueInput}
+      onBlur={handleBlur}
+      autoFocus
+      style={{
+        width: `${inputWidth}px`
+      }}
+      onKeyDown={handleKeyDown}
+    />
+  )
 }
 
 EditableText.defaultProps = {
   multiLine: false,
   stylesInput: '',
-  text: ''
+  text: '',
+  className: ''
 }
 
 EditableText.propTypes = {
   multiLine: PropTypes.bool,
   stylesInput: PropTypes.string,
-  text: PropTypes.string
+  text: PropTypes.string,
+  onBlur: PropTypes.func,
+  className: PropTypes.string
 }

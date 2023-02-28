@@ -1,0 +1,54 @@
+.title {
+  display: block;
+  text-align: center;
+}
+
+.price {
+  display: block;
+  margin: 0 0 30px;
+}
+
+.save {
+  padding: 15px;
+  background: rgb(93 93 93 / 40%);
+  border: 1px solid rgba(113 119 144 / 25%);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.5s;
+  backdrop-filter: blur(15px);
+}
+
+.save:hover {
+  background-color: rgba(36, 36, 36, 0.4);
+}
+
+.description {
+  word-break: break-word;
+  margin: 0 0 30px;
+}
+
+.title mark,
+.price mark {
+  background: none;
+  color: rgb(202, 202, 202);
+  font-family: "MyriadProBold";
+  margin: 0 10px 0 0;
+}
+
+.descriptionText {
+  padding: 5px 5px 14px;
+  height: 71px;
+  width: 100%;
+  border: 1px solid transparent;
+  font: 25px/30px "MyriadProRegular";
+}
+
+.disabledButton {
+  cursor: not-allowed;
+  opacity: 0.5;
+  text-decoration: none;
+  padding: 15px;
+  background: rgb(93 93 93 / 40%);
+  border: 1px solid rgba(113 119 144 / 25%);
+  border-radius: 15px;
+}
