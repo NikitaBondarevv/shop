@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { useContext } from 'react'
 
-import { LoginForm } from 'pages/loginForm/LoginForm'
+import { LoginForm } from 'pages/loginForm'
 import { UserContext } from 'contexts/userContext'
 import { ProductsInfo } from './productsInfo'
 import { Product } from './product'

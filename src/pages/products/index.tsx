@@ -9,8 +9,10 @@ import styles from './styles.css'
 import { Link } from 'react-router-dom'
 import { WarningWindow } from 'components/warningWindow'
 import BagIcon from './images/bag.png'
+import { Preloader } from 'components/preloader'
 
 export const Products = () => {
+  const [isLoading, setIsloading] = useState(false)
   const [value, setValue] = useState('')
   const [products, setProducts] = useState<IProduct[]>([])
   const [editIndex, setEditIndex] = useState(-1)
@@ -24,7 +26,13 @@ export const Products = () => {
   const description = useMemo(() => getDescription(removeId!), [removeId])
 
   const getData = async () => {
-    setProducts(await getProducts())
+    setIsloading(true)
+
+    try {
+      setProducts(await getProducts())
+    } finally {
+      setIsloading(false)
+    }
   }
 
   useEffect(() => {
@@ -51,60 +59,64 @@ export const Products = () => {
   }
 
   return (
-    <>
-      <h1 className={styles.heading}>
-        Products
-      </h1>
-      {
-        !!products.length && <input
-            className={styles.search}
-            type="text"
-            placeholder="Enter at list 2 chars"
-            value={value}
-            onChange={searchCategory}
-          />
-      }
-      {
-        allProducts.length
-          ? <ul className={styles.products}>
-            {
-              allProducts.map((product, index) => (
-                <li key={product.id}>
-                  <div className={styles.buttons}>
-                    <button type="button" onClick={() => setEditIndex(index)}>
-                      <Edit />
-                    </button>
-                    <button type="button" onClick={() => setRemoveId(product.id)}>
-                      <Delete />
-                    </button>
-                  </div>
-                  <Link to={`/products/${product.title}`}>
-                    {
-                      product.image
-                        ? <img className={styles.productImage} src={product.image} />
-                        : <img src={BagIcon} className={styles.noImage} />
-                    }
-                    <EditableText
-                      isEdit={editIndex === index}
-                      text={product.title}
-                      onBlur={(name) => handleRename(product, name)}
-                    />
-                  </Link>
-                </li>
-              ))
-            }
-          </ul>
-          : <span className={styles.noFilteredItemsMessage}>No products</span>
-      }
-      <Link className={styles.addNew} to="/products/new">ADD NEW</Link>
-      {
-        removeId &&
-        <WarningWindow
-          description={description}
-          onConfirm={() => onConfirm()}
-          onCancel={() => setRemoveId(undefined)}
-        />
-      }
-    </>
+    isLoading
+      ? <Preloader />
+      : (
+        <>
+          <h1 className={styles.heading}>
+            Products
+          </h1>
+          {
+            Boolean(products.length) && <input
+              className={styles.search}
+              type="text"
+              placeholder="Enter at list 2 chars"
+              value={value}
+              onChange={searchCategory}
+            />
+          }
+          {
+            allProducts.length
+              ? <ul className={styles.products}>
+                {
+                  allProducts.map((product, index) => (
+                    <li key={product.id}>
+                      <div className={styles.buttons}>
+                        <button type="button" onClick={() => setEditIndex(index)}>
+                          <Edit />
+                        </button>
+                        <button type="button" onClick={() => setRemoveId(product.id)}>
+                          <Delete />
+                        </button>
+                      </div>
+                      <Link to={`/products/${product.title}`}>
+                        {
+                          product.image
+                            ? <img className={styles.productImage} src={product.image} />
+                            : <img src={BagIcon} className={styles.noImage} />
+                        }
+                        <EditableText
+                          isEdit={editIndex === index}
+                          text={product.title}
+                          onBlur={(name) => handleRename(product, name)}
+                        />
+                      </Link>
+                    </li>
+                  ))
+                }
+              </ul>
+              : <span className={styles.noFilteredItemsMessage}>No products</span>
+          }
+          <Link className={styles.addNew} to="/products/new">ADD NEW</Link>
+          {
+            removeId &&
+            <WarningWindow
+              description={description}
+              onConfirm={() => onConfirm()}
+              onCancel={() => setRemoveId(undefined)}
+            />
+          }
+        </>
+      )
   )
 }

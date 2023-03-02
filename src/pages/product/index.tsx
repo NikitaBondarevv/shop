@@ -6,20 +6,22 @@ import { UserContext } from 'contexts/userContext'
 import { findProduct, updateProduct } from 'contracts/products'
 import { EditableProduct } from 'components/editableProduct'
 import styles from './styles.css'
+import { Preloader } from 'components/preloader'
 
 export const Product = () => {
-  const [product, setProduct] = useState<IProduct>({
-    id: 0,
-    title: '',
-    description: '',
-    image: '',
-    price: '0'
-  })
+  const [isLoading, setIsloading] = useState(false)
+  const [product, setProduct] = useState<IProduct>()
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
 
   const getData = async () => {
-    setProduct(await findProduct(title))
+    setIsloading(true)
+
+    try {
+      setProduct(await findProduct(title))
+    } finally {
+      setIsloading(false)
+    }
   }
 
   useEffect(() => {
@@ -27,9 +29,9 @@ export const Product = () => {
   }, [])
 
   const handleSave = async (title: string, price: string, description: string) => {
-    if (title !== product.title || price !== product.price || description !== product.description) {
+    if (title !== product?.title || price !== product.price || description !== product.description) {
       await updateProduct({
-        ...product,
+        ...product!,
         title,
         price,
         description
@@ -40,31 +42,37 @@ export const Product = () => {
   return (
     isAuthenticated
       ? (
-        <EditableProduct
-          onSave={handleSave}
-          title={product.title}
-          price={String(product.price)}
-          description={product.description!}
-        />
+        isLoading
+          ? <Preloader />
+          : <EditableProduct
+            onSave={handleSave}
+            title={product!.title}
+            price={String(product?.price)}
+            description={product?.description!}
+          />
       )
       : (
-        <>
-          <span className={styles.title}>
-            <mark>
-              TITLE:
-            </mark>
-            {product.title}
-          </span>
-          <span className={styles.price}>
-            <mark>
-              $
-            </mark>
-            {product.price}
-          </span>
-          <div className={styles.description}>
-            {product.description}
-          </div>
-        </>
+        isLoading
+          ? <Preloader />
+          : (
+            <>
+              <span className={styles.title}>
+                <mark>
+                  TITLE:
+                </mark>
+                {product?.title}
+              </span>
+              <span className={styles.price}>
+                <mark>
+                  $
+                </mark>
+                {product?.price}
+              </span>
+              <div className={styles.description}>
+                {product?.description}
+              </div>
+            </>
+          )
       )
   )
 }

@@ -6,8 +6,10 @@ import { ICategory } from 'interfaces/ICategories'
 import { updateCategory } from 'contracts/categories'
 import { PublishItems } from 'components/publishItems'
 import styles from './styles.css'
+import { Preloader } from 'components/preloader'
 
 export const Categories = () => {
+  const [isLoading, setIsloading] = useState(false)
   const { isAuthenticated } = useContext(UserContext)
   const [categories, setCategories] = useState<ICategory[]>([])
   const getDescription = (id: number) => {
@@ -17,7 +19,13 @@ export const Categories = () => {
   }
 
   const getData = async () => {
-    setCategories(await getCategories())
+    setIsloading(true)
+
+    try {
+      setCategories(await getCategories())
+    } finally {
+      setIsloading(false)
+    }
   }
 
   useEffect(() => {
@@ -42,25 +50,31 @@ export const Categories = () => {
   }
 
   return (
-    <>
-      <h1 className={styles.title}>
-        CATEGORIES
-      </h1>
-      <PublishItems
-        publishListTitle="Published Categories:"
-        listTitle="Categories:"
-        items={categories}
-        onRemove={handleConfirmRemove}
-        getWarningDescription={getDescription}
-        onPublish={handlePublish}
-        noAllItemsMessage="There are no published categories"
-        noFilteredItemsMessage="No categories"
-        onRename={handleRename}
-        filterPredicate={(data: ICategory) => Boolean(data.published)}
-        getLink={(category) => `/categories/${category.title}`}
-        viewMode={isAuthenticated}
-        showAddNewButton={isAuthenticated}
-      />
-    </>
+    isLoading
+      ? <Preloader />
+      : (
+        <>
+          <h1 className={styles.title}>
+            CATEGORIES
+          </h1>
+          {
+            <PublishItems
+              publishListTitle="Published Categories:"
+              listTitle="Categories:"
+              items={categories}
+              onRemove={handleConfirmRemove}
+              getWarningDescription={getDescription}
+              onPublish={handlePublish}
+              noAllItemsMessage="There are no published categories"
+              noFilteredItemsMessage="No categories"
+              onRename={handleRename}
+              filterPredicate={(data: ICategory) => Boolean(data.published)}
+              getLink={(category) => `/categories/${category.title}`}
+              viewMode={isAuthenticated}
+              showAddNewButton={isAuthenticated}
+            />
+          }
+        </>
+      )
   )
 }

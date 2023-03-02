@@ -8,22 +8,11 @@ import { getProducts } from 'contracts/products'
 import { IProduct } from 'interfaces/IProduct'
 import { ICategory } from 'interfaces/ICategories'
 import styles from './styles.css'
+import { Preloader } from 'components/preloader'
 
 export const Category = () => {
-  const [category, setCategory] = useState<ICategory>({
-    title: '',
-    id: 0,
-    published: false,
-    products: [
-      {
-        id: 0,
-        title: '',
-        description: '',
-        image: '',
-        price: 0
-      }
-    ]
-  })
+  const [isLoading, setIsloading] = useState(false)
+  const [category, setCategory] = useState<ICategory>()
   const [allProducts, setAllProducts] = useState<IProduct[]>([])
   const { title } = useParams()
   const { isAuthenticated } = useContext(UserContext)
@@ -32,11 +21,17 @@ export const Category = () => {
 
     return `You're going to remove "${findProduct?.title}" product. Press "Ok" to confirm.`
   }
-  const categoryProductsIds = useMemo(() => (category.products || []).map(product => product.id), [category.products])
+  const categoryProductsIds = useMemo(() => (category?.products || []).map(product => product.id), [category?.products])
 
   const getData = async () => {
-    setCategory(await findCategories(title))
-    setAllProducts(await getProducts())
+    setIsloading(true)
+
+    try {
+      setCategory(await findCategories(title))
+      setAllProducts(await getProducts())
+    } finally {
+      setIsloading(false)
+    }
   }
 
   useEffect(() => {
@@ -44,41 +39,47 @@ export const Category = () => {
   }, [])
 
   const handleRemove = async (product: IProduct) => {
-    const index = category.products?.indexOf(product)
-    category.products?.splice(index!, 1)
+    const index = category?.products?.indexOf(product)
+    category?.products?.splice(index!, 1)
 
-    await updateCategory(category)
+    await updateCategory(category!)
     getData()
   }
 
   const handleConfirmPublish = async ({ id, title }: IProduct) => {
-    category.products?.push({ id, title })
+    category?.products?.push({ id, title })
 
-    await updateCategory(category)
+    await updateCategory(category!)
     getData()
   }
 
   const getCategoryProducts = (product: IProduct) => categoryProductsIds?.includes(product.id)
 
   return (
-    <>
-      <h1 className={styles.title}>
-        {`CATEGORY: ${title?.toUpperCase()}`}
-      </h1>
-      <PublishItems<IProduct>
-        publishListTitle="Products in category:"
-        listTitle="All products:"
-        items={allProducts}
-        onRemove={handleRemove}
-        onPublish={handleConfirmPublish}
-        getWarningDescription={getDescription}
-        noAllItemsMessage="There are no products in this category"
-        noFilteredItemsMessage="No products"
-        filterPredicate={getCategoryProducts}
-        showEditButton
-        getLink={(product) => `/products/${product.title}`}
-        viewMode={isAuthenticated}
-      />
-    </>
+    isLoading
+      ? <Preloader />
+      : (
+        <>
+          <h1 className={styles.title}>
+            {`CATEGORY: ${title?.toUpperCase()}`}
+          </h1>
+          {
+            <PublishItems<IProduct>
+              publishListTitle="Products in category:"
+              listTitle="All products:"
+              items={allProducts}
+              onRemove={handleRemove}
+              onPublish={handleConfirmPublish}
+              getWarningDescription={getDescription}
+              noAllItemsMessage="There are no products in this category"
+              noFilteredItemsMessage="No products"
+              filterPredicate={getCategoryProducts}
+              showEditButton
+              getLink={(product) => `/products/${product.title}`}
+              viewMode={isAuthenticated}
+            />
+          }
+        </>
+      )
   )
 }

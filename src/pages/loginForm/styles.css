@@ -14,7 +14,8 @@
   color: #000;
 }
 
-.loginForm input[type=submit] {
+.loginForm button[type=submit] {
+  font: 24px/24px "MyriadProLight";
   padding: 0;
   margin: 0;
   background: rgb(93 93 93 / 40%);
@@ -26,9 +27,10 @@
   cursor: pointer;
   transition: 0.5s;
   backdrop-filter: blur(15px);
+  position: relative;
 }
 
-.loginForm input[type=submit]:hover {
+.loginForm button[type=submit]:hover {
   background-color: rgba(36, 36, 36, 0.4);
 }
 
@@ -49,4 +51,11 @@
 .loginForm .password::before {
   background-position: 0 -33px;
   height: 18px;
+}
+
+.preloader {
+  position: absolute;
+  top: -14px;
+  right: 0;
+  left: 0;
 }
