@@ -1,4 +1,4 @@
-# shop
+# Shop
 
 ## Installation server
 1) Clone repo (server base-koa) *git clone https://github.com/iliatcymbal/base-koa.git*
@@ -11,6 +11,8 @@
 
 ## Description
 Shop is a project where you can manage your products by adding, changing and deleting them.
+
+App built with React library using TypeScript.
  
 You can:
 1) Create a new category
