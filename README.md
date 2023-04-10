@@ -9,7 +9,7 @@
 1) Go to project folder and make npm i
 2) Run npm start to start todo project.
 
-
+## Description
 Shop is a project where you can manage your products by adding, changing and deleting them.
  
 You can:
