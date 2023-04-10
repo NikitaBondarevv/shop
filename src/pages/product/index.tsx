@@ -46,9 +46,9 @@ export const Product = () => {
           ? <Preloader />
           : <EditableProduct
             onSave={handleSave}
-            title={product!.title}
+            title={product?.title}
             price={String(product?.price)}
-            description={product?.description!}
+            description={product?.description}
           />
       )
       : (
